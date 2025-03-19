@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "https://mcuapi.herokuapp.com/api/v1/movies/:path*"
+      }
+    ]
+  }
+  
