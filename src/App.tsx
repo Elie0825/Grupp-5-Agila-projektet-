@@ -16,7 +16,6 @@ function App() {
   const [selectedPhase, setSelectedPhase] = useState<number | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  // NEW COMMENT - DID THIS WORK?
 
   // Hämta filmer när komponenten mountas
   useEffect(() => {
