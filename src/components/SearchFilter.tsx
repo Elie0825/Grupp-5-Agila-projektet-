@@ -7,10 +7,10 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
   selectedPhase, 
   onPhaseChange,
   phases,
-  selectedRating,
-  onRatingChange,
-  sortBy,
-  onSortChange
+  selectedRating = null,
+  onRatingChange = () => {},
+  sortBy = 'title',
+  onSortChange = () => {}
 }) => {
   const [showFilters, setShowFilters] = useState(false);
   const [showSort, setShowSort] = useState(false);
@@ -72,7 +72,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       </div>
 
-      {/* Resten av komponenten förblir samma som i föregående version */}
       {showFilters && (
         <div className="compact-filter-dropdown">
           <div className="compact-filter-section">
@@ -119,7 +118,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       )}
 
-      {/* Sorteringsdropdown */}
       {showSort && (
         <div className="compact-filter-dropdown">
           <div className="compact-filter-section">

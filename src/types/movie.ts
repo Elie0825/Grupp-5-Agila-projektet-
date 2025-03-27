@@ -69,4 +69,8 @@ export interface SearchFilterProps {
   selectedPhase: number | null; // Antingen ett (fas)number eller null om ingen fas är vald.
   onPhaseChange: (phase: number | null) => void; //  En callback-funktion som tar ett number | null och uppdaterar den valda fasen.
   phases: number[]; // En array av number, innehåller tillgängliga faser att filtrera på
+  selectedRating?: number | null;
+  onRatingChange?: (rating: number | null) => void;
+  sortBy?: string;
+  onSortChange?: (sort: string) => void;
 }

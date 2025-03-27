@@ -1,8 +1,33 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/:path*", 
-        "destination": "https://mcuapi.herokuapp.com/api/v1/movies/:path*"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    { 
+      "src": "backend/server.ts", 
+      "use": "@vercel/node" 
+    },
+    { 
+      "src": "package.json", 
+      "use": "@vercel/static-build" 
+    }
+  ],
+  "routes": [
+    { 
+      "src": "/api/movies", 
+      "dest": "backend/server.ts" 
+    },
+    {
+      "source": "/api/:path*", 
+      "destination": "https://mcuapi.herokuapp.com/api/v1/movies/:path*"
+    },
+    { 
+      "src": "/(.*)", 
+      "dest": "/" 
+    }
+  ],
+  "env": {
+    "DB_HOST": "@db_host",
+    "DB_USER": "@db_user", 
+    "DB_PASSWORD": "@db_password",
+    "DB_NAME": "@db_name"
   }
+}

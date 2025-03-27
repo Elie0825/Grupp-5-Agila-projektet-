@@ -1,158 +1,163 @@
 /* Navbar container */
 .navbar {
+  background: rgba(27, 26, 26, 0.7);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.navbar ul {
+  background-color: rgba(27, 26, 26, 0.7);
+}
+
+/* Logo till vänster */
+.logo {
+  margin-right: auto;
+}
+
+.logo a {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* Container för centrerade länkar */
+.nav-links-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Navigationslänkar */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Länk-items */
+.nav-links li {
+  position: relative;
+}
+
+/* Länker */
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Aktiv länk */
+.nav-links a.active {
+  font-weight: bold;
+  color: #bbb; /* Färgen på den aktiva länken */
+}
+
+.nav-links a.active::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+/* Hover-effekt för länkar */
+.nav-links a:hover {
+  color: #bbb;
+}
+
+/* Stäng av alla "röda" hover-stilar på nav-elementet */
+.navbar:hover .nav-links a {
+  color: white; /* Ta bort oönskad färg när navbarn är hoverad */
+}
+
+/* Hamburgermeny ikon */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  transition: all 0.3s ease;
+}
+
+/* Responsiv design */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links-container {
     position: fixed;
-    top: 0;
+    top: 200px;
     left: 0;
     right: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    backdrop-filter: blur(10px);
+    background:none;
+    backdrop-filter: blur(50px);
+    padding: 20px 0;
+    height: calc(70px);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
   }
-  
-  /* Logo till vänster */
-  .logo {
-    margin-right: auto;
+
+  .nav-links-container.open {
+    transform: translateX(0);
   }
-  
-  .logo a {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-  }
-  
-  /* Container för centrerade länkar */
-  .nav-links-container {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  /* Navigationslänkar */
+
   .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Länk-items */
-  .nav-links li {
-    position: relative;
-  }
-  
-  /* Länker */
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 5px 0;
-    transition: all 0.3s ease;
-  }
-  
-  /* Aktiv länk */
-  .nav-links a.active {
-    font-weight: bold;
-  }
-  
-  .nav-links a.active::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: white;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-  }
-  
-  /* Hover-effekt */
-  .nav-links a:hover {
-    color: #bbb;
-  }
-  
-  /* Hamburgermeny ikon */
-  .menu-toggle {
-    display: none;
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-    margin-left: auto;
+    gap: 0;
+    align-items: center;
   }
-  
-  .menu-toggle span {
-    display: block;
-    height: 3px;
+
+  .nav-links li {
     width: 100%;
-    background-color: white;
-    transition: all 0.3s ease;
+    text-align: center;
+    padding: 15px 0;
   }
-  
-  /* Responsiv design */
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: flex;
-    }
-    
-    .nav-links-container {
-      position: fixed;
-      top: 70px;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(10px);
-      padding: 20px 0;
-      height: calc(100vh - 70px);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease-in-out;
-      z-index: 999;
-    }
-    
-    .nav-links-container.open {
-      transform: translateX(0);
-    }
-    
-    .nav-links {
-      flex-direction: column;
-      gap: 0;
-      align-items: center;
-    }
-    
-    .nav-links li {
-      width: 100%;
-      text-align: center;
-      padding: 15px 0;
-    }
-    
-    .nav-links a {
-      font-size: 20px;
-      padding: 15px 20px;
-      display: block;
-    }
-    
-    .nav-links a.active::after {
-      width: 50%;
-      left: 25%;
-      bottom: 10px;
-    }
-  
-    /* Animation för hamburgermeny */
-    .menu-toggle.active span:nth-child(1) {
-      transform: translateY(9px) rotate(45deg);
-    }
-    
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .menu-toggle.active span:nth-child(3) {
-      transform: translateY(-9px) rotate(-45deg);
-    }
+
+  .nav-links a {
+    font-size: 20px;
+    padding: 5px 2px;
+    display: block;
   }
+
+  .nav-links a.active::after {
+    width: 50%;
+    left: 25%;
+    bottom: 10px;
+  }
+
+  /* Animation för hamburgermeny */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}
