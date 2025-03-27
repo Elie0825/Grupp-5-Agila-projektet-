@@ -1,14 +1,10 @@
 // src/components/SearchFilter.tsx
 import React from 'react';
+import { SearchFilterProps } from '../types/movie';
 
-interface SearchFilterProps {
-  searchTerm: string;
-  onSearchChange: (value: string) => void;
-  selectedPhase: number | null;
-  onPhaseChange: (phase: number | null) => void;
-  phases: number[];
-}
-
+/** Vi skapar en funktionell komponent och använder React.FC<SearchFilterProps>, 
+ * vilket betyder att komponenten tar emot SearchFilterProps som props.
+ * Destrukturerar props direkt i funktionsparametern. */
 const SearchFilter: React.FC<SearchFilterProps> = ({ 
   searchTerm, 
   onSearchChange, 
@@ -41,7 +37,9 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
                   onClick={() => onSearchChange('')}
                   aria-label="Rensa sökning"
                 >
-                  <span aria-hidden="true">×</span>
+                  <span aria-hidden="true">
+                    ×
+                  </span>
                 </button>
               )}
             </div>

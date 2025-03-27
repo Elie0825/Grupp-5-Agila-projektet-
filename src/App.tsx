@@ -62,7 +62,7 @@ function App() {
 
   /** Denna kod skapar en lista över unika Marvel-faser 
   från movies och sorterar dem i ordning.
-   * SET lagrar unika värden så dubletter försvinner från dropwoen menyn
+   * SET lagrar unika värden så dubletter försvinner från dropdown menyn
    */
   const phases = [...new Set(movies.map(movie => movie.phase))].sort();
 
@@ -73,25 +73,47 @@ function App() {
         <p>Utforska filmer från Marvel Cinematic Universe</p>
       </header>
 
+
+      {/** app.tsx skickar dessa states via props till searchfilter.tsx 
+       * SearchFilter.tsx skickar tillbaka ändringar genom callback-funktioner 
+       *  => onSearchChange, onPhaseChange
+      */}
       <SearchFilter 
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        selectedPhase={selectedPhase}
-        onPhaseChange={setSelectedPhase}
-        phases={phases}
+        searchTerm={searchTerm} // Skickar den aktuella söktexten till komponenten.
+        onSearchChange={setSearchTerm} // När användaren skriver i sökfältet, uppdateras searchTerm live
+        selectedPhase={selectedPhase} //  Skickar den valda phase till komponenten.
+        onPhaseChange={setSelectedPhase} // Uppdaterar selectedPhase när användaren väljer en fas.
+        phases={phases} // Skickar alla tillgängliga faser från API:et till komponenten.
       />
+      {/** funktionerna onSearchChange, onPhaseChange i SearchFilter.tsx är egentligen bara referenser 
+       * till setSearchTerm och setSelectedPhase i App.tsx.
+        När vi skickar en funktion som prop {} i JSX, ex: <SearchFilter onSearchChange={setSearchTerm} />
+        betyder det att onSearchChange i SearchFilter.tsx nu pekar på setSearchTerm från App.tsx.
+        
+        När SearchFilter.tsx anropar onSearchChange("Iron Man"), är det egentligen 
+        setSearchTerm("Iron Man") som körs i App.tsx, vilket uppdaterar state där.
+        {} används för att skicka funktioner som props. När SearchFilter.tsx 
+         anropar funktionen, uppdateras state i App.tsx */}
 
       <main>
         {loading && (
+          <>
           <section className="status-message">
             <output className="loading" role="status" aria-live="polite">
               <span className="loading-spinner"></span>
               <p>Laddar filmer...</p>
             </output>
           </section>
+
+          <section className="movie-grid"> 
+            {[...Array(10)].map((_, i) => ( // ghost placeholder bilder innan API har laddats
+              <div key={i} className="ghost-card" aria-hidden="true" />
+            ))}
+          </section>
+          </>
         )}
 
-        {error && (
+        {error && ( // om error (state) är null visas p elementet
           <section className="status-message">
             <output className="error" role="alert">
               <h2>Ett fel uppstod</h2>
@@ -100,13 +122,14 @@ function App() {
           </section>
         )}
 
-        {!loading && !error && (
+        {!loading && !error && ( // om loading o error (state) är false/null visas p elementet
           <section className="movies-section">
             <output className="movies-count" aria-live="polite">
-              Visar {filteredMovies.length} av {movies.length} filmer
+              Visar {filteredMovies.length} av {movies.length} filmer 
+              {/** visar tex 5 av 40 filmer. under sökrutan */}
             </output>
             
-            {filteredMovies.length === 0 ? (
+            {filteredMovies.length === 0 ? ( // om arrayen filteredMovies är tom
               <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
             ) : (
               <section className="movie-grid" role="feed" aria-busy="false">
