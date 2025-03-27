@@ -4,6 +4,23 @@
   --secondary-color: #518cca; /* Marvel blå */
 }
 
+/* Innan laddning av API*/
+.ghost-card {
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* Enkel laddningsanimation */
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.5; }
+}
+
+
 /* Grundläggande styling */
 * { box-sizing: border-box; }
 
@@ -28,6 +45,7 @@ html, body {
 /* Header */
 .main-header {
   text-align: center;
+  margin-top: 90px;
   margin-bottom: 1.5rem;
   position: relative;
   background-image: url(src/bilder/header.png);
@@ -61,46 +79,149 @@ p span {
 
 
 /* Sökformulär */
-.search-filters {
-  background-color: #175a92;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
+.compact-filter-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto 20px;
 }
 
-.search-filters fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
+.compact-filter-header {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
-.search-section, .filter-section {
-  margin-bottom: 0.5rem;
+.compact-search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  min-width: 200px;
 }
 
-.search-section { flex: 2; min-width: 200px; }
-.filter-section { flex: 1; min-width: 150px; }
+.compact-filter-buttons {
+  display: flex;
+  gap: 8px;
+}
 
-.search-wrapper { position: relative; }
+.compact-filter-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
 
-input, select {
+.compact-filter-button:hover {
+  background-color: #f5f5f5;
+}
+
+.compact-filter-button.active {
+  background-color: #e62429;
+  color: white;
+  border-color: #e62429;
+}
+
+.compact-filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 280px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  margin-top: 8px;
+  padding: 15px;
+}
+
+.compact-filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.compact-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.compact-filter-group h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.compact-checkbox-group,
+.compact-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.compact-checkbox-group label,
+.compact-radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.compact-range-slider {
   width: 100%;
-  padding: 0.5rem;
+  margin: 5px 0;
+}
+
+.compact-select {
+  width: 100%;
+  padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 13px;
 }
 
-.clear-button {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+.compact-filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.compact-clear-button {
+  padding: 8px 12px;
   background: none;
   border: none;
+  color: #666;
+  font-size: 13px;
   cursor: pointer;
+}
+
+.compact-clear-button:hover {
+  text-decoration: underline;
+}
+
+.compact-apply-button {
+  padding: 8px 16px;
+  background-color: #e62429;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.compact-apply-button:hover {
+  background-color: #c11a1f;
 }
 
 /* Filmrutnät */
@@ -176,6 +297,19 @@ input, select {
   padding: 1rem;
 }
 
+.details-poster {
+  width: 100%;  /* Säkerställer att bilden anpassas till sin container */
+  max-width: 400px; /* Förhindra att den blir för bred */
+  margin: 0 auto; /* Centrera bilden */
+}
+
+.details-poster img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Se till att bilden skärs av snyggt om det behövs */
+  border-radius: 4px;
+}
+
 .details-header {
   display: flex;
   justify-content: space-between;
@@ -188,6 +322,11 @@ input, select {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+/* Tar bort kantlinjen runt videon.*/
+iframe {
+  border: none;
 }
 
 /* Status-indikatorer */
@@ -242,3 +381,23 @@ input, select {
 .movie-card:hover .movie-title {
   color: #e62429; /* Marvel-rött för titeln vid hover */
 }
+
+@media (max-width: 768px) {
+  .navbar ul {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #af6363b9;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    gap: 15px;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+}
+  
+
+

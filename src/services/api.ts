@@ -9,7 +9,7 @@ export const fetchMarvelMovies = async (): Promise<Movie[]> => { /**funktionen
   returnerar en lista med Movie-objekt */
   try {
     console.log("Anropar MCU API via proxy...");
-    const response = await fetch("/api"); /** GET-anrop till en proxy-endpoint. */
+    const response = await fetch("/api/movies"); /** GET-anrop till en proxy-endpoint. */
     /**Istället för att anropa en extern URL används en proxy för att undvika CORS-problem. */
     
     if (!response.ok) {
