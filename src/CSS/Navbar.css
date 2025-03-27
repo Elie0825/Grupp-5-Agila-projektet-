@@ -7,10 +7,6 @@
   backdrop-filter: blur(10px);
 }
 
-.navbar ul {
-  background-color: rgba(27, 26, 26, 0.7);
-}
-
 /* Logo till vänster */
 .logo {
   margin-right: auto;
