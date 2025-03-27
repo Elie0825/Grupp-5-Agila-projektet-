@@ -1,67 +1,168 @@
-// src/components/SearchFilter.tsx
-import React from 'react';
+import React, { useState } from "react";
 import { SearchFilterProps } from '../types/movie';
 
-/** Vi skapar en funktionell komponent och använder React.FC<SearchFilterProps>, 
- * vilket betyder att komponenten tar emot SearchFilterProps som props.
- * Destrukturerar props direkt i funktionsparametern. */
 const SearchFilter: React.FC<SearchFilterProps> = ({ 
   searchTerm, 
   onSearchChange, 
   selectedPhase, 
   onPhaseChange,
-  phases 
+  phases,
+  selectedRating,
+  onRatingChange,
+  sortBy,
+  onSortChange
 }) => {
-  
-  return (
-    <nav className="search-filters" aria-label="Filtrera filmer">
-      <form role="search" onSubmit={(e) => e.preventDefault()}>
-        <fieldset>
-          <legend className="visually-hidden">Sök och filtrering</legend>
-          
-          <section className="search-section">
-            <label htmlFor="movie-search">Sök:</label>
-            <div className="search-wrapper">
-              <input
-                type="search"
-                id="movie-search"
-                placeholder="Sök efter filmer..."
-                value={searchTerm}
-                onChange={(e) => onSearchChange(e.target.value)}
-                aria-label="Sök efter filmer"
-              />
-              {searchTerm && (
-                <button 
-                  type="button" 
-                  className="clear-button" 
-                  onClick={() => onSearchChange('')}
-                  aria-label="Rensa sökning"
-                >
-                  <span aria-hidden="true">
-                    ×
-                  </span>
-                </button>
-              )}
-            </div>
-          </section>
+  const [showFilters, setShowFilters] = useState(false);
+  const [showSort, setShowSort] = useState(false);
 
-          <section className="filter-section">
-            <label htmlFor="phase-filter">Filtrera efter fas:</label>
-            <select 
-              id="phase-filter"
-              value={selectedPhase || ""} 
-              onChange={(e) => onPhaseChange(e.target.value ? Number(e.target.value) : null)}
-              aria-label="Filtrera efter fas"
-            >
-              <option value="">Alla faser</option>
-              {phases.map(phase => (
-                <option key={phase} value={phase}>Fas {phase}</option>
-              ))}
-            </select>
-          </section>
-        </fieldset>
-      </form>
-    </nav>
+  const handleApply = () => {
+    setShowFilters(false);
+    setShowSort(false);
+  };
+
+  const handleClearAll = () => {
+    onSearchChange("");
+    onPhaseChange(null);
+    onRatingChange(null);
+  };
+
+  return (
+    <div className="compact-filter-container">
+      <div className="compact-filter-header">
+        <input
+          type="text"
+          placeholder="Sök Marvel filmer..."
+          value={searchTerm}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="compact-search-input"
+        />
+        
+        {searchTerm && (
+          <button 
+            type="button" 
+            className="clear-button" 
+            onClick={() => onSearchChange('')}
+            aria-label="Rensa sökning"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        )}
+        
+        <div className="compact-filter-buttons">
+          <button
+            className={`compact-filter-button ${showFilters ? "active" : ""}`}
+            onClick={() => {
+              setShowFilters(!showFilters);
+              setShowSort(false);
+            }}
+          >
+            <i className="filter-icon">⚙️</i>
+            <span>Filter</span>
+          </button>
+          <button
+            className={`compact-filter-button ${showSort ? "active" : ""}`}
+            onClick={() => {
+              setShowSort(!showSort);
+              setShowFilters(false);
+            }}
+          >
+            <i className="sort-icon">⇅</i>
+            <span>Sortera</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Resten av komponenten förblir samma som i föregående version */}
+      {showFilters && (
+        <div className="compact-filter-dropdown">
+          <div className="compact-filter-section">
+            <div className="compact-filter-group">
+              <h4>Minimibetyg: {selectedRating || 0}/10</h4>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value={selectedRating || 0}
+                onChange={(e) => onRatingChange(parseInt(e.target.value))}
+                className="compact-range-slider"
+              />
+            </div>
+
+            <div className="compact-filter-group">
+              <h4>Fas</h4>
+              <select
+                value={selectedPhase || ""}
+                onChange={(e) => onPhaseChange(e.target.value ? parseInt(e.target.value) : null)}
+                className="compact-select"
+              >
+                <option value="">Alla faser</option>
+                {phases.map((phase) => (
+                  <option key={phase} value={phase}>
+                    Fas {phase}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="compact-filter-actions">
+              <button
+                className="compact-clear-button"
+                onClick={handleClearAll}
+              >
+                Rensa alla filter
+              </button>
+              <button className="compact-apply-button" onClick={handleApply}>
+                Visa resultat
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Sorteringsdropdown */}
+      {showSort && (
+        <div className="compact-filter-dropdown">
+          <div className="compact-filter-section">
+            <h4>Sortera efter</h4>
+            <div className="compact-radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="sort"
+                  value="title"
+                  checked={sortBy === "title"}
+                  onChange={() => onSortChange("title")}
+                />
+                Titel (A-Ö)
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="sort"
+                  value="rating"
+                  checked={sortBy === "rating"}
+                  onChange={() => onSortChange("rating")}
+                />
+                Betyg (Hög-Låg)
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="sort"
+                  value="release"
+                  checked={sortBy === "release"}
+                  onChange={() => onSortChange("release")}
+                />
+                Releasedatum (Nyast först)
+              </label>
+            </div>
+            <button className="compact-apply-button" onClick={handleApply}>
+              Tillämpa
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
