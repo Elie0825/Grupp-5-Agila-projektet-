@@ -4,6 +4,23 @@
   --secondary-color: #518cca; /* Marvel blå */
 }
 
+/* Innan laddning av API*/
+.ghost-card {
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* Enkel laddningsanimation */
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.5; }
+}
+
+
 /* Grundläggande styling */
 * { box-sizing: border-box; }
 
@@ -249,6 +266,19 @@ body {
   width: 100%;
 }
 
+.details-poster {
+  width: 100%;  /* Säkerställer att bilden anpassas till sin container */
+  max-width: 400px; /* Förhindra att den blir för bred */
+  margin: 0 auto; /* Centrera bilden */
+}
+
+.details-poster img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Se till att bilden skärs av snyggt om det behövs */
+  border-radius: 4px;
+}
+
 .details-header {
   display: flex;
   justify-content: space-between;
@@ -261,6 +291,11 @@ body {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+/* Tar bort kantlinjen runt videon.*/
+iframe {
+  border: none;
 }
 
 /* Status-indikatorer */

@@ -1,3 +1,16 @@
+import React, { useState, useEffect } from "react";
+import { fetchMarvelMovies } from "./services/api";
+import { Movie } from "./types/movie";
+import MovieCard from "./components/MovieCard";
+import MovieDetails from "./components/MovieDetails";
+import SearchFilter from "./components/SearchFilter";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import "./App.css";
+import "./CSS/Navbar.css";
+
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -91,12 +104,20 @@ function App() {
 
               <main>
                 {loading && (
-                  <section className="status-message">
-                    <output className="loading" role="status" aria-live="polite">
-                      <span className="loading-spinner"></span>
-                      <p>Laddar filmer...</p>
-                    </output>
-                  </section>
+                  <>
+                    <section className="status-message">
+                      <output className="loading" role="status" aria-live="polite">
+                        <span className="loading-spinner"></span>
+                        <p>Laddar filmer...</p>
+                      </output>
+                    </section>
+
+                    <section className="movie-grid"> 
+                      {[...Array(10)].map((_, i) => (
+                        <div key={i} className="ghost-card" aria-hidden="true" />
+                      ))}
+                    </section>
+                  </>
                 )}
 
                 {error && (

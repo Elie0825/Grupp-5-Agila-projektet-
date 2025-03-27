@@ -1,12 +1,9 @@
 // src/components/MovieDetails.tsx
 import React from 'react';
-import { Movie } from '../types/movie';
+import { Movie, MovieDetailsProps } from '../types/movie';
 
-interface MovieDetailsProps {
-  movie: Movie;
-  onClose: () => void;
-}
 
+/** funktionell komponent dom tar två destrukerade props */
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
   // Formatera releasedatum till läsbart format
   const formatDate = (dateString: string) => {
@@ -18,26 +15,27 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
   const formatDuration = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
+    return `${hours}h ${mins}m`; /** ${} gör att vi kan bädda in variabler 
+    i en sträng utan att använda + för bygga mening */
   };
 
   return (
     <aside className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="movie-title">
       <article className="movie-details">
+
+        {/**Titel och stäng-knapp */}
         <header className="details-header">
           <h2 id="movie-title">{movie.title}</h2>
-          <button 
-            className="close-button" 
-            onClick={onClose} 
-            aria-label="Stäng detaljer"
-          >
-            ×
+          <button className="close-button" onClick={onClose} aria-label="Stäng detaljer">
+            × {/** stänger modalen, bara en visuell knapp, kan lika gärna stå "stäng" */}
           </button>
         </header>
         
-        <section className="details-content">
+        <section className="details-content"> {/**Innehåller filmposter och info om film */}
+
+          {/** Visar filmpostern */}
           <figure className="details-poster">
-            {movie.cover_url ? (
+            {movie.cover_url ? ( // Om movie.cover_url finns, visas bilden annars figcaption
               <img src={movie.cover_url} alt={`Filmposter för ${movie.title}`} />
             ) : (
               <figcaption className="no-poster">Ingen bild tillgänglig</figcaption>
@@ -45,6 +43,10 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
           </figure>
           
           <section className="details-info">
+            {/** Visar detaljerad filmfakta 
+             * dl = definition list ( par av termer och innehåll/beskrvning.)
+             * dt = definition term (rubrik), dd = definition data (innehåll)
+            */}
             <dl>
               <dt>Utgivningsdatum:</dt>
               <dd><time dateTime={movie.release_date}>{formatDate(movie.release_date)}</time></dd>
@@ -76,6 +78,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
         </section>
         
         <section className="details-description">
+          {/** Visar handling om filmen om filmen har en ovierview */}
           <h3>Handling</h3>
           <p>{movie.overview || "Ingen beskrivning tillgänglig."}</p>
         </section>
@@ -84,12 +87,13 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
           <section className="trailer-section">
             <h3>Trailer</h3>
             <figure className="trailer-container">
-              <iframe 
+              <iframe //attribut nedan
                 src={movie.trailer_url.replace('watch?v=', 'embed/')} 
                 title={`${movie.title} trailer`}
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+                /** kommer från YouTube's inbäddningskod eller andra videoplattformars 
+                 *  iframe-inställningar, vilket styr vad som är tillåtet i videospelaren. */
+                allowFullScreen // Gör det möjligt att spela upp trailern i helskärmsläge.
               ></iframe>
             </figure>
           </section>

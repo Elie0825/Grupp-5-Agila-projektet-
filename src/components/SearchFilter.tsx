@@ -1,40 +1,25 @@
-// src/components/SearchFilter.tsx
 import React, { useState } from "react";
+import { SearchFilterProps } from '../types/movie';
 
-// Props som komponenten tar emot
-interface SearchFilterProps {
-  searchTerm: string;
-  onSearchChange: (term: string) => void;
-  selectedPhase: number | null;
-  onPhaseChange: (phase: number | null) => void;
-  phases: number[];
-  selectedRating: number | null;
-  onRatingChange: (rating: number | null) => void;
-  sortBy: string;
-  onSortChange: (sort: string) => void;
-}
-
-
-const SearchFilter: React.FC<SearchFilterProps> = ({
-  searchTerm,
-  onSearchChange,
-  selectedPhase,
+const SearchFilter: React.FC<SearchFilterProps> = ({ 
+  searchTerm, 
+  onSearchChange, 
+  selectedPhase, 
   onPhaseChange,
   phases,
   selectedRating,
   onRatingChange,
   sortBy,
-  onSortChange,
+  onSortChange
 }) => {
-    // State för att visa/dölja filter och sortering
   const [showFilters, setShowFilters] = useState(false);
   const [showSort, setShowSort] = useState(false);
-// Stänger dropdown-menyn efter val
+
   const handleApply = () => {
     setShowFilters(false);
     setShowSort(false);
   };
- // Rensar alla filter
+
   const handleClearAll = () => {
     onSearchChange("");
     onPhaseChange(null);
@@ -43,7 +28,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 
   return (
     <div className="compact-filter-container">
-      {/* Sökfält och knappar */}
       <div className="compact-filter-header">
         <input
           type="text"
@@ -53,8 +37,18 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
           className="compact-search-input"
         />
         
+        {searchTerm && (
+          <button 
+            type="button" 
+            className="clear-button" 
+            onClick={() => onSearchChange('')}
+            aria-label="Rensa sökning"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        )}
+        
         <div className="compact-filter-buttons">
-          {/* Filterknapp */}
           <button
             className={`compact-filter-button ${showFilters ? "active" : ""}`}
             onClick={() => {
@@ -65,7 +59,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
             <i className="filter-icon">⚙️</i>
             <span>Filter</span>
           </button>
-          {/* Sorteringsknapp */}
           <button
             className={`compact-filter-button ${showSort ? "active" : ""}`}
             onClick={() => {
@@ -79,11 +72,10 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       </div>
 
-      {/* Filter-dropdown */}
+      {/* Resten av komponenten förblir samma som i föregående version */}
       {showFilters && (
         <div className="compact-filter-dropdown">
           <div className="compact-filter-section">
-            {/* Betygsfilter */}
             <div className="compact-filter-group">
               <h4>Minimibetyg: {selectedRating || 0}/10</h4>
               <input
@@ -96,7 +88,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
               />
             </div>
 
-            {/* Fas-filter */}
             <div className="compact-filter-group">
               <h4>Fas</h4>
               <select
@@ -112,7 +103,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
                 ))}
               </select>
             </div>
-            {/* Knappar för att rensa och tillämpa */}
+
             <div className="compact-filter-actions">
               <button
                 className="compact-clear-button"
@@ -128,13 +119,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       )}
 
-      {/* Sorterings-dropdown */}
+      {/* Sorteringsdropdown */}
       {showSort && (
         <div className="compact-filter-dropdown">
           <div className="compact-filter-section">
             <h4>Sortera efter</h4>
             <div className="compact-radio-group">
-              {/* Alternativ för sortering */}
               <label>
                 <input
                   type="radio"
