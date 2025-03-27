@@ -23,6 +23,7 @@ body {
 /* Header */
 .main-header {
   text-align: center;
+  margin-top: 90px;
   margin-bottom: 1.5rem;
 }
 
@@ -211,3 +212,23 @@ input, select {
 .movie-card:hover .movie-title {
   color: #e62429; /* Marvel-rött för titeln vid hover */
 }
+
+@media (max-width: 768px) {
+  .navbar ul {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #af6363b9;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    gap: 15px;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+}
+  
+
+
