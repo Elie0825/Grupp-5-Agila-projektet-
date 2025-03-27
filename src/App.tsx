@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { fetchMarvelMovies } from "./services/api";
-import { Movie } from "./types/movie";
-import MovieCard from "./components/MovieCard";
-import MovieDetails from "./components/MovieDetails";
-import SearchFilter from "./components/SearchFilter";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";  {/* Kolla att Navbar har rätt import */}
-import About from "./Pages/About";      {/* Importera About utan .tsx */}
-import Contact from "./Pages/Contact";  {/* Importera Contact utan .tsx */}
-import "./App.css";
-import "./CSS/Navbar.css";
-
-function App() {  
+function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPhase, setSelectedPhase] = useState<number | null>(null);
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [sortBy, setSortBy] = useState<string>("title");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   useEffect(() => {
@@ -24,6 +13,7 @@ function App() {
       try {
         setLoading(true);
         const fetchedMovies = await fetchMarvelMovies();
+        
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
@@ -47,17 +37,35 @@ function App() {
     setSelectedMovie(null);
   };
 
+  // Filtrerar filmer baserat på sökterm, fas och betyg
   const filteredMovies = movies.filter(movie => {
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesPhase = selectedPhase === null || movie.phase === selectedPhase;
-    return matchesSearch && matchesPhase;
+    const matchesRating = selectedRating === null || movie.rating >= selectedRating;
+
+    return matchesSearch && matchesPhase && matchesRating;
   });
 
+  // Sorterar filmer efter titel, betyg eller datum
+  const sortedMovies = [...filteredMovies].sort((a, b) => {
+    switch (sortBy) {
+      case "title":
+        return a.title.localeCompare(b.title);
+      case "rating":
+        return b.rating - a.rating;
+      case "release":
+        return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+      default:
+        return 0;
+    }
+  });
+
+  // Hämtar alla unika faser
   const phases = [...new Set(movies.map(movie => movie.phase))].sort();
 
   return (
     <Router>
-      <Navbar /> {/* Navbar läggs till här */}
+      <Navbar />
 
       <Routes>
         <Route
@@ -69,12 +77,16 @@ function App() {
                 <p>Utforska filmer från Marvel Cinematic Universe</p>
               </header>
 
-              <SearchFilter 
+              <SearchFilter
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}
                 selectedPhase={selectedPhase}
                 onPhaseChange={setSelectedPhase}
                 phases={phases}
+                selectedRating={selectedRating}
+                onRatingChange={setSelectedRating}
+                sortBy={sortBy}
+                onSortChange={setSortBy}
               />
 
               <main>
@@ -99,17 +111,17 @@ function App() {
                 {!loading && !error && (
                   <section className="movies-section">
                     <output className="movies-count" aria-live="polite">
-                      Visar {filteredMovies.length} av {movies.length} filmer
+                      Visar {sortedMovies.length} av {movies.length} filmer
                     </output>
-                    
-                    {filteredMovies.length === 0 ? (
+
+                    {sortedMovies.length === 0 ? (
                       <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
                     ) : (
                       <section className="movie-grid" role="feed" aria-busy="false">
-                        {filteredMovies.map(movie => (
-                          <MovieCard 
-                            key={movie.id} 
-                            movie={movie} 
+                        {sortedMovies.map(movie => (
+                          <MovieCard
+                            key={movie.id}
+                            movie={movie}
                             onClick={handleMovieClick}
                           />
                         ))}
@@ -120,9 +132,9 @@ function App() {
               </main>
 
               {selectedMovie && (
-                <MovieDetails 
-                  movie={selectedMovie} 
-                  onClose={handleCloseDetails} 
+                <MovieDetails
+                  movie={selectedMovie}
+                  onClose={handleCloseDetails}
                 />
               )}
 
@@ -133,8 +145,8 @@ function App() {
             </div>
           }
         />
-        <Route path="/about" element={<About />} />  {/* Ingen .tsx här */}
-        <Route path="/contact" element={<Contact />} />  {/* Ingen .tsx här */}
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   );

@@ -8,6 +8,7 @@ export interface Root {
 
 // Grundläggande filmtyp från API
 export interface Movie {
+  rating: any;
   id: number;
   title: string;
   release_date: string;
