@@ -86,8 +86,13 @@ function App() {
           element={
             <div className="app-container">
               <header className="main-header">
-                <h1>Marvel Filmuniversum</h1>
-                <p>Utforska filmer från Marvel Cinematic Universe</p>
+                <img src="src/bilder/loggo.png" alt="Marvelous Ratings Logo" className="logo" />
+                <p>
+                  <span>Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!</span>
+                  <span>Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.</span>
+                  <span>Utforska Marvel-universumet och hitta nästa film att uppleva!</span>
+                  <span className="last-sentence">Allt samlat, allt Marvel - MARVELOUS!</span>
+                </p>
               </header>
 
               <SearchFilter
@@ -160,8 +165,7 @@ function App() {
               )}
 
               <footer>
-                <p>Data hämtad från MCU API</p>
-                <p>&copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
+                <p>Data hämtad från MCU API &copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
               </footer>
             </div>
           }
