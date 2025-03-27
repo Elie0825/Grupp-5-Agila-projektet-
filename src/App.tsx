@@ -68,74 +68,76 @@ function App() {
   const phases = [...new Set(movies.map(movie => movie.phase))].sort();
 
   return (
+
+    <><header className="main-header">
+      <img src="src/bilder/loggo.png" alt="Marvelous Ratings Logo" className="logo"></img>
+      <p>
+        <span>Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!</span>
+        <span>Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.</span>
+        <span>Utforska Marvel-universumet och hitta nästa film att uppleva!</span>
+        <span className="last-sentence">Allt samlat, allt Marvel - MARVELOUS!</span>
+      </p>
+    </header>
+    
     <div className="app-container">
-      <header className="main-header">
-        <h1>Marvel Filmuniversum</h1>
-        <p>Utforska filmer från Marvel Cinematic Universe</p>
-      </header>
+        <SearchFilter
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+          selectedPhase={selectedPhase}
+          onPhaseChange={setSelectedPhase}
+          phases={phases} />
 
-      <SearchFilter 
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        selectedPhase={selectedPhase}
-        onPhaseChange={setSelectedPhase}
-        phases={phases}
-      />
+        <main>
+          {loading && (
+            <section className="status-message">
+              <output className="loading" role="status" aria-live="polite">
+                <span className="loading-spinner"></span>
+                <p>Laddar filmer...</p>
+              </output>
+            </section>
+          )}
 
-      <main>
-        {loading && (
-          <section className="status-message">
-            <output className="loading" role="status" aria-live="polite">
-              <span className="loading-spinner"></span>
-              <p>Laddar filmer...</p>
-            </output>
-          </section>
+          {error && (
+            <section className="status-message">
+              <output className="error" role="alert">
+                <h2>Ett fel uppstod</h2>
+                <p>{error}</p>
+              </output>
+            </section>
+          )}
+
+          {!loading && !error && (
+            <section className="movies-section">
+              <output className="movies-count" aria-live="polite">
+                Visar {filteredMovies.length} av {movies.length} filmer
+              </output>
+
+              {filteredMovies.length === 0 ? (
+                <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
+              ) : (
+                <section className="movie-grid" role="feed" aria-busy="false">
+                  {filteredMovies.map(movie => (
+                    <MovieCard
+                      key={movie.id}
+                      movie={movie}
+                      onClick={handleMovieClick} />
+                  ))}
+                </section>
+              )}
+            </section>
+          )}
+        </main>
+
+        {selectedMovie && (
+          <MovieDetails
+            movie={selectedMovie}
+            onClose={handleCloseDetails} />
         )}
 
-        {error && (
-          <section className="status-message">
-            <output className="error" role="alert">
-              <h2>Ett fel uppstod</h2>
-              <p>{error}</p>
-            </output>
-          </section>
-        )}
-
-        {!loading && !error && (
-          <section className="movies-section">
-            <output className="movies-count" aria-live="polite">
-              Visar {filteredMovies.length} av {movies.length} filmer
-            </output>
-            
-            {filteredMovies.length === 0 ? (
-              <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
-            ) : (
-              <section className="movie-grid" role="feed" aria-busy="false">
-                {filteredMovies.map(movie => (
-                  <MovieCard 
-                    key={movie.id} 
-                    movie={movie} 
-                    onClick={handleMovieClick}
-                  />
-                ))}
-              </section>
-            )}
-          </section>
-        )}
-      </main>
-
-      {selectedMovie && (
-        <MovieDetails 
-          movie={selectedMovie} 
-          onClose={handleCloseDetails} 
-        />
-      )}
-
-      <footer>
-        <p>Data hämtad från MCU API</p>
-        <p>&copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
-      </footer>
-    </div>
+        <footer>
+          <p>Data hämtad från MCU API &copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
+        </footer>
+      </div></>
   );
 }
 
