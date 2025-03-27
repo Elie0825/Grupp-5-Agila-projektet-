@@ -8,26 +8,29 @@ import SearchFilter from "./components/SearchFilter";
 import "./App.css";
 
 function App() {
-  // Grundläggande tillstånd
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPhase, setSelectedPhase] = useState<number | null>(null);
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [sortBy, setSortBy] = useState<string>("title");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  
+  // Ta bort typeFilters och genreFilters eftersom de inte stöds av Movie-typen
+  const [showTypeFilters, setShowTypeFilters] = useState(false);
+  const [showGenreFilters, setShowGenreFilters] = useState(false);
 
-
-  // Hämta filmer när komponenten mountas
   useEffect(() => {
     const getMovies = async () => {
       try {
         setLoading(true);
-        const fetchedMovies = await fetchMarvelMovies(); //hämtar filmer
+        const fetchedMovies = await fetchMarvelMovies();
         
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
-          setMovies(fetchedMovies); // uppdaterar state med filmerna
+          setMovies(fetchedMovies);
         }
       } catch (err) {
         setError("Ett fel uppstod vid hämtning av filmer.");
@@ -37,34 +40,38 @@ function App() {
     };
 
     getMovies();
-  }, []); // körs en gång
+  }, []);
 
-
-  // Hanterare för filmkortklick
-  const handleMovieClick = (movie: Movie) => { /** movie: Movie betyder att argumentet 
-    movie måste vara av typen Movie med rätt egenskaper (interface) */
+  const handleMovieClick = (movie: Movie) => {
     setSelectedMovie(movie);
   };
 
-  // Hanterare för att stänga detaljvy
   const handleCloseDetails = () => {
     setSelectedMovie(null);
   };
-
-  // Filtrera filmer baserat på sökterm och fas
-  const filteredMovies = movies.filter(movie => { /** movies är en array av filmer (Movie[]) 
-    och .filter skapar en ny array med endast de filmer som uppfyller villkoren. */
+  // Filtrerar filmer baserat på sökterm, fas och betyg
+  const filteredMovies = movies.filter(movie => {
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesPhase = selectedPhase === null || movie.phase === selectedPhase;
-    /** Om ingen fas är vald, visa alla filmer.
-        Om en fas är vald, visa endast filmer i den fasen. */
-    return matchesSearch && matchesPhase;
-  });
+    const matchesRating = selectedRating === null || movie.rating >= selectedRating;
 
-  /** Denna kod skapar en lista över unika Marvel-faser 
-  från movies och sorterar dem i ordning.
-   * SET lagrar unika värden så dubletter försvinner från dropwoen menyn
-   */
+    // Ta bort type- och genre-filteringen eftersom dessa fält inte finns
+    return matchesSearch && matchesPhase && matchesRating;
+  });
+  // Sorterar filmer efter titel, betyg eller datum
+  const sortedMovies = [...filteredMovies].sort((a, b) => {
+    switch (sortBy) {
+      case "title":
+        return a.title.localeCompare(b.title);
+      case "rating":
+        return b.rating - a.rating;
+      case "release":
+        return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+      default:
+        return 0;
+    }
+  });
+ // Hämtar alla unika faser (t.ex. [1, 2, 3])
   const phases = [...new Set(movies.map(movie => movie.phase))].sort();
 
   return (
@@ -73,15 +80,19 @@ function App() {
         <h1>Marvel Filmuniversum</h1>
         <p>Utforska filmer från Marvel Cinematic Universe</p>
       </header>
-
-      <SearchFilter 
+    {/* Sök- och filterkomponent */}
+      <SearchFilter
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         selectedPhase={selectedPhase}
         onPhaseChange={setSelectedPhase}
         phases={phases}
+        selectedRating={selectedRating}
+        onRatingChange={setSelectedRating}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
+        // Ta bort type- och genre-filter props
       />
-
       <main>
         {loading && (
           <section className="status-message">
@@ -104,17 +115,17 @@ function App() {
         {!loading && !error && (
           <section className="movies-section">
             <output className="movies-count" aria-live="polite">
-              Visar {filteredMovies.length} av {movies.length} filmer
+              Visar {sortedMovies.length} av {movies.length} filmer
             </output>
-            
-            {filteredMovies.length === 0 ? (
+
+            {sortedMovies.length === 0 ? (
               <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
             ) : (
               <section className="movie-grid" role="feed" aria-busy="false">
-                {filteredMovies.map(movie => (
-                  <MovieCard 
-                    key={movie.id} 
-                    movie={movie} 
+                {sortedMovies.map(movie => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
                     onClick={handleMovieClick}
                   />
                 ))}
@@ -125,9 +136,9 @@ function App() {
       </main>
 
       {selectedMovie && (
-        <MovieDetails 
-          movie={selectedMovie} 
-          onClose={handleCloseDetails} 
+        <MovieDetails
+          movie={selectedMovie}
+          onClose={handleCloseDetails}
         />
       )}
 
