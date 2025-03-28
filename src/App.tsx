@@ -26,21 +26,28 @@ function App() {
       try {
         setLoading(true);
         const fetchedMovies = await fetchMarvelMovies();
-        
+  
+        if (!Array.isArray(fetchedMovies)) {
+          setError("API:t returnerade inget giltigt format.");
+          return;
+        }
+  
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
           setMovies(fetchedMovies);
         }
+  
       } catch (err) {
         setError("Ett fel uppstod vid hämtning av filmer.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     getMovies();
   }, []);
+  
 
   const handleMovieClick = (movie: Movie) => {
     setSelectedMovie(movie);
