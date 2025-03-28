@@ -5,21 +5,31 @@ import { Movie, Root } from '../types/movie';
  * Hämtar alla Marvel-filmer via proxy
  * returns En array med Marvel-filmer
  */
-// src/services/api.ts
-
-export async function fetchMarvelMovies() {
+export const fetchMarvelMovies = async (): Promise<Movie[]> => { /**funktionen 
+  returnerar en lista med Movie-objekt */
   try {
-    const response = await fetch("https://mcuapi.herokuapp.com/api/v1/movies");
-
-
+    console.log("Anropar MCU API via proxy...");
+    const response = await fetch("/api/movies"); /** GET-anrop till en proxy-endpoint. */
+    /**Istället för att anropa en extern URL används en proxy för att undvika CORS-problem. */
+    
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new Error(`API svarade med status: ${response.status}`);
     }
+    
+    /** Vi ser till att datan från API:et följer strukturen i 
+     * interfacet Root, så TypeScript kan hantera den korrekt 
+     * och ge oss typkontroll och autokomplettering */
+    const moviesResponse: Root = await response.json();
+    console.log(`Hämtade ${moviesResponse.data.length} filmer från MCU API`);
+    
+    /** moviesResponse innehåller hela API-svaret och har typen Root. */
 
-    const data = await response.json();
-    return data.data; // Externa API:t lägger filmerna under "data"
+    return moviesResponse.data;
+    /** return moviesResponse.data; skickar tillbaka en lista av 
+     * filmer till App.tsx, där den lagras i useState(movies). */
+
   } catch (error) {
-    console.error("Failed to fetch Marvel movies:", error);
-    return []; // Returnera tom array så sidan inte kraschar
+    console.error("API-fel:", error);
+    return [];
   }
 };

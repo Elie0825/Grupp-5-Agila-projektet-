@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
     <nav className="navbar">
       {/* Logotyp till vänster */}
       <div className="logo">
-        <Link to="/">Logo</Link>
+        <Link to="/"></Link>
       </div>
 
       {/* Centrerade länkar */}

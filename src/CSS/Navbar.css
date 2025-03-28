@@ -1,6 +1,6 @@
 /* Navbar container */
 .navbar {
-  background: rgba(27, 26, 26, 0.7);
+  background-color: #175a92;
   padding: 15px 20px;
   display: flex;
   align-items: center;
@@ -8,9 +8,8 @@
 }
 
 /* Logo till vänster */
-.logo {
-  margin-right: auto;
-}
+
+
 
 .logo a {
   font-size: 24px;

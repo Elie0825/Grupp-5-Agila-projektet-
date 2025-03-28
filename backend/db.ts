@@ -1,12 +1,19 @@
-import * as mysql from 'mysql2/promise';
+// backend/db.ts
+import { Pool } from 'pg';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
-// Funktion som returnerar en anslutning
-export async function getConnection() {
-  return mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '', 
-    database: 'marvel_movies',
-  });
-}
+// Anslutningssträngen från Neon
+const connectionString = process.env.DATABASE_URL || 
+  "postgres://neondb_owner:npg_21khvAbDoBCW@ep-jolly-glitter-abo9crtx-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require";
+
+// Skapa en pool för att hantera flera samtidiga anslutningar
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false // Krav för Neon
+  }
+});
+
+export default pool;

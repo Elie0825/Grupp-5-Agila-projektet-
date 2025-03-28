@@ -40,12 +40,12 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => { // destruk
           <time dateTime={movie.release_date}>{formatDate(movie.release_date)}</time>
         </header>
         
-        {movie.overview && ( /**Om movie.overview är null eller undefined, renderas inget.
+        {movie.imdb_id && ( /**Om movie.overview är null eller undefined, renderas inget.
           Om movie.overview finns, fortsätter koden att rendera <p>-elementet. */
           <p className="movie-description">
-            {movie.overview.length > 100 //  Om movie.overview.length > 100, kortas texten ner
-              ? `${movie.overview.substring(0, 100)}...` 
-              : movie.overview}
+            {movie.imdb_id.length > 100 //  Om movie.overview.length > 100, kortas texten ner
+              ? `${movie.imdb_id.substring(0, 100)}...` 
+              : movie.imdb_id}
           </p>
         )}
       </section>

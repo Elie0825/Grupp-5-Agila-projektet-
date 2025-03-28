@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     { 
-      "src": "backend/server.ts", 
+      "src": "api/*.ts", 
       "use": "@vercel/node" 
     },
     { 
@@ -13,11 +13,7 @@
   "routes": [
     { 
       "src": "/api/movies", 
-      "dest": "backend/server.ts" 
-    },
-    {
-      "source": "/api/:path*", 
-      "destination": "https://mcuapi.herokuapp.com/api/v1/movies/:path*"
+      "dest": "/api/movies.ts" 
     },
     { 
       "src": "/(.*)", 
@@ -25,9 +21,6 @@
     }
   ],
   "env": {
-    "DB_HOST": "@db_host",
-    "DB_USER": "@db_user", 
-    "DB_PASSWORD": "@db_password",
-    "DB_NAME": "@db_name"
+    "DATABASE_URL": "postgres://neondb_owner:npg_21khvAbDoBCW@ep-jolly-glitter-abo9crtx-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require"
   }
 }
