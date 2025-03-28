@@ -5,7 +5,7 @@ import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import "./App.css";
