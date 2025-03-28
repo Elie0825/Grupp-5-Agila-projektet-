@@ -48,7 +48,7 @@ html, body {
   margin-top: 90px;
   margin-bottom: 1.5rem;
   position: relative;
-  background-image: url(src/bilder/header.png);
+  background-image: url('/bilder/header.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; 
@@ -56,6 +56,11 @@ html, body {
   height: 350px;
 }
 
+@media (max-width: 600px) {
+  .main-header {
+    height: 200px;
+  }
+}
 
 
 .logo {

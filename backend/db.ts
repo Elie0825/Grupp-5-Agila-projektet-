@@ -1,19 +1,21 @@
-// backend/db.ts
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
+// Laddar in miljövariabler från .env
+import * as dotenv from "dotenv";
 dotenv.config();
 
-// Anslutningssträngen från Neon
-const connectionString = process.env.DATABASE_URL || 
-  "postgres://neondb_owner:npg_21khvAbDoBCW@ep-jolly-glitter-abo9crtx-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require";
+// Debug: skriver ut databas-URL:n vid uppstart (användbart lokalt)
+console.log("🔧 DATABASE_URL:", process.env.DATABASE_URL);
 
-// Skapa en pool för att hantera flera samtidiga anslutningar
-const pool = new Pool({
-  connectionString,
-  ssl: {
-    rejectUnauthorized: false // Krav för Neon
-  }
+// Importerar mysql2 med promise-stöd
+import { createPool } from "mysql2/promise";
+
+// Skapar en återanvändbar connection pool
+const pool = createPool({
+  uri: process.env.DATABASE_URL,  // Använder värdet från .env
+  waitForConnections: true,
+  connectionLimit: 10,
 });
 
-export default pool;
+// Exporterar en funktion som hämtar en ny klient från poolen
+export function getClient() {
+  return pool.getConnection(); 
+}

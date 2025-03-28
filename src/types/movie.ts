@@ -1,5 +1,3 @@
-// src/types/movie.ts - Förenklad för första deployment
-
 // API-svar root objekt
 export interface Root { /** Vanligt att kalla den översta nivån i en 
   API-respons för Root, eftersom den omsluter alla data. */
@@ -25,6 +23,9 @@ export interface Movie {
   post_credit_scenes: number;
   imdb_id: string;
   updated_at: string;
+  imdb_rating?: number;
+  rotten_tomatoes_rating?: number;
+  metacritic_rating?: number;
 }
 
 // Grundläggande props-interface

@@ -1,34 +1,38 @@
-import express from "express"; // importerar express ramverk för att skapa API-servern
-import cors from "cors"; // importerar CORS för att tilåta att frontend får anropa från servern
-import { getConnection } from "./db";
-import { RowDataPacket } from 'mysql2/promise';
+import express from "express";           // Express för att skapa en lokal server
+import cors from "cors";                 // CORS tillåter anrop från ditt React/Vite-frontend
+import { RowDataPacket } from "mysql2/promise"; // Typning för databasresultat
+import { getClient } from "./db";        // Hämtar en anslutning till databasen
 
-const app = express(); // skapar själva express appen
-const PORT = process.env.PORT || 3001; // porten som servern kör på, lokalt (3001) eller deploy
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(cors()); // Tillåter frontend att anropa API:t
+app.use(cors()); // Tillåt alla origin 
 
-// Skapar en GET-endpoint på /api/movies
 app.get("/api/movies", async (req, res) => {
   try {
-    const connection = await getConnection();
-    
-    // Använd RowDataPacket för att typa resultatet
-    const [rows] = await connection.execute("SELECT * FROM movies") as [RowDataPacket[], any];
-    
-    console.log(`${rows.length} filmer hämtade från databasen`);
-    
-    // Formatera svaret som frontend förväntar sig
+    // Anslut till databasen
+    const client = await getClient();
+
+    // Kör SQL-frågan
+    const [rows] = await client.query(
+      "SELECT * FROM movies"
+    ) as [RowDataPacket[], any];
+
+    // Skicka svar till frontend
     res.json({
       data: rows,
-      total: rows.length
+      total: rows.length,
     });
+
+    // Släpp anslutningen
+    client.release();
   } catch (err) {
     console.error("Fel vid hämtning:", err);
     res.status(500).json({ message: "Något gick fel på servern" });
   }
 });
-  // Startar servern och skriver ut en bekräftelse i terminalen
-  app.listen(PORT, () => {
-    console.log(`Servern körs på http://localhost:${PORT}`);
-  });
+
+// Starta servern lokalt
+app.listen(PORT, () => {
+  console.log(`Servern är igång på http://localhost:${PORT}`);
+});
