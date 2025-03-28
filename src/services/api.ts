@@ -11,6 +11,7 @@ export async function fetchMarvelMovies() {
   try {
     const response = await fetch("https://mcuapi.herokuapp.com/api/v1/movies");
 
+
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
