@@ -1,31 +1,28 @@
+import { Request, Response } from "express";
+import { executeQuery } from "./db";
+import { Movie } from "../src/types/movie";
 
-import { Request, Response } from "express"; // Importerar typer för Express-request/response
-import { RowDataPacket } from "mysql2"; // Typning av svar från MySQL
-import { pool } from "./db"; // Importerar vår databasanslutning (från flyttad db.ts-fil)
-import { Movie } from "../src/types/movie"; // Importerar vår Movie-typ så vi kan type-casta resultatet från databasen
-/**
- * GET-endpoint som anropas från frontend (serverless via Vercel)
- * Hämtar alla filmer från databasen och returnerar som JSON
- */
 export default async function handler(req: Request, res: Response) {
   try {
-    // 🔹 Hämta alla filmer från databasen
-    const [rows] = await pool.execute(
-      "SELECT * FROM movies"
-    ) as RowDataPacket[][];
-
-    // 🔹 Skicka tillbaka filmerna till frontend i rätt format
+    console.log("API /api/movies anropad");
+    
+    // Använd vår executeQuery-funktion för att hämta filmer
+    const rows = await executeQuery("SELECT * FROM movies");
+    
+    console.log(`Hittade ${rows.length} filmer i databasen`);
+    
+    // Returnera data i rätt format
     res.status(200).json({
-      data: rows as Movie[],         // Array med filmer
-      total: (rows as Movie[]).length, // Totalt antal filmer
+      data: rows as Movie[],
+      total: rows.length,
     });
-  } catch (error) {
-    // Något gick fel – logga felet och skicka tillbaka ett felmeddelande
-    console.error("Fel vid hämtning av filmer:", error);
+  } catch (err: any) { // 'any' för att lösa typproblemet
+    console.error("Fel vid hämtning av filmer:", err);
     res.status(500).json({
       error: {
         code: "500",
-        message: "A server error has occurred",
+        message: "Ett serverfel har inträffat",
+        details: process.env.NODE_ENV !== 'production' ? err.message : undefined
       },
     });
   }

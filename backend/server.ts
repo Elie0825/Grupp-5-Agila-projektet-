@@ -1,34 +1,33 @@
-import express from "express";           // Express för att skapa en lokal server
-import cors from "cors";                 // CORS tillåter anrop från ditt React/Vite-frontend
-import { RowDataPacket } from "mysql2/promise"; // Typning för databasresultat
-import { getClient } from "../api/db";        // Hämtar en anslutning till databasen
+import express from "express";
+import cors from "cors";
+import { executeQuery } from "../api/db";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors()); // Tillåt alla origin 
+app.use(cors());
 
 app.get("/api/movies", async (req, res) => {
   try {
-    // Anslut till databasen
-    const client = await getClient();
-
-    // Kör SQL-frågan
-    const [rows] = await client.query(
-      "SELECT * FROM movies"
-    ) as [RowDataPacket[], any];
-
+    // Anslut till databasen och hämta filmer
+    console.log("Hämtar filmer från databasen...");
+    const rows = await executeQuery("SELECT * FROM movies");
+    
+    console.log(`Hittade ${rows.length} filmer i databasen`);
+    
     // Skicka svar till frontend
     res.json({
       data: rows,
       total: rows.length,
     });
-
-    // Släpp anslutningen
-    client.release();
-  } catch (err) {
+  } catch (err: any) { // Märk 'any' här för att lösa typproblemet
     console.error("Fel vid hämtning:", err);
-    res.status(500).json({ message: "Något gick fel på servern" });
+    res.status(500).json({
+      error: {
+        message: "Något gick fel på servern",
+        details: process.env.NODE_ENV !== 'production' ? err.message : undefined
+      }
+    });
   }
 });
 
