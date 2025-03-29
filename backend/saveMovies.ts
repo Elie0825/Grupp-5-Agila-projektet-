@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getClient } from "./db"; // Hämtar en klient från vår pool
+import { getClient } from "../api/db"; // Hämtar en klient från vår pool
 import { Movie } from "../src/types/movie";
 
 // Funktion som hämtar filmer från MCU API och sparar i databasen

@@ -1,7 +1,7 @@
 import express from "express";           // Express för att skapa en lokal server
 import cors from "cors";                 // CORS tillåter anrop från ditt React/Vite-frontend
 import { RowDataPacket } from "mysql2/promise"; // Typning för databasresultat
-import { getClient } from "./db";        // Hämtar en anslutning till databasen
+import { getClient } from "../api/db";        // Hämtar en anslutning till databasen
 
 const app = express();
 const PORT = process.env.PORT || 3001;

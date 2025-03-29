@@ -9,7 +9,7 @@ console.log("🔧 DATABASE_URL:", process.env.DATABASE_URL);
 import { createPool } from "mysql2/promise";
 
 // Skapar en återanvändbar connection pool
-const pool = createPool({
+export const pool = createPool({
   uri: process.env.DATABASE_URL,  // Använder värdet från .env
   waitForConnections: true,
   connectionLimit: 10,

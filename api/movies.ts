@@ -1,23 +1,28 @@
-import { Pool } from 'pg';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { Request, Response } from "express";
+import { RowDataPacket } from "mysql2";
+import { pool } from "../../backend/db"; // justera sökvägen om den skiljer sig
 
-console.log("DATABASE_URL:", process.env.DATABASE_URL); // För felsökning
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+/**
+ * API-route som körs på servern (serverless på Vercel).
+ * Hämtar alla filmer från databasen och returnerar som JSON-objekt.
+ */
+export default async function handler(req: Request, res: Response) {
   try {
-    const client = await pool.connect();
-    const result = await client.query("SELECT * FROM movies");
-    client.release();
-    res.status(200).json(result.rows);
-  } catch (err) {
-    console.error("Neon database error:", err);
-    res.status(500).json({ error: "Failed to fetch data from database" });
+    // Hämta filmer från databasen
+    const [rows] = await pool.execute("SELECT * FROM movies") as [RowDataPacket[], any];
+
+    // Skicka resultatet i rätt format (som frontend förväntar sig)
+    return res.status(200).json({
+      data: rows,             // Array med filmer
+      total: rows.length      // Antal filmer
+    });
+
+  } catch (error) {
+    console.error("Fel vid hämtning av filmer från databasen:", error);
+
+    // Skicka felmeddelande till frontend
+    return res.status(500).json({
+      message: "Något gick fel på servern",
+    });
   }
 }
