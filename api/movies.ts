@@ -1,28 +1,32 @@
-import { Request, Response } from "express";
-import { RowDataPacket } from "mysql2";
-import { pool } from "../../backend/db"; // justera sökvägen om den skiljer sig
 
+import { Request, Response } from "express"; // Importerar typer för Express-request/response
+import { RowDataPacket } from "mysql2"; // Typning av svar från MySQL
+import { pool } from "./db"; // Importerar vår databasanslutning (från flyttad db.ts-fil)
+import { Movie } from "../src/types/movie"; // Importerar vår Movie-typ så vi kan type-casta resultatet från databasen
 /**
- * API-route som körs på servern (serverless på Vercel).
- * Hämtar alla filmer från databasen och returnerar som JSON-objekt.
+ * GET-endpoint som anropas från frontend (serverless via Vercel)
+ * Hämtar alla filmer från databasen och returnerar som JSON
  */
 export default async function handler(req: Request, res: Response) {
   try {
-    // Hämta filmer från databasen
-    const [rows] = await pool.execute("SELECT * FROM movies") as [RowDataPacket[], any];
+    // 🔹 Hämta alla filmer från databasen
+    const [rows] = await pool.execute(
+      "SELECT * FROM movies"
+    ) as RowDataPacket[][];
 
-    // Skicka resultatet i rätt format (som frontend förväntar sig)
-    return res.status(200).json({
-      data: rows,             // Array med filmer
-      total: rows.length      // Antal filmer
+    // 🔹 Skicka tillbaka filmerna till frontend i rätt format
+    res.status(200).json({
+      data: rows as Movie[],         // Array med filmer
+      total: (rows as Movie[]).length, // Totalt antal filmer
     });
-
   } catch (error) {
-    console.error("Fel vid hämtning av filmer från databasen:", error);
-
-    // Skicka felmeddelande till frontend
-    return res.status(500).json({
-      message: "Något gick fel på servern",
+    // Något gick fel – logga felet och skicka tillbaka ett felmeddelande
+    console.error("Fel vid hämtning av filmer:", error);
+    res.status(500).json({
+      error: {
+        code: "500",
+        message: "A server error has occurred",
+      },
     });
   }
 }
