@@ -60,7 +60,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
             <span>Filter</span>
           </button>
           <button
-            className={`compact-filter-button ${showSort ? "active" : ""}`}
+            className={`compact-sort-button ${showSort ? "active" : ""}`}
             onClick={() => {
               setShowSort(!showSort);
               setShowFilters(false);
