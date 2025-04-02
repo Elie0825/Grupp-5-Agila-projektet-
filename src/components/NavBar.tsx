@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
     <nav className="navbar">
       {/* Logotyp till vänster */}
       <div className="logo">
-        <Link to="/">Logo</Link>
+        <Link to="/"></Link>
       </div>
 
       {/* Centrerade länkar */}
@@ -36,6 +36,7 @@ const Navbar: React.FC = () => {
             <Link 
               to="/" 
               className={location.pathname === '/' ? 'active' : ''}
+              onClick={() => setIsMenuOpen(false)}  // Stänger menyn när man klickar på en länk
             >
               Hem
             </Link>
@@ -44,6 +45,7 @@ const Navbar: React.FC = () => {
             <Link 
               to="/about" 
               className={location.pathname === '/about' ? 'active' : ''}
+              onClick={() => setIsMenuOpen(false)}  // Stänger menyn när man klickar på en länk
             >
               Om oss
             </Link>
@@ -52,6 +54,7 @@ const Navbar: React.FC = () => {
             <Link 
               to="/contact" 
               className={location.pathname === '/contact' ? 'active' : ''}
+              onClick={() => setIsMenuOpen(false)}  // Stänger menyn när man klickar på en länk
             >
               Kontakt
             </Link>

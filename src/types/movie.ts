@@ -1,5 +1,3 @@
-// src/types/movie.ts - Förenklad för första deployment
-
 // API-svar root objekt
 export interface Root { /** Vanligt att kalla den översta nivån i en 
   API-respons för Root, eftersom den omsluter alla data. */
@@ -25,6 +23,9 @@ export interface Movie {
   post_credit_scenes: number;
   imdb_id: string;
   updated_at: string;
+  imdb_rating?: number | null;  // IMDb betyg (0-10)
+  rt_rating?: number | null;    // Rotten Tomatoes betyg (0-100%)
+  mc_rating?: number | null;
 }
 
 // Grundläggande props-interface
@@ -69,4 +70,8 @@ export interface SearchFilterProps {
   selectedPhase: number | null; // Antingen ett (fas)number eller null om ingen fas är vald.
   onPhaseChange: (phase: number | null) => void; //  En callback-funktion som tar ett number | null och uppdaterar den valda fasen.
   phases: number[]; // En array av number, innehåller tillgängliga faser att filtrera på
+  selectedRating?: number | null;
+  onRatingChange?: (rating: number | null) => void;
+  sortBy?: string;
+  onSortChange?: (sort: string) => void;
 }

@@ -1,8 +1,32 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/:path*", 
-        "destination": "https://mcuapi.herokuapp.com/api/v1/movies/:path*"
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/*.ts",
+      "use": "@vercel/node",
+      "config": {
+        "maxDuration": 30
       }
-    ]
-  }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/api/movies",
+      "dest": "/api/movies.ts"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
+    }
+  ]
+}

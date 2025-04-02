@@ -1,8 +1,6 @@
-// src/components/MovieCard.tsx
 import React from 'react';
 import { Movie, MovieCardProps } from '../types/movie';
-
-
+import '../CSS/MovieCard.css'; // Importera den dedikerade CSS-filen
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => { // destrukturerade propd från app.tsx
   /** React.FC betyder att detta är en funktionell komponent i React.
@@ -14,6 +12,18 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => { // destruk
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }; 
     // inbyggd typ i TypeScript som gör datumformatering flexibel och anpassningsbar
     return new Date(dateString).toLocaleDateString('sv-SE', options);
+  };
+
+  // Kontrollera om filmen har släppts
+  const isMovieReleased = (releaseDate: string): boolean => {
+    const today = new Date();
+    const releaseDay = new Date(releaseDate);
+    return releaseDay <= today;
+  };
+
+  // Formatera betyg till decimalformat (t.ex. 7 blir 7.0)
+  const formatRating = (rating: number): string => {
+    return rating.toFixed(1);
   };
 
   return (
@@ -31,22 +41,26 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => { // destruk
             Ingen bild
           </figcaption>
         )}
-        <mark className="phase-badge">Fas {movie.phase}</mark>
       </figure>
       
       <section className="movie-info">
         <header>
-          <h2>{movie.title}</h2>
-          <time dateTime={movie.release_date}>{formatDate(movie.release_date)}</time>
+          <h2 className="movie-title">{movie.title}</h2>
         </header>
         
-        {movie.overview && ( /**Om movie.overview är null eller undefined, renderas inget.
-          Om movie.overview finns, fortsätter koden att rendera <p>-elementet. */
-          <p className="movie-description">
-            {movie.overview.length > 100 //  Om movie.overview.length > 100, kortas texten ner
-              ? `${movie.overview.substring(0, 100)}...` 
-              : movie.overview}
-          </p>
+        {/* Visa IMDb-betyg eller "Coming soon" beroende på om filmen har släppts */}
+        {isMovieReleased(movie.release_date) ? (
+          <>
+            {movie.imdb_rating && <span className="movie-rating">{formatRating(movie.imdb_rating)}</span>}
+            {movie.release_date && (
+              <>
+                {movie.imdb_rating && " | "}
+                <span className="release-year">{new Date(movie.release_date).getFullYear()}</span>
+              </>
+            )}
+          </>
+        ) : (
+          <span className="coming-soon-card">Coming soon...</span>
         )}
       </section>
     </article>

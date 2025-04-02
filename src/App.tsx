@@ -5,7 +5,7 @@ import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import "./App.css";
@@ -26,21 +26,28 @@ function App() {
       try {
         setLoading(true);
         const fetchedMovies = await fetchMarvelMovies();
-        
+  
+        if (!Array.isArray(fetchedMovies)) {
+          setError("API:t returnerade inget giltigt format.");
+          return;
+        }
+  
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
           setMovies(fetchedMovies);
         }
+  
       } catch (err) {
         setError("Ett fel uppstod vid hämtning av filmer.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     getMovies();
   }, []);
+  
 
   const handleMovieClick = (movie: Movie) => {
     setSelectedMovie(movie);
@@ -86,8 +93,13 @@ function App() {
           element={
             <div className="app-container">
               <header className="main-header">
-                <h1>Marvel Filmuniversum</h1>
-                <p>Utforska filmer från Marvel Cinematic Universe</p>
+              <img src="/bilder/loggo.png" alt="Marvelous Ratings Logo" className="logo" />
+                <p>
+                  <span>Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!</span>
+                  <span>Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.</span>
+                  <span>Utforska Marvel-universumet och hitta nästa film att uppleva!</span>
+                  <span className="last-sentence">Allt samlat, allt Marvel - MARVELOUS!</span>
+                </p>
               </header>
 
               <SearchFilter
@@ -160,8 +172,7 @@ function App() {
               )}
 
               <footer>
-                <p>Data hämtad från MCU API</p>
-                <p>&copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
+                <p>Data hämtad från MCU API &copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
               </footer>
             </div>
           }

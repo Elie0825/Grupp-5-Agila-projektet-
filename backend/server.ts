@@ -1,34 +1,37 @@
-import express from "express"; // importerar express ramverk för att skapa API-servern
-import cors from "cors"; // importerar CORS för att tilåta att frontend får anropa från servern
-import { getConnection } from "./db";
-import { RowDataPacket } from 'mysql2/promise';
+import express from "express";
+import cors from "cors";
+import { executeQuery } from "../api/db";
 
-const app = express(); // skapar själva express appen
-const PORT = process.env.PORT || 3001; // porten som servern kör på, lokalt (3001) eller deploy
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(cors()); // Tillåter frontend att anropa API:t
+app.use(cors());
 
-// Skapar en GET-endpoint på /api/movies
 app.get("/api/movies", async (req, res) => {
   try {
-    const connection = await getConnection();
+    // Anslut till databasen och hämta filmer
+    console.log("Hämtar filmer från databasen...");
+    const rows = await executeQuery("SELECT * FROM movies");
     
-    // Använd RowDataPacket för att typa resultatet
-    const [rows] = await connection.execute("SELECT * FROM movies") as [RowDataPacket[], any];
+    console.log(`Hittade ${rows.length} filmer i databasen`);
     
-    console.log(`${rows.length} filmer hämtade från databasen`);
-    
-    // Formatera svaret som frontend förväntar sig
+    // Skicka svar till frontend
     res.json({
       data: rows,
-      total: rows.length
+      total: rows.length,
     });
-  } catch (err) {
+  } catch (err: any) { // Märk 'any' här för att lösa typproblemet
     console.error("Fel vid hämtning:", err);
-    res.status(500).json({ message: "Något gick fel på servern" });
+    res.status(500).json({
+      error: {
+        message: "Något gick fel på servern",
+        details: process.env.NODE_ENV !== 'production' ? err.message : undefined
+      }
+    });
   }
 });
-  // Startar servern och skriver ut en bekräftelse i terminalen
-  app.listen(PORT, () => {
-    console.log(`Servern körs på http://localhost:${PORT}`);
-  });
+
+// Starta servern lokalt
+app.listen(PORT, () => {
+  console.log(`Servern är igång på http://localhost:${PORT}`);
+});

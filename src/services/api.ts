@@ -1,35 +1,40 @@
-// src/services/api.ts
-import { Movie, Root } from '../types/movie';
+import axios from 'axios';
 
-/**
- * Hämtar alla Marvel-filmer via proxy
- * returns En array med Marvel-filmer
- */
-export const fetchMarvelMovies = async (): Promise<Movie[]> => { /**funktionen 
-  returnerar en lista med Movie-objekt */
+// Definiera isLocalhost
+const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost';
+
+export const fetchMarvelMovies = async () => {
   try {
-    console.log("Anropar MCU API via proxy...");
-    const response = await fetch("/api/movies"); /** GET-anrop till en proxy-endpoint. */
-    /**Istället för att anropa en extern URL används en proxy för att undvika CORS-problem. */
-    
-    if (!response.ok) {
-      throw new Error(`API svarade med status: ${response.status}`);
+    if (isLocalhost) {
+      // Lokalt: hämta direkt från MCU API
+      const response = await axios.get("https://mcuapi.herokuapp.com/api/v1/movies");
+      console.log("🎬 Hämtar filmer direkt från MCU API");
+      
+      // För lokal utveckling - om vi vill ha dummybetyg
+      const moviesWithDummyRatings = response.data.data.map(movie => ({
+        ...movie,
+        imdb_rating: Math.floor(Math.random() * 20 + 65) / 10, // 6.5-8.5
+        rt_rating: Math.floor(Math.random() * 20) + 75, // 75-95%
+        mc_rating: Math.floor(Math.random() * 20) + 70 // 70-90
+      }));
+      
+      return moviesWithDummyRatings;
+    } else {
+      // På Vercel: hämta från backend som hämtar från databasen
+      try {
+        console.log("🎬 Försöker hämta filmer från vår databas...");
+        const response = await axios.get("/api/movies");
+        console.log(`🎬 Hämtade ${response.data.data.length} filmer från backend/databas`);
+        return response.data.data;
+      } catch (err) {
+        // Om databasen inte svarar, fallback till MCU API
+        console.warn("⚠️ Databasfel, använder fallback till MCU API", err.message);
+        const fallbackResponse = await axios.get("https://mcuapi.herokuapp.com/api/v1/movies");
+        return fallbackResponse.data.data;
+      }
     }
-    
-    /** Vi ser till att datan från API:et följer strukturen i 
-     * interfacet Root, så TypeScript kan hantera den korrekt 
-     * och ge oss typkontroll och autokomplettering */
-    const moviesResponse: Root = await response.json();
-    console.log(`Hämtade ${moviesResponse.data.length} filmer från MCU API`);
-    
-    /** moviesResponse innehåller hela API-svaret och har typen Root. */
-
-    return moviesResponse.data;
-    /** return moviesResponse.data; skickar tillbaka en lista av 
-     * filmer till App.tsx, där den lagras i useState(movies). */
-
   } catch (error) {
-    console.error("API-fel:", error);
-    return [];
+    console.error("❌ Alla försök att hämta filmer misslyckades:", error);
+    throw error;
   }
 };

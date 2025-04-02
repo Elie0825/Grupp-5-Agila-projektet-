@@ -7,10 +7,10 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
   selectedPhase, 
   onPhaseChange,
   phases,
-  selectedRating,
-  onRatingChange,
-  sortBy,
-  onSortChange
+  selectedRating = null,
+  onRatingChange = () => {},
+  sortBy = 'title',
+  onSortChange = () => {}
 }) => {
   const [showFilters, setShowFilters] = useState(false);
   const [showSort, setShowSort] = useState(false);
@@ -31,7 +31,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
       <div className="compact-filter-header">
         <input
           type="text"
-          placeholder="Sök Marvel filmer..."
+          placeholder="Hitta filmer, serier och mer..." // ändrade denna inför merge
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           className="compact-search-input"
@@ -60,7 +60,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
             <span>Filter</span>
           </button>
           <button
-            className={`compact-filter-button ${showSort ? "active" : ""}`}
+            className={`compact-sort-button ${showSort ? "active" : ""}`}
             onClick={() => {
               setShowSort(!showSort);
               setShowFilters(false);
@@ -72,7 +72,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       </div>
 
-      {/* Resten av komponenten förblir samma som i föregående version */}
       {showFilters && (
         <div className="compact-filter-dropdown">
           <div className="compact-filter-section">
@@ -119,7 +118,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       )}
 
-      {/* Sorteringsdropdown */}
       {showSort && (
         <div className="compact-filter-dropdown">
           <div className="compact-filter-section">
