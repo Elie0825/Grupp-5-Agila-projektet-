@@ -95,13 +95,11 @@ function App() {
           element={
             <div className="app-container">
               <header className="main-header">
-              <img src="/bilder/loggo.png" alt="Marvelous Ratings Logo" className="logo" />
-                <p>
-                  <span>Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!</span>
-                  <span>Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.</span>
-                  <span>Utforska Marvel-universumet och hitta nästa film att uppleva!</span>
-                  <span className="last-sentence">Allt samlat, allt Marvel - MARVELOUS!</span>
-                </p>
+                <p className="text">
+                Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer! 
+                Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.
+                Utforska Marvel-universumet och hitta nästa film att uppleva!
+                Allt samlat, allt Marvel, MARVELOUS! </p>
               </header>
 
               <SearchFilter

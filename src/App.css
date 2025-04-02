@@ -21,14 +21,23 @@
 }
 
 
-/* Grundläggande styling */
-* { box-sizing: border-box; }
-
 
 body {
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  background-color: #175a92;
+  min-height: 100vh;
+  padding-top: 70px; 
+  background: linear-gradient(193deg, #0D3A70 -1.67%, #0B315F 16.78%, #061E3B 62.91%, #071E3A 101.6%); /* fin fade */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Gör så att bakgrunden inte scrollar */
+  transition: background 1s ease-in-out; /* mjuk övergång vid ändringar */
+}
+
+@keyframes fadeInBackground {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 html, body {
@@ -47,43 +56,97 @@ html, body {
   text-align: center;
   margin-top: 150px;
   margin-bottom: 1.5rem;
+
   position: relative;
-  background-image: url('/bilder/header.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; 
+  background: linear-gradient(180deg, rgba(11, 15, 52, 0.00) 13.36%, rgba(10, 19, 54, 0.26) 34.36%, rgba(9, 24, 56, 0.58) 50.36%, rgba(8, 27, 58, 0.82) 76.86%, #071E3B 100%), url(/bilder/header.png) no-repeat center center;
+  background-size: cover;
+  /* Behåller bakgrundsbildens proportionsbalans */
   width: 100%;
-  height: 350px;
+  /* Sträcker headern över hela skärmen */
+  height: 60vh;
+  /* Gör att headern täcker hela viewporten */
+  margin-top: -30px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+
 }
+
+.main-header-content {
+  position: relative;
+  /* transform: translate(-50%, -50%);  Centrera innehållet i headern */
+  padding: 285px 336px 99px 336px;
+  /* Håll padding för innehållet */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 1; */
+  /* top: 50%;  /* Placera innehållet i mitten
+  left: 50%; */
+  /* padding: 0; */
+
+
+
+}
+
+.text {
+  color: white;
+  display: flex;
+  justify-content: center;
+  /* Centrerar innehållet horisontellt */
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    height: 40vh;
+    /* Minska höjden på headern för mindre skärmar */
+  }
+
+  .text {
+    font-size: 1rem;
+    /* Minska textstorleken för mindre skärmar */
+  }
+}
+
+@media (max-width: 600px) {
+  .main-header {
+    height: 80vh;
+    /* Ytterligare justering av höjd på mindre skärmar */
+  }
+
+  .main-header-content {
+    top: 60%;
+    /* Flytta texten ner mer vid små skärmar */
+  }
+
+  .text {
+    font-size: 0.8rem;
+    /* Ytterligare minskning av textstorlek */
+  }
+}
+
+/* p { 
+  margin-top: 90px;
+
+}
+
+p span {
+  margin-top: 2px;
+  display: block;
+  color: white;
+  text-align: center;
+
+}
+
+.last-sentence {
+  margin-top: 1.5rem;
+} */
 
 @media (max-width: 600px) {
   .main-header {
     height: 200px;
   }
 }
-
-
-.logo {
-  display: block;
-  max-width: 250px;
-  height: auto;
-  margin: 0 auto;
-  position: relative;
-  top: 20%; 
-  transform: translateY(-50%);
-}
-
-
-p{ margin-top: 30px;}
-
-p span {
-  display: block;
-}
-
-.last-sentence {
-  margin-top: 1.5rem;
-}
-
 
 /* Sökformulär */
 .compact-filter-container {
@@ -94,40 +157,78 @@ p span {
 
 .compact-filter-header {
   display: flex;
-  gap: 10px;
+  justify-content: space-between; /* Tryck ut elementen till vänster och höger */
   align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap; /* Gör att det inte bryter vid mindre skärmstorlek */
 }
 
 .compact-search-input {
-  flex: 1;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  font-size: 14px;
-  min-width: 200px;
+  flex: 1; /* Tar upp tillgängligt utrymme */
+  max-width: 600px;
+  padding: 0.6rem 1rem;
+  border: 1px solid white;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.compact-search-input {
+  flex: 1; /* Tar upp tillgängligt utrymme */
+  max-width: 600px;
+  padding: 0.6rem 1rem;
+  border: 1px solid white;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.compact-search-input::placeholder {
+  color: #ccc;
+}
+
+.compact-search-input:focus {
+  box-shadow: 0 0 0 2px #518cca;
 }
 
 .compact-filter-buttons {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 1rem;
 }
+
+.compact-filter-button,
+.compact-sort-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+
+/* === FILTER-KNAPP === */
 
 .compact-filter-button {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 8px 12px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 20px;
+  gap: 6px;
+  padding: 10px 16px;
+  background-color: #0f2f58;
+  color: white;
+  border: 1px solid white; /* 🔲 Vit kantlinje */
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-size: 15px;
+  transition: background-color 0.3s;
 }
 
 .compact-filter-button:hover {
-  background-color: #f5f5f5;
+  background-color: #17457a;
 }
+
 
 .compact-filter-button.active {
   background-color: #e62429;
@@ -231,6 +332,26 @@ p span {
   background-color: #c11a1f;
 }
 
+/* === SORTERA-KNAPP UTAN RAM === */
+.compact-sort-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background-color: #0f2f58;
+  color: white;
+  border: none; /* Ingen kant */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+.compact-sort-button:hover {
+  background-color: #17457a;
+}
+
+
 /* Filmrutnät */
 .movie-grid {
   display: grid;
@@ -240,11 +361,15 @@ p span {
 
 /* Filmkort */
 .movie-card {
-  background-color: white;
-  border-radius: 4px;
+  color: white;
+  background: linear-gradient(193deg, #0D3A70 -1.67%, #0B315F 16.78%, #061E3B 62.91%, #071E3A 101.6%); /* fin fade */
+  border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 
 .movie-poster {
   position: relative;

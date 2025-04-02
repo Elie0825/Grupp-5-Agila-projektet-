@@ -89,7 +89,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
           
           {/* Sorterings-knapp som visar sorteringspanelen */}
           <button
+
             className={`compact-filter-button ${showSort ? "active" : ""}`} // Aktiverar knappen om sortering är öppen
+
+            className={`compact-sort-button ${showSort ? "active" : ""}`}
+
             onClick={() => {
               setShowSort(!showSort); // Växlar om sorteringspanelen ska visas eller inte
               setShowFilters(false); // Stänger filterpanelen om sorteringspanelen öppnas
