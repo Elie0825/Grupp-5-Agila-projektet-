@@ -1,16 +1,22 @@
-/* Navbar container */
+/* Hela navbaren – gradient och placerad överst */
 .navbar {
-  background-color: #175a92;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  backdrop-filter: blur(10px);
+  background-color: rgba(7, 30, 58, 0.2);
+  backdrop-filter: blur(4px); /* Skapar glasliknande blur-effekt */
+  padding: 15px 30px;
+  position: fixed;
+  width: 100%; 
+  z-index: 999; 
+  height: 32px;
+
+  
 }
 
-/* Logo till vänster */
+.logo {
+  height: 42px;
+  margin-top: -2px;
+}
 
-
-
+/* Logotyp eller "Hem"-länk */
 .logo a {
   font-size: 24px;
   font-weight: bold;
@@ -18,43 +24,41 @@
   text-decoration: none;
 }
 
-/* Container för centrerade länkar */
-.nav-links-container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Navigationslänkar */
+/* Menyn med länkar (höger sida) */
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 15px;
+  list-style: none; /* Tar bort punkter från listan */
+  position: absolute;
+  right: 30px;
+  transform: translateY(-50%);
+  top: 50%;
   margin: 0;
-  padding: 0;
+  padding: 80px;
 }
 
-/* Länk-items */
+/* Varje menyitem */
 .nav-links li {
-  position: relative;
+  position: relative; /* Gör att vi kan placera underline med ::after */
+  display: inline-block; /* Lägg till detta */
+  margin-left: 30px; /* Lite mellanrum mellan länkarna */
 }
 
-/* Länker */
+/* Själva länkarna */
 .nav-links a {
   color: white;
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
   padding: 5px 0;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Mjuk hover-övergång */
+  display: inline-block;
 }
 
-/* Aktiv länk */
+/* Markerar aktiv länk */
 .nav-links a.active {
   font-weight: bold;
-  color: #bbb; /* Färgen på den aktiva länken */
 }
 
+/* Understreck för aktiv länk */
 .nav-links a.active::after {
   content: "";
   display: block;
@@ -62,21 +66,16 @@
   height: 2px;
   background-color: white;
   position: absolute;
-  bottom: -5px;
+  bottom: -1px;
   left: 0;
 }
 
-/* Hover-effekt för länkar */
+/* Hover-effekt */
 .nav-links a:hover {
-  color: #bbb;
+  color: #bbb; /* Samma som aktiv färg */
 }
 
-/* Stäng av alla "röda" hover-stilar på nav-elementet */
-.navbar:hover .nav-links a {
-  color: white; /* Ta bort oönskad färg när navbarn är hoverad */
-}
-
-/* Hamburgermeny ikon */
+/* Hamburger-ikonen – dold i desktopläge */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -87,48 +86,47 @@
   margin-left: auto;
 }
 
+/* De tre linjerna i hamburgermenyn */
 .menu-toggle span {
   display: block;
   height: 3px;
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   transition: all 0.3s ease;
 }
 
-/* Responsiv design */
+/* ========== MOBILVY ========== */
 @media (max-width: 768px) {
+  /* Visa hamburgermenyn i mobil */
   .menu-toggle {
     display: flex;
   }
 
-  .nav-links-container {
+  /* Mobilmeny, dold som standard */
+  .nav-links {
     position: fixed;
-    top: 200px;
-    left: 0;
+    top: 70px;
     right: 0;
-    background:none;
-    backdrop-filter: blur(50px);
-    padding: 20px 0;
-    height: calc(70px);
-    transform: translateX(-100%);
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px); /* Samma glas-effekt */
+    width: 200px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 10px;
+    transform: translateX(100%); /* Flyttad utanför skärmen */
     transition: transform 0.3s ease-in-out;
     z-index: 999;
   }
 
-  .nav-links-container.open {
-    transform: translateX(0);
+  /* När menyn är öppen i mobil */
+  .nav-links.open {
+    transform: translateX(0); /* Flyttas in från höger */
   }
 
-  .nav-links {
-    flex-direction: column;
-    gap: 0;
-    align-items: center;
-  }
-
+  /* Länkarna tar hela bredden i mobil */
   .nav-links li {
     width: 100%;
-    text-align: center;
-    padding: 15px 0;
   }
   .navbar ul {
     background-color: #518cca;
@@ -147,24 +145,26 @@
   }
   
   .nav-links a {
-    font-size: 20px;
-    padding: 5px 2px;
+    font-size: 18px;
     display: block;
+    width: 100%;
   }
 
+  
+
+  /* Gör underline kortare i mobil */
   .nav-links a.active::after {
     width: 50%;
-    left: 25%;
-    bottom: 10px;
+    left: 0;
   }
 
-  /* Animation för hamburgermeny */
+  /* Animerad hamburgermeny – X-form vid aktivt läge */
   .menu-toggle.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
   }
 
   .menu-toggle.active span:nth-child(2) {
-    opacity: 0;
+    opacity: 0; /* Döljer mittenlinjen */
   }
 
   .menu-toggle.active span:nth-child(3) {
