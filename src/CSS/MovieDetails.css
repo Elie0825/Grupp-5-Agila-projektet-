@@ -116,14 +116,21 @@ align-items: flex-start;
 padding: 1.5rem 1rem 1rem 1rem;
 background: none;
 border-bottom: none;
+width: 100%; /* Säkerställ full bredd */
+box-sizing: border-box; /* Inkludera padding i width */
 }
 
 .details-header h2 {
 margin: 0 0 0.5rem 0;
-font-size: 2rem; /* Minska från 2.5rem till 2rem */
+font-size: 2rem;
 font-weight: 700;
 line-height: 1.2;
 text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+max-width: calc(100% - 100px); /* Lämna plats för betyget */
+padding-right: 0.5rem; /* Extra padding till höger */
+box-sizing: border-box;
+word-wrap: break-word; /* Tillåt ordbrytning */
+hyphens: auto; /* Tillåt avstavning */
 }
 
 .movie-meta {
@@ -282,15 +289,17 @@ border: none;
 
 .average-rating {
 position: absolute;
-top: 20px;  /* Justera för att hamna i linje med filmtiteln */
-right: 20px;
+top: 1.5rem; /* Samma top-padding som details-header */
+right: 1rem; /* Samma right-padding som details-header */
 font-size: 2rem;
 font-weight: bold;
 text-align: right;
 padding: 5px 10px;
 border-radius: 8px;
 color: white;
-z-index: 5; /* Se till att den visas ovanför andra element */
+z-index: 5;
+width: 85px; /* Fast bredd för konsekvent layout */
+text-align: center;
 }
 
 .movie-year,
