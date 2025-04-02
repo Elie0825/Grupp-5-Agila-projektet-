@@ -18,7 +18,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPhase, setSelectedPhase] = useState<number | null>(null);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
-  const [sortBy, setSortBy] = useState<string>("title");
+  const [sortBy, setSortBy] = useState<string>("chronology");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   useEffect(() => {
@@ -69,6 +69,8 @@ function App() {
   // Sorterar filmer efter titel, betyg eller datum
   const sortedMovies = [...filteredMovies].sort((a, b) => {
     switch (sortBy) {
+      case "chronology":
+    return a.chronology - b.chronology;
       case "title":
         return a.title.localeCompare(b.title);
       case "rating":
