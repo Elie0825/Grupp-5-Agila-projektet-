@@ -26,6 +26,7 @@ const Navbar: React.FC = () => {
     <nav className="navbar">
       {/* Logotyp till vänster */}
       <div className="logo">
+      <img src="/logo.png" alt="Marvelous Ratings Logo" className="logo" />
         <Link to="/"></Link>
       </div>
 

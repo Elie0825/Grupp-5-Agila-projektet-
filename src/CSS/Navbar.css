@@ -1,12 +1,17 @@
-/* Hela navbaren – transparent och placerad överst */
+/* Hela navbaren – gradient och placerad överst */
 .navbar {
-  background: transparent; /* Genomskinlig bakgrund */
-  backdrop-filter: blur(10px); /* Skapar glasliknande blur-effekt */
+  background-color: rgba(7, 30, 58, 0.2);
+  backdrop-filter: blur(4px); /* Skapar glasliknande blur-effekt */
   padding: 15px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Logo till vänster, länkar till höger */
-  font-family: sans-serif;
+  position: fixed;
+  width: 100%; 
+  z-index: 999; 
+  height: 32px;  
+}
+
+.logo {
+  height: 42px;
+  margin-top: -2px;
 }
 
 /* Logotyp eller "Hem"-länk */
@@ -20,15 +25,19 @@
 /* Menyn med länkar (höger sida) */
 .nav-links {
   list-style: none; /* Tar bort punkter från listan */
-  display: flex;
-  gap: 30px; /* Mellanrum mellan länkar */
+  position: absolute;
+  right: 30px;
+  transform: translateY(-50%);
+  top: 50%;
   margin: 0;
-  padding: 0;
+  padding: 80px;
 }
 
 /* Varje menyitem */
 .nav-links li {
   position: relative; /* Gör att vi kan placera underline med ::after */
+  display: inline-block; /* Lägg till detta */
+  margin-left: 30px; /* Lite mellanrum mellan länkarna */
 }
 
 /* Själva länkarna */
@@ -39,12 +48,12 @@
   font-weight: 500;
   padding: 5px 0;
   transition: all 0.3s ease; /* Mjuk hover-övergång */
+  display: inline-block;
 }
 
 /* Markerar aktiv länk */
 .nav-links a.active {
   font-weight: bold;
-  color: #bbb; /* Lite mjukare vit */
 }
 
 /* Understreck för aktiv länk */
@@ -55,7 +64,7 @@
   height: 2px;
   background-color: white;
   position: absolute;
-  bottom: -5px;
+  bottom: -1px;
   left: 0;
 }
 
@@ -117,12 +126,29 @@
   .nav-links li {
     width: 100%;
   }
-
+  .navbar ul {
+    background-color: #518cca;
+   
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      right: 0px;
+     
+      flex-direction: column;
+      align-items: center;
+     
+      gap: 15px;
+      transform: translateY(-100%);
+     
+  }
+  
   .nav-links a {
     font-size: 18px;
     display: block;
     width: 100%;
   }
+
+  
 
   /* Gör underline kortare i mobil */
   .nav-links a.active::after {

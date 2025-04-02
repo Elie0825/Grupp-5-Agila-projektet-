@@ -26,8 +26,11 @@ body.modal-open {
   100% { opacity: 0.5; }
 }
 
+
+
 body {
   min-height: 100vh;
+  padding-top: 70px; 
   background: linear-gradient(193deg, #0D3A70 -1.67%, #0B315F 16.78%, #061E3B 62.91%, #071E3A 101.6%); /* fin fade */
   background-repeat: no-repeat;
   background-attachment: fixed; /* Gör så att bakgrunden inte scrollar */
@@ -56,63 +59,98 @@ html, body {
 
 /* Header */
 .main-header {
-  text-align: center;
-  margin-top: 90px;
-  margin-bottom: 1.5rem;
-  position: relative;
-  background-image: url('/bilder/header.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; 
-  width: 100%;
-  height: 350px;
-}
-
-.header-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.1rem;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.header-right {
-  width: 200px;
-  margin-left: 2rem;
+  width: 100vw;
+  margin-top: 4rem; /* Skjuter ner hela headern så den hamnar under navbaren */
+  background: url('/headerbild.svg') no-repeat center center;
+  background-size: cover;
+  background-position: top;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 4rem 2rem; /* Lite inre utrymme, men ingen stor top-padding */
+  min-height: 30rem; /* Tillräcklig höjd för att visa bilden snyggt */
 }
+
+.main-header-content {
+  position: relative;
+  /* transform: translate(-50%, -50%);  Centrera innehållet i headern */
+  padding: 285px 336px 99px 336px;
+  /* Håll padding för innehållet */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 1; */
+  /* top: 50%;  /* Placera innehållet i mitten
+  left: 50%; */
+  /* padding: 0; */
+
+}
+
+.main-header {
+  margin-top: 32px; /* Skjuter ner headern så den inte hamnar bakom navbaren */
+}
+
+
+.text {
+  color: white;
+  display: flex;
+  justify-content: center;
+  /* Centrerar innehållet horisontellt */
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    height: 40vh;
+    /* Minska höjden på headern för mindre skärmar */
+  }
+
+  .text {
+    font-size: 1rem;
+    /* Minska textstorleken för mindre skärmar */
+  }
+}
+
+@media (max-width: 600px) {
+  .main-header {
+    height: 80vh;
+    /* Ytterligare justering av höjd på mindre skärmar */
+  }
+
+  .main-header-content {
+    top: 60%;
+    /* Flytta texten ner mer vid små skärmar */
+  }
+
+  .text {
+    font-size: 0.8rem;
+    /* Ytterligare minskning av textstorlek */
+  }
+}
+
+/* p { 
+  margin-top: 90px;
+
+}
+
+p span {
+  margin-top: 2px;
+  display: block;
+  color: white;
+  text-align: center;
+
+}
+
+.last-sentence {
+  margin-top: 1.5rem;
+} */
 
 @media (max-width: 600px) {
   .main-header {
     height: 200px;
   }
-}
-
-.logo {
-  display: block;
-  max-width: 250px;
-  height: auto;
-  margin: 0 auto;
-  position: relative;
-  top: 20%; 
-  transform: translateY(-50%);
-}
-
-p{ margin-top: 30px;}
-
-p span {
-  display: block;
-}
-
-.last-sentence {
-  margin-top: 1.5rem;
 }
 
 /* Sökformulär */
@@ -129,6 +167,16 @@ p span {
   gap: 1rem;
   margin: 1rem 0;
   flex-wrap: wrap; /* Gör att det inte bryter vid mindre skärmstorlek */
+}
+
+.compact-search-input {
+  flex: 1; /* Tar upp tillgängligt utrymme */
+  max-width: 600px;
+  padding: 0.6rem 1rem;
+  border: 1px solid white;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
 }
 
 .compact-search-input {
@@ -165,7 +213,9 @@ p span {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+
 /* === FILTER-KNAPP === */
+
 .compact-filter-button {
   display: flex;
   align-items: center;
@@ -183,6 +233,7 @@ p span {
 .compact-filter-button:hover {
   background-color: #17457a;
 }
+
 
 .compact-filter-button.active {
   background-color: #e62429;

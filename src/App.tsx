@@ -5,7 +5,7 @@ import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/NavBar";
+import NavBar from "./components/Navbar";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import "./App.css";
@@ -18,7 +18,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPhase, setSelectedPhase] = useState<number | null>(null);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
-  const [sortBy, setSortBy] = useState<string>("title");
+  const [sortBy, setSortBy] = useState<string>("chronology");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   useEffect(() => {
@@ -69,6 +69,8 @@ function App() {
   // Sorterar filmer efter titel, betyg eller datum
   const sortedMovies = [...filteredMovies].sort((a, b) => {
     switch (sortBy) {
+      case "chronology":
+    return a.chronology - b.chronology;
       case "title":
         return a.title.localeCompare(b.title);
       case "rating":
@@ -85,7 +87,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <NavBar />
 
       <Routes>
         <Route
@@ -93,7 +95,6 @@ function App() {
           element={
             <div className="app-container">
               <header className="main-header">
-              <img src="/bilder/loggo.png" alt="Marvelous Ratings Logo" className="logo" />
                 <p>
                   <span>Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!</span>
                   <span>Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.</span>
