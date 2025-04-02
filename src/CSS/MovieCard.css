@@ -44,7 +44,9 @@ color: #333;
 }
 
 .movie-info { 
-padding: 0.8rem; 
+padding: 0.8rem;
+display: flex;
+flex-direction: column;
 }
 
 .movie-info h2 { 
@@ -55,6 +57,20 @@ transition: color 0.3s ease;
 
 .movie-card img {
 transition: all 0.3s ease;
+}
+
+.movie-rating {
+font-size: 1.6rem; 
+font-weight: bold;
+margin-bottom: 0.3rem;
+color: white;
+}
+
+.movie-title {
+font-size: 1rem;
+margin: 0;
+font-weight: normal;
+transition: color 0.3s ease;
 }
 
 
@@ -69,13 +85,11 @@ transition: color 0.3s ease;
 font-style: italic;
 color: rgba(255, 255, 255, 0.7);
 font-size: 0.9rem;
+margin-bottom: 0.3rem;
 }
 
 /* Styling för betyg och release år */
-.movie-rating, .release-year {
-font-size: 0.9rem;
-color: rgba(255, 255, 255, 0.9);
-}
+
 
 /* Responsiv design för mindre skärmar */
 @media (max-width: 600px) {
@@ -86,6 +100,10 @@ color: rgba(255, 255, 255, 0.9);
 .movie-info {
     padding: 0.6rem;
 }
+
+.movie-rating {
+    font-size: 1.3rem;
+  }
 
 .movie-info h2 {
     font-size: 0.9rem;

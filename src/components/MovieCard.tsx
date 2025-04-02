@@ -26,6 +26,40 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => { // destruk
     return rating.toFixed(1);
   };
 
+  // Beräkna genomsnittsbetyg från IMDB, RT och MC
+  const calculateAverageRating = (
+    imdbRating: number | null | undefined, 
+    rtRating: number | null | undefined, 
+    mcRating: number | null | undefined
+  ): number | null => {
+    // Om IMDB-betyget saknas, returnera null
+    if (!imdbRating) {
+      return null;
+    }
+    
+    // Räkna ut hur många giltiga betyg vi har
+    let validRatings = 1; // IMDB finns alltid om vi kommit hit
+    let sum = imdbRating;
+    
+    // Lägg till RT om det finns
+    if (rtRating) {
+      sum += rtRating / 10; // Konvertera till skala 0-10
+      validRatings++;
+    }
+    
+    // Lägg till MC om det finns
+    if (mcRating) {
+      sum += mcRating / 10; // Konvertera till skala 0-10
+      validRatings++;
+    }
+
+    // Beräkna medelvärdet
+    const averageRating = sum / validRatings;
+
+    // Returnera medelvärdet med en decimal precision
+    return parseFloat(averageRating.toFixed(1));
+  };
+
   return (
     <article className="movie-card" onClick={() => onClick(movie)}> 
     {/** onClick={() => onClick(movie)} → När användaren klickar på kortet:
@@ -44,24 +78,20 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => { // destruk
       </figure>
       
       <section className="movie-info">
-        <header>
-          <h2 className="movie-title">{movie.title}</h2>
-        </header>
-        
-        {/* Visa IMDb-betyg eller "Coming soon" beroende på om filmen har släppts */}
+        {/* Visa genomsnittsbetyg eller "Coming soon" beroende på om filmen har släppts */}
         {isMovieReleased(movie.release_date) ? (
-          <>
-            {movie.imdb_rating && <span className="movie-rating">{formatRating(movie.imdb_rating)}</span>}
-            {movie.release_date && (
-              <>
-                {movie.imdb_rating && " | "}
-                <span className="release-year">{new Date(movie.release_date).getFullYear()}</span>
-              </>
-            )}
-          </>
+          <div className="movie-rating">
+            {movie.imdb_rating && 
+              calculateAverageRating(movie.imdb_rating, movie.rt_rating || null, movie.mc_rating || null)?.toFixed(1)
+            }
+          </div>
         ) : (
           <span className="coming-soon-card">Coming soon...</span>
         )}
+        
+        <header>
+          <h2 className="movie-title">{movie.title}</h2>
+        </header>
       </section>
     </article>
   );

@@ -71,22 +71,39 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
   // Fiktiva genres för demo (lägg till i Movie-typen och API om det behövs i framtiden)
   const genres = ['Sci-Fi', 'Superhero', 'Action', 'Adventure'];
 
-  const calculateAverageRating = (imdbRating: number | null, rtRating: number | null, mcRating: number | null): number | null => {
-    // Om något betyg är null, returnera null
-    if (imdbRating === null || rtRating === null || mcRating === null) {
+  // Beräkna genomsnittsbetyg från IMDB, RT och MC
+  const calculateAverageRating = (
+    imdbRating: number | null | undefined, 
+    rtRating: number | null | undefined, 
+    mcRating: number | null | undefined
+  ): number | null => {
+    // Om IMDB-betyget saknas, returnera null
+    if (!imdbRating) {
       return null;
     }
-    // Konvertera Rotten Tomatoes och Metacritic betyg till skalan 0-10
-    const rtConverted = rtRating / 10;
-    const mcConverted = mcRating / 10;
-  
+    
+    // Räkna ut hur många giltiga betyg vi har
+    let validRatings = 1; // IMDB finns alltid om vi kommit hit
+    let sum = imdbRating;
+    
+    // Lägg till RT om det finns
+    if (rtRating) {
+      sum += rtRating / 10; // Konvertera till skala 0-10
+      validRatings++;
+    }
+    
+    // Lägg till MC om det finns
+    if (mcRating) {
+      sum += mcRating / 10; // Konvertera till skala 0-10
+      validRatings++;
+    }
+
     // Beräkna medelvärdet
-    const averageRating = (imdbRating + rtConverted + mcConverted) / 3;
-  
+    const averageRating = sum / validRatings;
+
     // Returnera medelvärdet med en decimal precision
     return parseFloat(averageRating.toFixed(1));
   };
-  
 
   return (
     <aside 
@@ -96,7 +113,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
       aria-labelledby="movie-title"
       onClick={handleClose}
     >
-      <article className="movie-details" onClick={handleModalClick}>
+      <article className="movie-details" onClick={handleModalClick} ref={modalRef}>
         {/* Stängningsknapp */}
         <button className="close-button" onClick={handleClose} aria-label="Stäng detaljer">
           ×
@@ -126,10 +143,10 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
         <header className="details-header">
           <h2 id="movie-title">{movie.title}</h2>
           
-          {/* Visa betyget uppe till höger */}
+          {/* Visa genomsnittsbetyget uppe till höger */}
           {isMovieReleased(movie.release_date) && movie.imdb_rating && (
             <div className="average-rating">
-              {movie.imdb_rating.toFixed(1)}/10
+              {calculateAverageRating(movie.imdb_rating, movie.rt_rating || null, movie.mc_rating || null)?.toFixed(1)}/10
             </div>
           )}
           
