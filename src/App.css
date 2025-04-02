@@ -53,6 +53,10 @@ html, body {
 
 /* Header */
 .main-header {
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 1.5rem;
+
   position: relative;
   background: linear-gradient(180deg, rgba(11, 15, 52, 0.00) 13.36%, rgba(10, 19, 54, 0.26) 34.36%, rgba(9, 24, 56, 0.58) 50.36%, rgba(8, 27, 58, 0.82) 76.86%, #071E3B 100%), url(/bilder/header.png) no-repeat center center;
   background-size: cover;

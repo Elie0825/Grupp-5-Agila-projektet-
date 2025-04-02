@@ -128,7 +128,22 @@
   .nav-links li {
     width: 100%;
   }
-
+  .navbar ul {
+    background-color: #518cca;
+   
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      right: 0px;
+      /* background: #af6363b9; */
+      flex-direction: column;
+      align-items: center;
+      /* padding: 15px 0; */
+      gap: 15px;
+      transform: translateY(-100%);
+      /* transition: transform 0.3s ease; */
+  }
+  
   .nav-links a {
     font-size: 18px;
     display: block;
