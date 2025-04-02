@@ -1,5 +1,5 @@
 // src/components/MovieDetails.tsx
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Movie, MovieDetailsProps } from '../types/movie';
 
 
@@ -10,6 +10,28 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('sv-SE', options);
   };
+
+  // Skapar refs för att kunna kolla om man klickar utanför moviedetails
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  // Effekt som lyssnar på klick utanför modalfönstret för att stänga det
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Om användaren klickar utanför modalfönstret, stäng modalen
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    // Lägg till eventlistener för klick
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Rensa eventlistener vid komponentens avmontering
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
+
   
   // Formatera speltid från minuter till timmar och minuter
   const formatDuration = (minutes: number) => {
@@ -21,7 +43,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
 
   return (
     <aside className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="movie-title">
-      <article className="movie-details">
+  <article className="movie-details" ref={modalRef}>
 
         {/**Titel och stäng-knapp */}
         <header className="details-header">
