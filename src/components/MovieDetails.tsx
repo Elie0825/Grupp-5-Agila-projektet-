@@ -3,100 +3,100 @@ import axios from 'axios';
 import { Movie, MovieDetailsProps } from '../types/movie';
 import '../CSS/MovieDetails.css';
 
-const OMDB_API_KEY = process.env.NEXT_PUBLIC_OMDB_API_KEY;
+const OMDB_API_KEY = "8f57b2c1"; // Hårdkodad API-nyckel
 
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
+  // Uppdaterad state-typ med union type number | null
   const [movieRatings, setMovieRatings] = useState<{
-    imdbRating?: number | null,
-    rtRating?: number | null,
-    mcRating?: number | null
+    imdbRating: number | null,
+    rtRating: number | null,
+    mcRating: number | null
   }>({
-    imdbRating: movie.imdb_rating,
-    rtRating: movie.rt_rating,
-    mcRating: movie.mc_rating
+    imdbRating: null,
+    rtRating: null,
+    mcRating: null
   });
 
-  // Hämta betyg från OMDb API om de saknas
+  // Hämta betyg från OMDb API
   useEffect(() => {
     const fetchMovieRatings = async () => {
-      // Kontrollera om någon rating saknas
-      if (
-        movieRatings.imdbRating === null || 
-        movieRatings.rtRating === null || 
-        movieRatings.mcRating === null
-      ) {
-        try {
-          const response = await axios.get('http://www.omdbapi.com/', {
-            params: {
-              apikey: OMDB_API_KEY,
-              t: movie.title,
-              y: new Date(movie.release_date).getFullYear()
-            }
-          });
+      try {
+        console.log(`Hämtar betyg för "${movie.title}" från OMDb API`);
+        const response = await axios.get('https://www.omdbapi.com/', {
+          params: {
+            apikey: OMDB_API_KEY,
+            t: movie.title,
+            y: new Date(movie.release_date).getFullYear()
+          }
+        });
 
-          const data = response.data;
-          const updatedRatings = { ...movieRatings };
+        const data = response.data;
+        if (data && data.Response === "True") {
+          // Skapa ett objekt med explicit typer
+          const updatedRatings = { 
+            imdbRating: null as number | null, 
+            rtRating: null as number | null, 
+            mcRating: null as number | null 
+          };
           
-          // Uppdatera bara saknade betyg
-          if (!updatedRatings.imdbRating && data.imdbRating) {
+          // IMDb betyg
+          if (data.imdbRating && data.imdbRating !== "N/A") {
             updatedRatings.imdbRating = parseFloat(data.imdbRating);
           }
 
           // Rotten Tomatoes
-          if (!updatedRatings.rtRating) {
-            const rtRating = data.Ratings?.find((r: any) => r.Source === 'Rotten Tomatoes');
-            if (rtRating) {
-              updatedRatings.rtRating = parseInt(rtRating.Value);
+          if (data.Ratings) {
+            const rtRating = data.Ratings.find((r: any) => r.Source === 'Rotten Tomatoes');
+            if (rtRating && rtRating.Value) {
+              updatedRatings.rtRating = parseInt(rtRating.Value.replace('%', ''));
             }
           }
 
           // Metacritic
-          if (!updatedRatings.mcRating && data.Metascore) {
+          if (data.Metascore && data.Metascore !== "N/A") {
             updatedRatings.mcRating = parseInt(data.Metascore);
           }
 
+          console.log(`Betyg för "${movie.title}":`, updatedRatings);
           setMovieRatings(updatedRatings);
-        } catch (error) {
-          console.error('Kunde inte hämta betyg:', error);
+        } else {
+          console.log(`Ingen träff på OMDb för "${movie.title}"`);
         }
+      } catch (error) {
+        console.error('Kunde inte hämta betyg:', error);
       }
     };
 
-    // Körs endast om miljövariabeln för OMDb API finns (vilket bara är sant på Vercel)
-    if (OMDB_API_KEY) {
-      fetchMovieRatings();
-    }
-  }, [movie.title, movie.release_date, OMDB_API_KEY]);
+    // Hämta alltid betyg från OMDb
+    fetchMovieRatings();
+    
+  }, [movie.title, movie.release_date]);
 
+  // Resten av din kod...
+  
   // Formatera releasedatum till läsbart format
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('sv-SE', options);
   };
 
-  // Skapar refs för att kunna kolla om man klickar utanför moviedetails
+  // Refs och event listeners för modal
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  // Effekt som lyssnar på klick utanför modalfönstret för att stänga det
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Om användaren klickar utanför modalfönstret, stäng modalen
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
 
-    // Lägg till eventlistener för klick
     document.addEventListener('mousedown', handleClickOutside);
-
-    // Rensa eventlistener vid komponentens avmontering
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onClose]);
-
   
-  // Formatera speltid från minuter till timmar och minuter
+  // Formatera speltid
   const formatDuration = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
@@ -115,10 +115,9 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
     return releaseDay <= today;
   };
 
-  // Förhindra scrollning på body när modalen är öppen
+  // Förhindra scrollning
   useEffect(() => {
     document.body.classList.add('modal-open');
-    
     return () => {
       document.body.classList.remove('modal-open');
     };
@@ -133,10 +132,10 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
     e.stopPropagation();
   };
 
-  // Fiktiva genres för demo (lägg till i Movie-typen och API om det behövs i framtiden)
+  // Fiktiva genres
   const genres = ['Sci-Fi', 'Superhero', 'Action', 'Adventure'];
 
-  // Beräkna genomsnittsbetyg från IMDB, RT och MC
+  // Beräkna genomsnittsbetyg från betygen vi hämtat från OMDb
   const calculateAverageRating = (): number | null => {
     const { imdbRating, rtRating, mcRating } = movieRatings;
     
@@ -218,13 +217,13 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
           </div>
         </header>
 
-        {/* Betygssektion */}
+        {/* Betygssektion - nu med data direkt från OMDb */}
         <section className="ratings-section">
           <h3 className="section-title">Betyg</h3>
 
           {isMovieReleased(movie.release_date) ? (
             <div className="ratings-container-inline">
-              {movieRatings.imdbRating !== null && movieRatings.imdbRating !== undefined && (
+              {movieRatings.imdbRating !== null && (
                 <div className="rating-badge">
                   <h4>IMDB</h4>
                   <span className="rating-icon">⭐</span>
@@ -232,7 +231,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
                 </div>
               )}
               
-              {movieRatings.rtRating !== null && movieRatings.rtRating !== undefined && (
+              {movieRatings.rtRating !== null && (
                 <div className="rating-badge">
                   <h4>Rotten Tomatoes</h4>
                   <span className="rating-icon">🍅</span>
@@ -240,7 +239,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
                 </div>
               )}
               
-              {movieRatings.mcRating !== null && movieRatings.mcRating !== undefined && (
+              {movieRatings.mcRating !== null && (
                 <div className="rating-badge">
                   <h4>Metacritic</h4>
                   <span className="rating-icon">📊</span>
@@ -255,9 +254,8 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
           )}
         </section>
         
-        {/* About the movie section */}
+        {/* Övrig information från databasen */}
         <section className="about-movie-section">
-          {/* Horisontell linje före About the movie */}
           <div className="section-divider"></div>
           <h3 className="section-title">About the movie</h3>
           <p>{movie.overview || "Ingen beskrivning tillgänglig."}</p>

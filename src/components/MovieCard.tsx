@@ -1,63 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Movie, MovieCardProps } from '../types/movie';
 import '../CSS/MovieCard.css';
 
+const OMDB_API_KEY = "8f57b2c1"; // Hårdkodad API-nyckel
+
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
-  // Beräkna genomsnittsbetyg från IMDB, RT och MC
-  const calculateAverageRating = (
-    imdbRating: number | null | undefined, 
-    rtRating: number | null | undefined, 
-    mcRating: number | null | undefined
-  ): number | null => {
-    // Om IMDB-betyget saknas, försök använda andra betyg om de finns
-    const hasImdb = imdbRating !== null && imdbRating !== undefined;
-    const hasRt = rtRating !== null && rtRating !== undefined;
-    const hasMc = mcRating !== null && mcRating !== undefined;
-    
-    // Om inga betyg finns alls
-    if (!hasImdb && !hasRt && !hasMc) {
-      return null;
-    }
-    
-    let validRatings = 0;
-    let sum = 0;
-    
-    // Lägg till IMDB om det finns
-    if (hasImdb) {
-      sum += imdbRating!;
-      validRatings++;
-    }
-    
-    // Lägg till RT om det finns (konvertera till skala 0-10)
-    if (hasRt) {
-      sum += rtRating! / 10;
-      validRatings++;
-    }
-    
-    // Lägg till MC om det finns (konvertera till skala 0-10)
-    if (hasMc) {
-      sum += mcRating! / 10;
-      validRatings++;
-    }
-    
-    // Om inga giltiga betyg fanns
-    if (validRatings === 0) {
-      return null;
-    }
+  // Uppdaterad state-typ med union type number | null för att lösa TypeScript-felet
+  const [ratings, setRatings] = useState<{
+    imdb: number | null;
+    rt: number | null;
+    mc: number | null;
+  }>({
+    imdb: null,
+    rt: null,
+    mc: null
+  });
 
-    // Beräkna medelvärdet
-    const averageRating = sum / validRatings;
-
-    // Returnera medelvärdet med en decimal precision
-    return parseFloat(averageRating.toFixed(1));
-  };
+  // Hämta betyg från OMDb API
+  useEffect(() => {
+    const fetchRatings = async () => {
+      try {
+        const response = await axios.get('https://www.omdbapi.com/', {
+          params: {
+            apikey: OMDB_API_KEY,
+            t: movie.title,
+            y: new Date(movie.release_date).getFullYear()
+          }
+        });
+        
+        if (response.data && response.data.Response === "True") {
+          // Skapa ett temporärt objekt för att bygga upp betygen
+          const newRatings = { 
+            imdb: null as number | null, 
+            rt: null as number | null, 
+            mc: null as number | null 
+          };
+          
+          // IMDb
+          if (response.data.imdbRating && response.data.imdbRating !== "N/A") {
+            newRatings.imdb = parseFloat(response.data.imdbRating);
+          }
+          
+          // Rotten Tomatoes
+          if (response.data.Ratings) {
+            const rtRating = response.data.Ratings.find((r: any) => r.Source === 'Rotten Tomatoes');
+            if (rtRating && rtRating.Value) {
+              newRatings.rt = parseInt(rtRating.Value.replace('%', ''));
+            }
+          }
+          
+          // Metacritic
+          if (response.data.Metascore && response.data.Metascore !== "N/A") {
+            newRatings.mc = parseInt(response.data.Metascore);
+          }
+          
+          setRatings(newRatings);
+        }
+      } catch (error) {
+        console.error('Error fetching ratings:', error);
+      }
+    };
+    
+    // Hämta alltid betyg direkt från OMDb
+    if (isMovieReleased(movie.release_date)) {
+      fetchRatings();
+    }
+  }, [movie.title, movie.release_date]);
   
-  // Beräkna betygsvärdet
-  const ratingValue = calculateAverageRating(
-    movie.imdb_rating, 
-    movie.rt_rating, 
-    movie.mc_rating
-  );
+  // Beräkna genomsnittsbetyg från OMDb-data
+  const calculateAverageRating = (): number | null => {
+    const validRatings = [
+      ratings.imdb,
+      ratings.rt ? ratings.rt / 10 : null,
+      ratings.mc ? ratings.mc / 10 : null
+    ].filter((r): r is number => r !== null);
+    
+    if (validRatings.length === 0) return null;
+    
+    const average = validRatings.reduce((sum, r) => sum + r, 0) / validRatings.length;
+    return parseFloat(average.toFixed(1));
+  };
 
   // Kontrollera om filmen har släppts
   const isMovieReleased = (releaseDate: string): boolean => {
@@ -65,6 +88,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
     const releaseDay = new Date(releaseDate);
     return releaseDay <= today;
   };
+
+  const ratingValue = calculateAverageRating();
 
   return (
     <article className="movie-card" onClick={() => onClick(movie)}>
