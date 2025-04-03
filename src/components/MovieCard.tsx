@@ -1,21 +1,8 @@
 import React from 'react';
 import { Movie, MovieCardProps } from '../types/movie';
-import '../CSS/MovieCard.css'; // Importera den dedikerade CSS-filen
+import '../CSS/MovieCard.css';
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
-  // Formatera releasedatum till läsbart format
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('sv-SE', options);
-  };
-
-  // Kontrollera om filmen har släppts
-  const isMovieReleased = (releaseDate: string): boolean => {
-    const today = new Date();
-    const releaseDay = new Date(releaseDate);
-    return releaseDay <= today;
-  };
-
   // Beräkna genomsnittsbetyg från IMDB, RT och MC
   const calculateAverageRating = (
     imdbRating: number | null | undefined, 
@@ -72,6 +59,13 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
     movie.mc_rating
   );
 
+  // Kontrollera om filmen har släppts
+  const isMovieReleased = (releaseDate: string): boolean => {
+    const today = new Date();
+    const releaseDay = new Date(releaseDate);
+    return releaseDay <= today;
+  };
+
   return (
     <article className="movie-card" onClick={() => onClick(movie)}>
       <figure className="movie-poster">
@@ -85,10 +79,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
       </figure>
       
       <section className="movie-info">
-        {/* Visa genomsnittsbetyg eller "Coming soon" beroende på om filmen har släppts */}
         {isMovieReleased(movie.release_date) ? (
           <div className="movie-rating">
-            {ratingValue !== null ? ratingValue : "N/A"}
+            {ratingValue !== null ? ratingValue.toFixed(1) : "N/A"}
           </div>
         ) : (
           <span className="coming-soon-card">Coming soon...</span>
