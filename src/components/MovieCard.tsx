@@ -88,7 +88,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
         {/* Visa genomsnittsbetyg eller "Coming soon" beroende på om filmen har släppts */}
         {isMovieReleased(movie.release_date) ? (
           <div className="movie-rating">
-            {ratingValue !== null ? ratingValue.toFixed(1) : "N/A"}
+            {ratingValue !== null ? ratingValue : "N/A"}
           </div>
         ) : (
           <span className="coming-soon-card">Coming soon...</span>
