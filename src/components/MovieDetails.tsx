@@ -1,8 +1,73 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { Movie, MovieDetailsProps } from '../types/movie';
-import '../CSS/MovieDetails.css'; // Importera den dedikerade CSS-filen
+import '../CSS/MovieDetails.css';
+
+const OMDB_API_KEY = process.env.NEXT_PUBLIC_OMDB_API_KEY;
 
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
+  const [movieRatings, setMovieRatings] = useState<{
+    imdbRating?: number | null,
+    rtRating?: number | null,
+    mcRating?: number | null
+  }>({
+    imdbRating: movie.imdb_rating,
+    rtRating: movie.rt_rating,
+    mcRating: movie.mc_rating
+  });
+
+  // Hämta betyg från OMDb API om de saknas
+  useEffect(() => {
+    const fetchMovieRatings = async () => {
+      // Kontrollera om någon rating saknas
+      if (
+        movieRatings.imdbRating === null || 
+        movieRatings.rtRating === null || 
+        movieRatings.mcRating === null
+      ) {
+        try {
+          const response = await axios.get('http://www.omdbapi.com/', {
+            params: {
+              apikey: OMDB_API_KEY,
+              t: movie.title,
+              y: new Date(movie.release_date).getFullYear()
+            }
+          });
+
+          const data = response.data;
+          const updatedRatings = { ...movieRatings };
+          
+          // Uppdatera bara saknade betyg
+          if (!updatedRatings.imdbRating && data.imdbRating) {
+            updatedRatings.imdbRating = parseFloat(data.imdbRating);
+          }
+
+          // Rotten Tomatoes
+          if (!updatedRatings.rtRating) {
+            const rtRating = data.Ratings?.find((r: any) => r.Source === 'Rotten Tomatoes');
+            if (rtRating) {
+              updatedRatings.rtRating = parseInt(rtRating.Value);
+            }
+          }
+
+          // Metacritic
+          if (!updatedRatings.mcRating && data.Metascore) {
+            updatedRatings.mcRating = parseInt(data.Metascore);
+          }
+
+          setMovieRatings(updatedRatings);
+        } catch (error) {
+          console.error('Kunde inte hämta betyg:', error);
+        }
+      }
+    };
+
+    // Körs endast om miljövariabeln för OMDb API finns (vilket bara är sant på Vercel)
+    if (OMDB_API_KEY) {
+      fetchMovieRatings();
+    }
+  }, [movie.title, movie.release_date, OMDB_API_KEY]);
+
   // Formatera releasedatum till läsbart format
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -72,38 +137,22 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
   const genres = ['Sci-Fi', 'Superhero', 'Action', 'Adventure'];
 
   // Beräkna genomsnittsbetyg från IMDB, RT och MC
-  const calculateAverageRating = (
-    imdbRating: number | null | undefined, 
-    rtRating: number | null | undefined, 
-    mcRating: number | null | undefined
-  ): number | null => {
-    // Om IMDB-betyget saknas, returnera null
-    if (!imdbRating) {
-      return null;
-    }
+  const calculateAverageRating = (): number | null => {
+    const { imdbRating, rtRating, mcRating } = movieRatings;
     
-    // Räkna ut hur många giltiga betyg vi har
-    let validRatings = 1; // IMDB finns alltid om vi kommit hit
-    let sum = imdbRating;
-    
-    // Lägg till RT om det finns
-    if (rtRating) {
-      sum += rtRating / 10; // Konvertera till skala 0-10
-      validRatings++;
-    }
-    
-    // Lägg till MC om det finns
-    if (mcRating) {
-      sum += mcRating / 10; // Konvertera till skala 0-10
-      validRatings++;
-    }
+    const ratings = [
+      imdbRating,
+      rtRating ? rtRating / 10 : null,
+      mcRating ? mcRating / 10 : null
+    ].filter((rating): rating is number => rating !== null && rating !== undefined);
 
-    // Beräkna medelvärdet
-    const averageRating = sum / validRatings;
+    if (ratings.length === 0) return null;
 
-    // Returnera medelvärdet med en decimal precision
+    const averageRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
     return parseFloat(averageRating.toFixed(1));
   };
+
+  const ratingValue = calculateAverageRating();
 
   return (
     <aside 
@@ -144,9 +193,9 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
           <h2 id="movie-title">{movie.title}</h2>
           
           {/* Visa genomsnittsbetyget uppe till höger */}
-          {isMovieReleased(movie.release_date) && movie.imdb_rating && (
+          {isMovieReleased(movie.release_date) && ratingValue && (
             <div className="average-rating">
-              {calculateAverageRating(movie.imdb_rating, movie.rt_rating || null, movie.mc_rating || null)?.toFixed(1)}/10
+              {ratingValue.toFixed(1)}/10
             </div>
           )}
           
@@ -175,27 +224,27 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
 
           {isMovieReleased(movie.release_date) ? (
             <div className="ratings-container-inline">
-              {movie.imdb_rating && (
+              {movieRatings.imdbRating !== null && movieRatings.imdbRating !== undefined && (
                 <div className="rating-badge">
                   <h4>IMDB</h4>
                   <span className="rating-icon">⭐</span>
-                  <span className="rating-value">{movie.imdb_rating.toFixed(1)}</span>
+                  <span className="rating-value">{movieRatings.imdbRating.toFixed(1)}</span>
                 </div>
               )}
               
-              {movie.rt_rating && (
+              {movieRatings.rtRating !== null && movieRatings.rtRating !== undefined && (
                 <div className="rating-badge">
                   <h4>Rotten Tomatoes</h4>
                   <span className="rating-icon">🍅</span>
-                  <span className="rating-value">{movie.rt_rating}%</span>
+                  <span className="rating-value">{movieRatings.rtRating}%</span>
                 </div>
               )}
               
-              {movie.mc_rating && (
+              {movieRatings.mcRating !== null && movieRatings.mcRating !== undefined && (
                 <div className="rating-badge">
                   <h4>Metacritic</h4>
                   <span className="rating-icon">📊</span>
-                  <span className="rating-value">{movie.mc_rating}</span>
+                  <span className="rating-value">{movieRatings.mcRating}</span>
                 </div>
               )}
             </div>
@@ -205,8 +254,6 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
             </div>
           )}
         </section>
-        
-        
         
         {/* About the movie section */}
         <section className="about-movie-section">
