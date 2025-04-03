@@ -6,7 +6,9 @@ export interface Root {
 
 // Grundläggande filmtyp från API
 export interface Movie {
+  calculateAverageRating(): unknown;
   id: number;
+  rating: number | null;
   title: string;
   release_date: string;
   box_office: number;
