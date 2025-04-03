@@ -6,8 +6,8 @@ import MovieDetails from "./components/MovieDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar";
-import About from "./Pages/About";
-import Contact from "./Pages/Contact";
+import MarvelTimeline from "./components/Marvels Historia";
+import Contact from "./components/Marvels Historia";
 import "./App.css";
 import "./CSS/Navbar.css";
 
@@ -47,7 +47,6 @@ function App() {
   
     getMovies();
   }, []);
-  
 
   const handleMovieClick = (movie: Movie) => {
     setSelectedMovie(movie);
@@ -87,7 +86,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar /> {/* Navbar kommer att hantera navigeringen till Marvel Timeline */}
 
       <Routes>
         <Route
@@ -95,13 +94,14 @@ function App() {
           element={
             <div className="app-container">
               <header className="main-header">
-                <p className="text">
-                Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer! 
-                Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.
-                Utforska Marvel-universumet och hitta nästa film att uppleva!
-                Allt samlat, allt Marvel, MARVELOUS! </p>
-              </header>
-
+              <p className="text">
+                 <span className="big-span">Marvelos RATINGS <br /></span>
+                 Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!<br />
+                 Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.<br />
+                 Utforska Marvel-universumet och hitta nästa film att uppleva!<br />
+                <br /> Allt samlat, allt Marvel, MARVELOUS!
+              </p>
+            </header>
               <SearchFilter
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}
@@ -177,7 +177,7 @@ function App() {
             </div>
           }
         />
-        <Route path="/about" element={<About />} />
+        <Route path="/marvel-timeline" element={<MarvelTimeline />} /> {/* Uppdatera till Marvel Timeline */}
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>

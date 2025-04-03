@@ -53,22 +53,17 @@ html, body {
 
 /* Header */
 .main-header {
-  text-align: center;
-  margin-top: 150px;
-  margin-bottom: 1.5rem;
-
   position: relative;
   background: linear-gradient(180deg, rgba(11, 15, 52, 0.00) 13.36%, rgba(10, 19, 54, 0.26) 34.36%, rgba(9, 24, 56, 0.58) 50.36%, rgba(8, 27, 58, 0.82) 76.86%, #071E3B 100%), url(/bilder/header.png) no-repeat center center;
   background-size: cover;
-  /* Behåller bakgrundsbildens proportionsbalans */
   width: 100%;
-  /* Sträcker headern över hela skärmen */
   height: 60vh;
-  /* Gör att headern täcker hela viewporten */
-  margin-top: -30px;
-  margin-bottom: 1.5rem;
   text-align: center;
-
+  display: flex;
+  justify-content: center; /* Horisontell centrering */
+  align-items: center; /* Vertikal centrering */
+  padding: 0 20px; /* Lite padding om du vill ha marginaler */
+  margin-top: -30px;
 }
 
 .main-header-content {
@@ -87,14 +82,21 @@ html, body {
 
 
 }
+.big-span {
+  font-size: 2rem; /* Gör texten större */
+  font-weight: bold; /* Gör texten fet */
+  color: white; /* Marvel-röd, om du vill */
+  text-transform: uppercase; /* Gör texten versaler */
+}
 
 .text {
+  
   color: white;
-  display: flex;
-  justify-content: center;
-  /* Centrerar innehållet horisontellt */
-  align-items: center;
+  max-width: 80%; /* Justera bredden om du vill att texten ska vara mer komprimerad */
+  margin: 0 auto;
+  line-height: 1.5;
 }
+
 
 @media (max-width: 768px) {
   .main-header {
@@ -114,13 +116,10 @@ html, body {
     /* Ytterligare justering av höjd på mindre skärmar */
   }
 
-  .main-header-content {
-    top: 60%;
-    /* Flytta texten ner mer vid små skärmar */
-  }
+
 
   .text {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     /* Ytterligare minskning av textstorlek */
   }
 }
@@ -144,7 +143,7 @@ p span {
 
 @media (max-width: 600px) {
   .main-header {
-    height: 200px;
+    height: 250px;
   }
 }
 

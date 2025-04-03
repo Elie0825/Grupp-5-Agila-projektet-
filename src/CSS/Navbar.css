@@ -1,173 +1,95 @@
-/* Hela navbaren – gradient och placerad överst */
+/* === NAVBAR - Glasliknande design === */
 .navbar {
-  background-color: rgba(7, 30, 58, 0.2);
-  backdrop-filter: blur(4px); /* Skapar glasliknande blur-effekt */
-  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.1); /* Transparent vit bakgrund */
+  backdrop-filter: blur(10px); /* Glas-effekt */
+  -webkit-backdrop-filter: blur(10px); /* För Safari */
+  padding: 5px 0px;
   position: fixed;
-  width: 100%; 
-  z-index: 999; 
-  height: 32px;
-
-  
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Logotyp till vänster och länkar till höger */
+  z-index: 999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtil kantlinje */
 }
 
-.logo {
-  height: 42px;
-  margin-top: -2px;
+/* === LOGOTYP === */
+.logo img {
+  height: 40px;
 }
 
-/* Logotyp eller "Hem"-länk */
-.logo a {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-
-/* Menyn med länkar (höger sida) */
+/* === NAV-LÄNKAR === */
 .nav-links {
-  list-style: none; /* Tar bort punkter från listan */
-  position: absolute;
-  right: 30px;
-  transform: translateY(-50%);
-  top: 50%;
+  list-style: none;
+  display: flex;
+  align-items: center;
   margin: 0;
-  padding: 80px;
+  padding: 0;
+  margin-left: 999px; /* Trycker länkarna till höger */
 }
 
-/* Varje menyitem */
+/* === NAV-ITEMS === */
 .nav-links li {
-  position: relative; /* Gör att vi kan placera underline med ::after */
-  display: inline-block; /* Lägg till detta */
-  margin-left: 30px; /* Lite mellanrum mellan länkarna */
+  margin-left: 15px; /* Mer avstånd mellan länkarna */
 }
 
-/* Själva länkarna */
+/* === NAV-LÄNKAR STYLING === */
 .nav-links a {
   color: white;
-  text-decoration: none;
   font-size: 18px;
   font-weight: 500;
+  text-decoration: none;
   padding: 5px 0;
-  transition: all 0.3s ease; /* Mjuk hover-övergång */
-  display: inline-block;
+  transition: color 0.3s ease;
 }
 
-/* Markerar aktiv länk */
+/* === HOVER-EFFEKT === */
+.nav-links a:hover {
+  color: #1E90FF;
+}
+
+/* === AKTIV LÄNK UNDERSTRECK === */
 .nav-links a.active {
   font-weight: bold;
 }
 
-/* Understreck för aktiv länk */
 .nav-links a.active::after {
   content: "";
   display: block;
   width: 100%;
   height: 2px;
-  background-color: white;
+  background: white;
   position: absolute;
-  bottom: -1px;
+  bottom: -4px;
   left: 0;
+  transition: width 0.3s ease;
 }
 
-/* Hover-effekt */
-.nav-links a:hover {
-  color: #bbb; /* Samma som aktiv färg */
-}
-
-/* Hamburger-ikonen – dold i desktopläge */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 21px;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-/* De tre linjerna i hamburgermenyn */
-.menu-toggle span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background-color: white;
-  transition: all 0.3s ease;
-}
-
-/* ========== MOBILVY ========== */
+/* === MOBILVY - Glas navbar på små skärmar också === */
 @media (max-width: 768px) {
-  /* Visa hamburgermenyn i mobil */
-  .menu-toggle {
-    display: flex;
+  .navbar {
+      height: 60px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
   }
 
-  /* Mobilmeny, dold som standard */
   .nav-links {
-    position: fixed;
-    top: 70px;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px); /* Samma glas-effekt */
-    width: 200px;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 10px;
-    transform: translateX(100%); /* Flyttad utanför skärmen */
-    transition: transform 0.3s ease-in-out;
-    z-index: 999;
+      display: flex;
+      position: relative;
+      width: auto;
+      background: transparent;
+      backdrop-filter: none;
+      transform: none;
+      transition: none;
+      margin-left: auto; /* Trycker länkarna till höger även på små skärmar */
   }
 
-  /* När menyn är öppen i mobil */
-  .nav-links.open {
-    transform: translateX(0); /* Flyttas in från höger */
-  }
-
-  /* Länkarna tar hela bredden i mobil */
   .nav-links li {
-    width: 100%;
-  }
-  .navbar ul {
-    background-color: #518cca;
-   
-      position: absolute;
-      top: 50px;
-      left: 0px;
-      right: 0px;
-      /* background: #af6363b9; */
-      flex-direction: column;
-      align-items: center;
-      /* padding: 15px 0; */
-      gap: 15px;
-      transform: translateY(-100%);
-      /* transition: transform 0.3s ease; */
-  }
-  
-  .nav-links a {
-    font-size: 18px;
-    display: block;
-    width: 100%;
+      margin-left: 40px; /* Mer avstånd mellan länkarna även på mobil */
   }
 
-  
-
-  /* Gör underline kortare i mobil */
-  .nav-links a.active::after {
-    width: 50%;
-    left: 0;
-  }
-
-  /* Animerad hamburgermeny – X-form vid aktivt läge */
-  .menu-toggle.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-
-  .menu-toggle.active span:nth-child(2) {
-    opacity: 0; /* Döljer mittenlinjen */
-  }
-
-  .menu-toggle.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+  .menu-toggle {
+      display: none; /* Tar bort hamburgermenyn */
   }
 }

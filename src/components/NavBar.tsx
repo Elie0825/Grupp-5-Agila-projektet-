@@ -43,21 +43,21 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link 
-              to="/about" 
-              className={location.pathname === '/about' ? 'active' : ''}
-              onClick={() => setIsMenuOpen(false)}  // Stänger menyn när man klickar på en länk
-            >
-              Om oss
-            </Link>
-          </li>
+  <Link 
+    to="/marvel-timeline" 
+    className={location.pathname === '/marvel-timeline' ? 'active' : ''}
+    onClick={() => setIsMenuOpen(false)}
+  >
+    Marvel timline
+  </Link>
+</li>
           <li>
             <Link 
               to="/contact" 
               className={location.pathname === '/contact' ? 'active' : ''}
               onClick={() => setIsMenuOpen(false)}  // Stänger menyn när man klickar på en länk
             >
-              Kontakt
+              Marvel Historia
             </Link>
           </li>
         </ul>
