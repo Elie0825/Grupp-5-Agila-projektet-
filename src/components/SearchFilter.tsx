@@ -51,57 +51,83 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
   };
 
   return (
-    <div className="compact-filter-container">
+  //SÖKFÄLT
+   <div className="compact-filter-container">
       <div className="compact-filter-header">
-        {/* Sökfält för att skriva in filmtitel */}
+        <div className="search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
         <input
           type="text"
-          placeholder="Sök Marvel filmer..."
-          value={searchTerm} // Visar det aktuella sökordet
-          onChange={(e) => onSearchChange(e.target.value)} // Uppdaterar sökordet vid ändring
+          placeholder="Sök bland Marvel filmer..."
+          value={searchTerm}
+          onChange={(e) => onSearchChange(e.target.value)}  // Uppdaterar värdet när användaren skriver
           className="compact-search-input"
         />
-        
-        {/* Rensa-knapp om det finns ett sökord */}
         {searchTerm && (
           <button 
             type="button" 
             className="clear-button" 
-            onClick={() => onSearchChange('')} // Rensar sökfältet
+            onClick={() => onSearchChange('')}  // När knappen klickas, rensa sökfältet
             aria-label="Rensa sökning"
           >
             <span aria-hidden="true">×</span>
           </button>
-        )}
+    )}
+
+
         
         <div className="compact-filter-buttons">
           {/* Filter-knapp som visar filterpanelen */}
           <button
-            className={`compact-filter-button ${showFilters ? "active" : ""}`} // Aktiverar knappen om filter är öppet
-            onClick={() => {
-              setShowFilters(!showFilters); // Växlar om filterpanelen ska visas eller inte
-              setShowSort(false); // Stänger sorteringspanelen om filterpanelen öppnas
-            }}
-          >
-            <i className="filter-icon">⚙️</i>
-            <span>Filter</span>
-          </button>
+  className={`compact-filter-button ${showFilters ? "active" : ""}`} 
+  onClick={() => {
+    setShowFilters(!showFilters);
+    setShowSort(false);
+  }}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="filter-icon"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+    />
+  </svg>
+  <span>Filter</span>
+</button>
           
-          {/* Sorterings-knapp som visar sorteringspanelen */}
-          <button
-
-            className={`compact-filter-button ${showSort ? "active" : ""}`} // Aktiverar knappen om sortering är öppen
-
-            className={`compact-sort-button ${showSort ? "active" : ""}`}
-
-            onClick={() => {
-              setShowSort(!showSort); // Växlar om sorteringspanelen ska visas eller inte
-              setShowFilters(false); // Stänger filterpanelen om sorteringspanelen öppnas
-            }}
-          >
-            <i className="sort-icon">⇅</i>
-            <span>Sortera</span>
-          </button>
+<button
+  className={`compact-filter-button ${showSort ? "active" : ""}`} 
+  onClick={() => {
+    setShowSort(!showSort); 
+    setShowFilters(false); 
+  }}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="sort-icon"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+    />
+  </svg>
+  <span>Sortera</span>
+</button>
         </div>
       </div>
 

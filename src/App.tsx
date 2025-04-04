@@ -6,8 +6,8 @@ import MovieDetails from "./components/MovieDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar";
+// Elies nya import
 import MarvelTimeline from "./components/Marvels Historia";
-import Contact from "./components/Marvels Historia";
 import "./App.css";
 import "./CSS/Navbar.css";
 
@@ -56,11 +56,27 @@ function App() {
     setSelectedMovie(null);
   };
 
+  // Hjälpfunktion för att beräkna genomsnittligt betyg
+  const calculateAverageRating = (movie: Movie): number => {
+    const ratings = [
+      movie.imdb_rating,
+      // Konvertera RT-betyg (0-100) till samma skala som IMDb (0-10)
+      movie.rt_rating ? movie.rt_rating / 10 : null,
+      // Konvertera Metacritic-betyg (0-100) till samma skala som IMDb (0-10)
+      movie.mc_rating ? movie.mc_rating / 10 : null
+    ].filter((rating): rating is number => rating !== null && rating !== undefined);
+    
+    if (ratings.length === 0) return 0;
+    
+    return ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+  };
+
   // Filtrerar filmer baserat på sökterm, fas och betyg
   const filteredMovies = movies.filter(movie => {
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesPhase = selectedPhase === null || movie.phase === selectedPhase;
-    const matchesRating = selectedRating === null || movie.rating >= selectedRating;
+    const averageRating = calculateAverageRating(movie);
+    const matchesRating = selectedRating === null || (movie.rating !== null && movie.rating >= selectedRating);
 
     return matchesSearch && matchesPhase && matchesRating;
   });
@@ -69,11 +85,20 @@ function App() {
   const sortedMovies = [...filteredMovies].sort((a, b) => {
     switch (sortBy) {
       case "chronology":
-    return a.chronology - b.chronology;
+        return a.chronology - b.chronology;
       case "title":
         return a.title.localeCompare(b.title);
-      case "rating":
-        return b.rating - a.rating;
+        case "rating":
+      if (selectedRating === null) {
+        return 0; // Om inget rating är valt, gör ingen förändring
+      }
+
+      // Hantera null för a.rating och b.rating
+      const ratingA = a.rating ?? 0; // Ge ett standardvärde 0 om betyget är null
+      const ratingB = b.rating ?? 0; // Ge ett standardvärde 0 om betyget är null
+
+      // Sortera betygen (högt till lågt)
+      return ratingB - ratingA;
       case "release":
         return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
       default:
@@ -177,8 +202,8 @@ function App() {
             </div>
           }
         />
-        <Route path="/marvel-timeline" element={<MarvelTimeline />} /> {/* Uppdatera till Marvel Timeline */}
-        <Route path="/contact" element={<Contact />} />
+        {/* Elies nya route */}
+        <Route path="/marvel-timeline" element={<MarvelTimeline />} />
       </Routes>
     </Router>
   );

@@ -6,17 +6,37 @@ export default async function handler(req: Request, res: Response) {
   try {
     console.log("API /api/movies anropad");
     
-    // Använd vår executeQuery-funktion för att hämta filmer
-    const rows = await executeQuery("SELECT * FROM movies");
+    // Använder explicit kolumnlista för att säkerställa att vi får alla fält
+    const rows = await executeQuery(`
+      SELECT 
+        id, title, release_date, box_office, duration, 
+        overview, cover_url, trailer_url, directed_by, 
+        phase, saga, chronology, post_credit_scenes, 
+        imdb_id, updated_at, 
+        imdb_rating, rt_rating, mc_rating
+      FROM movies
+    `);
     
     console.log(`Hittade ${rows.length} filmer i databasen`);
     
-    // Returnera data i rätt format
+    // Loggar första filmen för att kontrollera om betygen finns med
+    if (rows.length > 0) {
+      const firstMovie = rows[0];
+      console.log("Första filmen från databasen:", {
+        id: firstMovie.id,
+        title: firstMovie.title,
+        imdb_rating: firstMovie.imdb_rating,
+        rt_rating: firstMovie.rt_rating,
+        mc_rating: firstMovie.mc_rating
+      });
+    }
+    
+    // Returnerar data i rätt format
     res.status(200).json({
       data: rows as Movie[],
       total: rows.length,
     });
-  } catch (err: any) { // 'any' för att lösa typproblemet
+  } catch (err: any) {
     console.error("Fel vid hämtning av filmer:", err);
     res.status(500).json({
       error: {
