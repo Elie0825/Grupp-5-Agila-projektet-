@@ -61,7 +61,7 @@ function App() {
   const filteredMovies = movies.filter(movie => {
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesPhase = selectedPhase === null || movie.phase === selectedPhase;
-    const matchesRating = selectedRating === null || movie.rating >= selectedRating;
+    const matchesRating = selectedRating === null || (movie.rating !== null && movie.rating >= selectedRating);
 
     return matchesSearch && matchesPhase && matchesRating;
   });
@@ -73,8 +73,17 @@ function App() {
     return a.chronology - b.chronology;
       case "title":
         return a.title.localeCompare(b.title);
-      case "rating":
-        return b.rating - a.rating;
+        case "rating":
+      if (selectedRating === null) {
+        return 0; // Om inget rating är valt, gör ingen förändring
+      }
+
+      // Hantera null för a.rating och b.rating
+      const ratingA = a.rating ?? 0; // Ge ett standardvärde 0 om betyget är null
+      const ratingB = b.rating ?? 0; // Ge ett standardvärde 0 om betyget är null
+
+      // Sortera betygen (högt till lågt)
+      return ratingB - ratingA;
       case "release":
         return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
       default:

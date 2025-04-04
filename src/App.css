@@ -156,34 +156,47 @@ p span {
 /* Sökformulär */
 .compact-filter-container {
   position: relative;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto 20px;
 }
 
 .compact-filter-header {
   display: flex;
-  justify-content: space-between; /* Tryck ut elementen till vänster och höger */
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1rem; /* Minska gapet mellan elementen */
   margin: 1rem 0;
-  flex-wrap: wrap; /* Gör att det inte bryter vid mindre skärmstorlek */
+  flex-wrap: wrap;
+  position: relative; /* Viktigt för absolut positionering av knappen */
+}
+
+.compact-filter-right-group {
+  display: flex; /* Gör att de två knapparna kan vara på rad */
+  gap: 1rem; /* Justera gapet mellan knapparna */
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: #ccc;
 }
 
 .compact-search-input {
-  flex: 1; /* Tar upp tillgängligt utrymme */
-  max-width: 600px;
+  position: relative;
+  flex: 1;
+  max-width: 500px;
   padding: 0.6rem 1rem;
+  padding-left: 30px; /* Skapar utrymme för sökikonen */
+  padding-right: 30px; /* Skapar utrymme för rensa-knappen */
   border: 1px solid white;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: white;
-}
-
-.compact-search-input {
-  flex: 1; /* Tar upp tillgängligt utrymme */
-  max-width: 600px;
-  padding: 0.6rem 1rem;
-  border: 1px solid white;
+  order: 1;
+  margin-right: auto;
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.05);
   color: white;
@@ -197,12 +210,37 @@ p span {
   box-shadow: 0 0 0 2px #518cca;
 }
 
-.compact-filter-buttons {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+/* Rensningsmöjlighet för sökrutan */
+.clear-button {
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #a00028;
+  font-size: 40px;
+  cursor: pointer;
+  z-index: 1; /* Säkerställ att knappen är över andra element */
 }
 
+.clear-button:hover {
+  color: white; /* Ändrar färg på knappen när användaren hovrar */
+}
+
+/* === FILTER-KNAPP & SORTERINGSKNAPP === */
+.compact-filter-buttons {
+  display: flex;
+  gap: 1rem; /* Lägg till lite avstånd mellan knapparna */
+  order: 2; /* Flytta knapparna till höger */
+  margin-left: auto; /* Trycker knapparna mot högerkanten */
+}
+
+.filter-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
 .compact-filter-button,
 .compact-sort-button {
   padding: 0.5rem 1rem;
@@ -212,7 +250,6 @@ p span {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.05);
 }
-
 
 /* === FILTER-KNAPP === */
 
@@ -278,15 +315,15 @@ p span {
 .compact-radio-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 15px;
 }
 
 .compact-checkbox-group label,
 .compact-radio-group label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -337,7 +374,14 @@ p span {
   background-color: #c11a1f;
 }
 
-/* === SORTERA-KNAPP UTAN RAM === */
+.sort-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+
+/* === SORTERA-KNAPP === */
 .compact-sort-button {
   display: flex;
   align-items: center;
@@ -467,17 +511,30 @@ p span {
   transition: all 0.3s;
 }
 
-/* Rensningsmöjlighet för sökrutan */
-.clear-button {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.5rem;
+
+@media (max-width: 768px) {
+  .clear-button {
+    right: 10px; /* Behåll lite avstånd från högerkant */
+    font-size: 18px; /* Minska storleken på "x" för mindre skärmar */
+  }
+
+  .compact-search-input {
+    padding-left: 20px; /* Minska padding för mindre skärmar */
+    padding-right: 20px; /* Minska padding för mindre skärmar */
+  }
+}
+
+/* Media Query för extra små skärmar (t.ex. telefoner i porträttläge) */
+@media (max-width: 480px) {
+  .clear-button {
+    font-size: 24px; /* Ytterligare minska storleken på "x" */
+    right: 5px; /* Justera positionen för att passa bättre på små skärmar */
+  }
+
+  .compact-search-input {
+    padding-left: 15px; /* Minska padding för extra små skärmar */
+    padding-right: 15px; /* Minska padding för extra små skärmar */
+  }
 }
 
 @media (max-width: 768px) {
