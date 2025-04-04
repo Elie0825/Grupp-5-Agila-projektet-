@@ -59,16 +59,15 @@ html, body {
 
 /* Header */
 .main-header {
-  width: 100vw;
+  width: 100%;
   margin-top: 4rem; /* Skjuter ner hela headern så den hamnar under navbaren */
-  background: url('/headerbild.svg') no-repeat center center;
+  background-image: url("/headerbild.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
-  background-position: top;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 1rem;
   padding: 4rem 2rem; /* Lite inre utrymme, men ingen stor top-padding */
   min-height: 30rem; /* Tillräcklig höjd för att visa bilden snyggt */
 }
@@ -91,15 +90,22 @@ html, body {
 .main-header {
   margin-top: 32px; /* Skjuter ner headern så den inte hamnar bakom navbaren */
 }
+.big-span {
+  font-size: 2rem; /* Gör texten större */
+  font-weight: bold; /* Gör texten fet */
+  color: white; /* Marvel-röd, om du vill */
+  text-transform: uppercase; /* Gör texten versaler */
+}
 
 
 .text {
+  
   color: white;
-  display: flex;
-  justify-content: center;
-  /* Centrerar innehållet horisontellt */
-  align-items: center;
+  max-width: 80%; /* Justera bredden om du vill att texten ska vara mer komprimerad */
+  margin: 0 auto;
+  line-height: 1.5;
 }
+
 
 @media (max-width: 768px) {
   .main-header {
@@ -119,13 +125,10 @@ html, body {
     /* Ytterligare justering av höjd på mindre skärmar */
   }
 
-  .main-header-content {
-    top: 60%;
-    /* Flytta texten ner mer vid små skärmar */
-  }
+
 
   .text {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     /* Ytterligare minskning av textstorlek */
   }
 }
@@ -149,7 +152,7 @@ p span {
 
 @media (max-width: 600px) {
   .main-header {
-    height: 200px;
+    height: 250px;
   }
 }
 
