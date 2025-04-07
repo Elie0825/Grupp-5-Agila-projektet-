@@ -9,7 +9,7 @@ import CharacterDetails from "./components/CharacterDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import MarvelTimeline from "./components/MarvelsHistoria";
+import MarvelTimeline from "./components/MarvelTimeline";
 import CharactersPage from "./components/CharactersPage";
 import "./App.css";
 import "./css/Navbar.css";
@@ -237,7 +237,7 @@ function App() {
             </div>
           }
         />
-        <Route path="/marvel-timeline" element={<MarvelTimeline />} />
+        <Route path="/marvel-historia" element={<MarvelTimeline />} />
         <Route path="/characters" element={<CharactersPage />} />
       </Routes>
     </Router>

@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/MarvelsHistoria.css";
+import "../css/MarvelTimeline.css";
 
 
 
-const Contact: React.FC = () => {
+const MarvelTimeline: React.FC = () => {
   return (
     <div className="marvel-historia">
       <h1>Marvel Cinematic Universe Timeline</h1>
@@ -66,4 +66,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact;
+export default MarvelTimeline;
