@@ -3,6 +3,7 @@
   position: relative;
   max-width: 1200px;
   margin: 0 auto 20px;
+  
 }
 
 .compact-filter-header {
@@ -62,12 +63,12 @@
   /* Style på texten i fältet*/
   color: rgba(255, 255, 255, 0.56);
   /* Brödtext */
+  line-height: 1.5rem; /* 150% */
+  transition: all 0.3s ease-in-out; /* Smidigare övergångar */
   font-family: Inter;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5rem; /* 150% */
-  transition: all 0.3s ease-in-out; /* Smidigare övergångar */
 }
 
 .compact-search-input::placeholder {
@@ -103,6 +104,7 @@
   gap: 1rem;
   order: 2;
   margin-left: auto;
+  
 }
 
 .filter-icon, .sort-icon {
@@ -116,7 +118,15 @@
 .compact-sort-button {
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  color: white;
+  color: #FFF;
+
+/* Brödtext */
+font-family: Inter;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
+
+  
   border-radius: 6px;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.05);
@@ -133,7 +143,7 @@
   border: 1px solid white;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 15px;
+  
   transition: background-color 0.3s, transform 0.2s;
 }
 

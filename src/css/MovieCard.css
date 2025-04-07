@@ -1,12 +1,10 @@
-/* MovieCard.css - Kombination av båda stilarna */
 
 .movie-card {
     color: white;
-    background: linear-gradient(193deg, #0D3A70 -1.67%, #0B315F 16.78%, #061E3B 62.91%, #071E3A 101.6%);
-    border-radius: 8px;
+    background-color: transparent;
+    border-radius: 9px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 200px;
     margin: 10px;
     display: flex;
@@ -30,6 +28,7 @@
   .movie-image {
     width: 100%;
     height: 100%;
+    border-radius: 9px;
     object-fit: cover;
     display: block;
     transition: all 0.3s ease;
@@ -65,7 +64,6 @@
     font-style: normal;
     font-weight: 100;
     line-height: 1.5rem; /* 96% */
-
     /* gapet mellan rating och filmnanm */
     gap: 0.6875rem;
   }

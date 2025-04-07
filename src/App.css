@@ -165,9 +165,7 @@ html, body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   justify-items: center;
-  width: 100%; /* Säkerställ full bredd inom containern */
-
-  
+  width: 100%; /* Säkerställ full bredd inom containern */  
 }
 
 /* ========== TILLGÄNGLIGHETSKLASSER ========== */

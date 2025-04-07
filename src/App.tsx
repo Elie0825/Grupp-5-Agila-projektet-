@@ -216,7 +216,7 @@ function App() {
               {selectedMovie && (
                 <MovieDetails
                   movie={selectedMovie}
-                  movies={movies} // Lägg till denna rad
+                  movies={movies} 
                   onClose={handleCloseDetails}
                   onCharacterClick={handleCharacterClick}
                 />
