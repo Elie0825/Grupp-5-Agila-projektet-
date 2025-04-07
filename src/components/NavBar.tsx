@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
               className={location.pathname === '/about' ? 'active' : ''}
               onClick={() => setIsMenuOpen(false)}  // Stänger menyn när man klickar på en länk
             >
-              Om oss
+              Marvel Universum
             </Link>
           </li>
           <li>

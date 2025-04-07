@@ -6,10 +6,10 @@ import MovieDetails from "./components/MovieDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import About from "./components/MarvelUniversum";
 import "./App.css";
-import "./CSS/Navbar.css";
+import".//components/MarvelUniversum.tsx";
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
