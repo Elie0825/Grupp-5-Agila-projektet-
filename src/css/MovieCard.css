@@ -92,13 +92,31 @@
   }
   
   /* Responsiv design för mindre skärmar */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    .movie-card {
+      width: 200px;
+    }
+    
+    .movie-image-container {
+      height: 300px;
+    }
+  
+    .movie-rating {
+      font-size: 1.3rem;
+    }
+  
+    .movie-title {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 672px) {
     .movie-card {
       width: 160px;
     }
     
     .movie-image-container {
-      height: 200px;
+      height: 250px;
     }
   
     .movie-rating {

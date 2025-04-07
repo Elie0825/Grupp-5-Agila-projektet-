@@ -1,7 +1,9 @@
-
-
 .characters-page {
-color: white;
+  color: #FFF;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .characters-hero {
@@ -13,11 +15,12 @@ color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #FFF;
   text-align: center;
   position: relative;
   overflow: hidden;
   padding: 4rem 2rem;
+  box-sizing: border-box; /* Viktigt! */
   background-image: 
     linear-gradient(
       180deg, 
@@ -37,7 +40,7 @@ color: white;
 font-size: 2.5rem;
 font-weight: bold;
 margin-bottom: 1rem;
-color: white;
+color: #FFF;
 opacity: 0.7;
 font-family: 'Inter', sans-serif;
 }
@@ -133,22 +136,32 @@ margin-top: 2rem;
 
 /* ==== Responsiv design för CharactersPage ==== */
 @media (max-width: 768px) {
-    .characters-hero h1 {
-      font-size: 2rem;
-    }
-  
-    .characters-grid {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 1rem;
-    }
+  .characters-hero h1 {
+    font-size: 2rem;
+  }
+
+  .characters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
   }
   
-  @media (max-width: 480px) {
-    .characters-hero {
-      padding: 3rem 1rem;
-    }
-  
-    .characters-hero h1 {
-      font-size: 1.8rem;
-    }
+  .characters-hero {
+    padding: 3rem 1rem; /* Minska padding på mindre skärmar */
   }
+}
+
+@media (max-width: 480px) {
+  .characters-hero {
+    padding: 2rem 1rem;
+    height: auto; /* Låt höjden anpassa sig efter innehållet */
+    min-height: 20rem;
+  }
+
+  .characters-hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .characters-grid {
+    padding: 0 0.5rem 2rem;
+  }
+}

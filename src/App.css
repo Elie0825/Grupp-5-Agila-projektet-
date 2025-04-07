@@ -1,9 +1,3 @@
-/* ========== GLOBALA VARIABLER ========== */
-:root {
-  --primary-color: #e23636; /* Min huvudsakliga Marvel-röda färg för akcenter */
-  --secondary-color: #518cca; /* Sekundär blå färg för detaljer och hover-effekter */
-}
-
 /* ========== MODAL OCH BODY-HANTERING ========== */
 /* Förhindrar scrollning när en modal är öppen */
 body.modal-open {
@@ -14,11 +8,13 @@ body.modal-open {
 /* ========== BAKGRUND OCH GRUNDLÄGGANDE STYLING ========== */
 body {
   min-height: 100vh;
+  width: 100%;
   /* Gradient-bakgrund som ger djup och Marvel-känsla */
   background: linear-gradient(193deg, #0D3A70 -1.67%, #0B315F 16.78%, #061E3B 62.91%, #071E3A 101.6%);
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Fixerar bakgrunden under scrollning */
-  transition: background 1s ease-in-out; /* Mjuk övergång mellan bakgrundstillstånd */
+  background-attachment: fixed;
+  transition: background 1s ease-in-out;
+  overflow-x: hidden;
 }
 
 /* ========== LADDNINGSANIMATIONER ========== */
@@ -44,11 +40,7 @@ body {
   to { opacity: 1; }
 }
 
-/* ========== RESET OCH GRUNDLÄGGANDE LAYOUT ========== */
-html, body {
-  margin: 0;
-  padding: 0;
-}
+
 
 /* Containern för hela applikationen */
 .app-container {
@@ -56,19 +48,21 @@ html, body {
   max-width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 /* ========== HEADER-STYLING ========== */
 .main-header {
-  max-width: 100vw; /* Maxbredd enligt bild 3 */
+  max-width: 100vw; 
   margin: 0 auto; /* Centrera innehållet horisontellt */
+  box-sizing: border-box; /* Viktigt föratt undvika horisontell scroll! */
   width: 100%;
   height: 80vh;
   min-height: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #FFF;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -87,14 +81,14 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 2rem;
-  background-size: 100% 100%; 
-  
 }
 
 .movies-section {
-  max-width: 1200px; /* Samma bredd som compact-filter-container */
-  margin: 0 auto; /* Centrera horizontellt */
+  max-width: 1200px;
+  margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
+  
 }
 
 
@@ -139,6 +133,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
   padding: 0 1rem;
   /* Rubrik 3 */
   font-family: Inter;

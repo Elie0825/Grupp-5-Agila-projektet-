@@ -1,430 +1,347 @@
 /* Sökformulär och filterkomponent */
 .compact-filter-container {
-  position: relative;
+    position: relative;
   max-width: 1200px;
   margin: 0 auto 20px;
+  box-sizing: border-box;
+  padding: 0 1rem; /* Lägg till padding inuti boxen */
+  }
   
-}
-
-.compact-filter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.compact-filter-right-group {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-/* Förbättrad sökikon med toggle-funktionalitet */
-.search-icon {
-  position: absolute;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  color: #ccc;
-  cursor: pointer; /* Visa att den är klickbar */
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.search-icon:hover {
-  color: white;
-  transform: scale(1.1);
-}
-
-.search-icon:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
-  border-radius: 50%;
-}
-
-.compact-search-input {
-  position: relative;
-  flex: 1;
-  max-width: 500px;
-  padding: 0.6rem 1rem;
-  padding-left: 30px;
-  padding-right: 30px;
-  order: 1;
-  margin-right: auto;
-  /* style på sök rutan/fältet */
-  border-radius: 0.5rem;
-  border: 1px solid #FFF;
-  background: rgba(255, 255, 255, 0.05);
-  /* Style på texten i fältet*/
-  color: rgba(255, 255, 255, 0.56);
-  /* Brödtext */
-  line-height: 1.5rem; /* 150% */
-  transition: all 0.3s ease-in-out; /* Smidigare övergångar */
-  font-family: Inter;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.compact-search-input::placeholder {
-  color: #ccc;
-  font-family: 'Inter', sans-serif; /* Samma font för placeholder */
-}
-
-.compact-search-input:focus {
-  box-shadow: 0 0 0 2px #518cca;
-  border-color: #518cca;
-}
-
-.clear-button {
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #ccc;
-  font-size: 40px;
-  cursor: pointer;
-  z-index: 1;
-  transition: color 0.2s ease;
-}
-
-.clear-button:hover {
-  color: white;
-}
-
-.compact-filter-buttons {
-  display: flex;
-  gap: 1rem;
-  order: 2;
-  margin-left: auto;
-  
-}
-
-.filter-icon, .sort-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 6px;
-}
-
-/* Förbättrade filterkanppar med tydligare toggle-feedback */
-.compact-filter-button,
-.compact-sort-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: #FFF;
-
-/* Brödtext */
-font-family: Inter;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; /* 150% */
-
-  
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
-}
-
-.compact-filter-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  background-color: #0f2f58;
-  color: white;
-  border: 1px solid white;
-  border-radius: 6px;
-  cursor: pointer;
-  
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.compact-filter-button:hover {
-  background-color: #17457a;
-}
-
-.compact-filter-button:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
-}
-
-.compact-filter-button.active {
-  background-color: #e62429;
-  color: white;
-  border-color: #e62429;
-  transform: scale(1.05); /* Lägg till liten skaleffekt när aktiv */
-}
-
-.compact-filter-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 280px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  margin-top: 8px;
-  padding: 15px;
-  animation: fadeIn 0.2s ease-in-out; /* Lägg till animation */
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.compact-filter-section {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.compact-filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.compact-filter-group h4 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-}
-
-.compact-checkbox-group,
-.compact-radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.compact-checkbox-group label,
-.compact-radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.compact-checkbox-group label:hover,
-.compact-radio-group label:hover {
-  color: #e62429;
-}
-
-.compact-range-slider {
-  width: 100%;
-  margin: 5px 0;
-  cursor: pointer;
-}
-
-.compact-select {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 13px;
-  transition: border-color 0.2s ease;
-}
-
-.compact-select:focus {
-  border-color: #518cca;
-  outline: none;
-}
-
-.compact-filter-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.compact-clear-button {
-  padding: 8px 12px;
-  background: none;
-  border: none;
-  color: #666;
-  font-size: 13px;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.compact-clear-button:hover {
-  text-decoration: underline;
-  color: #e62429;
-}
-
-.compact-apply-button {
-  padding: 8px 16px;
-  background-color: #e62429;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.compact-apply-button:hover {
-  background-color: #c11a1f;
-  transform: translateY(-1px);
-}
-
-.compact-apply-button:active {
-  transform: translateY(1px);
-}
-
-.compact-sort-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  background-color: #0f2f58;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.3s;
-}
-
-.compact-sort-button:hover {
-  background-color: #17457a;
-}
-
-/* Lägg till marginal mellan sökrutan och filmräknaren i mobilvy */
-@media (max-width: 768px) {
-  .movies-section {
-    margin-top: 20px !important;
-  }
-
-  .movies-count {
-    display: inline-block;
-    margin-bottom: 15px;
-  }
-}
-
-/* Responsiva justeringar */
-@media (max-width: 480px) {
-  .clear-button {
-    font-size: 24px;
-    right: 5px;
-  }
-
-  .compact-search-input {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-@media (max-width: 512px) {
-  .compact-search-input {
-    display: none;
-    transition: all 0.3s ease;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .compact-search-input.active {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    margin-top: 10px;
-  }
-
-  .search-icon {
-    cursor: pointer;
-    margin-left: 10px;
-    width: 30px;
-    height: 30px;
-    position: relative; /* Ändra till relativ positionering i mobilvy */
-    left: auto; /* Ta bort absolut positionering */
-  }
-}
-
-@media (max-width: 512px) {
-  .compact-filter-buttons {
+  .compact-filter-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .compact-filter-right-group {
+    display: flex;
+    gap: 1rem;
     align-items: center;
   }
-
-  .compact-filter-button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin-left: 10px;
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .compact-filter-button span {
-    display: none; /* Dölj text */
-  }
-
-  .compact-filter-button svg {
-    width: 24px;
-    height: 24px;
-    color: white;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  .compact-filter-button:hover svg {
-    transform: scale(1.1);
-  }
-
-  .compact-filter-button.active svg {
-    color: #e62429; /* Marvel-röd färg för aktiv knapp */
-  }
-}
-
-@media (max-width: 512px) {
-  .compact-search-input {
-    display: none;
-    transition: all 0.3s ease;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-overflow: clip; /* Klipp av texten */
-    white-space: nowrap; /* Förhindra radbrytning */
-    overflow: hidden; 
-    text-indent: -9999px; /* Skjut ut texten utanför visningsområdet */
-    width: 0; /* Minska bredden till 0 */
-    padding: 0;
-  }
-
-  .compact-search-input::placeholder {
-    color: transparent; /* Göm placeholder */
-  }
-
-  .compact-search-input.active {
-    display: block;
-    width: calc(100% - 200px); /* Anpassad bredd */
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 20px;
-    padding: 0 15px;
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.2);
-    text-indent: 0; /* Återställ texten */
+    width: 20px;
+    height: 20px;
+    color: #ccc;
   }
   
-  .compact-search-input.active::placeholder {
-    color: rgba(255, 255, 255, 0.5); /* Visa placeholder i aktivt läge */
+  .compact-search-input {
+    position: relative;
+    flex: 1;
+    max-width: 500px;
+    padding: 0.6rem 1rem;
+    padding-left: 30px;
+    padding-right: 30px;
+    order: 1;
+    margin-right: auto;
+    /* style på sök rutan/fältet */
+    border-radius: 0.5rem;
+    border: 1px solid #FFF;
+    background: rgba(255, 255, 255, 0.05);
+    /* Style på texten i fältet*/
+    color: rgba(255, 255, 255, 0.56);
+    /* Brödtext */
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
+
   }
-}
+  
+  .compact-search-input::placeholder {
+    color: #ccc;
+    font-family: 'Inter', sans-serif; /* Samma font för placeholder */
+  }
+  
+  .compact-search-input:focus {
+    box-shadow: 0 0 0 2px #518cca;
+  }
+  
+  .clear-button {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a00028;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .clear-button:hover {
+    color: white;
+  }
+  
+  .compact-filter-buttons {
+    display: flex;
+    gap: 1rem;
+    order: 2;
+    margin-left: auto;
+  }
+  
+  .filter-icon, .sort-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+  }
+  
+  .compact-filter-button,
+  .compact-sort-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .compact-filter-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background-color: #0f2f58;
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .compact-filter-button:hover {
+    background-color: #17457a;
+  }
+  
+  .compact-filter-button.active {
+    background-color: #e62429;
+    color: white;
+    border-color: #e62429;
+  }
+  
+  .compact-filter-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 280px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    margin-top: 8px;
+    padding: 15px;
+  }
+  
+  .compact-filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .compact-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .compact-filter-group h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .compact-checkbox-group,
+  .compact-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .compact-checkbox-group label,
+  .compact-radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  .compact-range-slider {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .compact-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  
+  .compact-filter-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .compact-clear-button {
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  .compact-clear-button:hover {
+    text-decoration: underline;
+  }
+  
+  .compact-apply-button {
+    padding: 8px 16px;
+    background-color: #e62429;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .compact-apply-button:hover {
+    background-color: #c11a1f;
+  }
+  
+  .compact-sort-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background-color: #0f2f58;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .compact-sort-button:hover {
+    background-color: #17457a;
+  }
+  
+  /* Responsiva justeringar */
+  @media (max-width: 480px) {
+    .clear-button {
+      font-size: 24px;
+      right: 5px;
+    }
+  
+    .compact-search-input {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  @media (max-width: 544px) {
+    .compact-search-input {
+      display: none;
+      transition: all 0.3s ease;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  
+    .compact-search-input.active {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      margin-top: 10px;
+    }
+  
+    .search-icon {
+      cursor: pointer;
+      margin-left: 10px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  @media (max-width: 544px) {
+    .compact-filter-buttons {
+      display: flex;
+      align-items: center;
+    }
+  
+    .compact-filter-button {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .compact-filter-button span {
+      display: none; /* Dölj text */
+    }
+  
+    .compact-filter-button svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+  
+    .compact-filter-button.active svg {
+      color: #e62429; /* Marvel-röd färg för aktiv knapp */
+    }
+  }
+
+  @media (max-width: 544px) {
+    .compact-search-input {
+      display: none;
+      transition: all 0.3s ease;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-overflow: clip; /* Klipp av texten */
+      white-space: nowrap; /* Förhindra radbrytning */
+      overflow: hidden; 
+      text-indent: -9999px; /* Skjut ut texten utanför visningsområdet */
+      width: 0; /* Minska bredden till 0 */
+    padding: 0;
+    
+    }
+
+    .compact-search-input::placeholder {
+      color: transparent; /* Göm placeholder */
+    }
+  
+    .compact-search-input.active {
+      display: block;
+      width: calc(100% - 200px); /* Anpassad bredd */
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 20px;
+      padding: 0 15px;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+  }
