@@ -21,7 +21,7 @@ body {
 /* Ghost card för att indikera laddning av innehåll */
 .ghost-card {
   width: 100%;
-  height: 250px;
+  height: 350px;
   border-radius: 8px;
   background-color: #e0e0e0;
   animation: pulse 1.2s ease-in-out infinite; /* Skapar en "andnings"-effekt */
@@ -161,6 +161,7 @@ body {
   gap: 20px;
   justify-items: center;
   width: 100%; /* Säkerställ full bredd inom containern */  
+  padding-top: 20px;
 }
 
 /* ========== TILLGÄNGLIGHETSKLASSER ========== */
@@ -177,10 +178,6 @@ body {
 
 /* ========== RESPONSIV DESIGN ========== */
 @media (max-width: 600px) {
-  .movie-grid { 
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-  }
-
   .main-header {
     height: 250px;
   }
@@ -213,3 +210,46 @@ body {
     font-size: calc(1.2rem + 1.5vw);
   }
 }
+
+  /* Brytpunkter för responsivitet */
+  @media (max-width: 1120px) {
+    .movie-grid {
+      /* 4 kort per rad för lite mindre skärmar */
+      grid-template-columns: repeat(4, minmax(190px, 1fr));
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .movie-grid {
+      /* 3 kort per rad för mellanstora skärmar */
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (max-width: 670px) {
+    .movie-grid {
+      /* 2 kort per rad för mindre skärmar */
+      grid-template-columns: repeat(2, minmax(200px, 1fr));
+      gap: 5px; 
+    }
+
+    .movie-image-container {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      width: 200px;
+      overflow: hidden;
+    }
+    .movie-card {
+      width: 200px;
+    }
+
+  }
+  
+  @media (max-width: 420px) {
+    .movie-grid {
+      /* 1 kort per rad för mobila enheter */
+      grid-template-columns: repeat(1, minmax(200px, 1fr));
+      gap: 5px;
+    }
+  }
