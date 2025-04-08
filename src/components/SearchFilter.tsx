@@ -15,7 +15,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 }) => {
   const [showFilters, setShowFilters] = useState(false); // Håller reda på om filterpanelen är öppen
   const [showSort, setShowSort] = useState(false); // Håller reda på om sorteringspanelen är öppen
-  const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(true); // Alltid aktiv
 
   // Skapar refs för att kunna kolla om man klickar utanför filter- eller sorteringspanelerna
   const filtersRef = useRef<HTMLDivElement | null>(null);
@@ -47,16 +47,6 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
           !clickedOnSortButton) {
         setShowSort(false);
       }
-      
-      // Stäng sökfält om klick är utanför och inte på ikonen
-      if (
-        isSearchActive && 
-        searchInputRef.current && 
-        !searchInputRef.current.contains(event.target as Node) &&
-        !clickedOnSearchIcon
-      ) {
-        setIsSearchActive(false);
-      }
     };
 
     // Lägg till en lyssnare för klick utanför
@@ -66,18 +56,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isSearchActive, showFilters, showSort]);
+  }, [showFilters, showSort]);
 
   const handleSearchIconClick = () => {
-    // Toggle sökfältet - öppna om stängt, stäng om öppet
-    setIsSearchActive(!isSearchActive);
-    
-    // Fokusera sökfältet när det aktiveras
-    if (!isSearchActive) {
-      setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 100);
-    }
+    // Fokusera sökfältet när ikonen klickas
+    searchInputRef.current?.focus();
   };
 
   // Uppdaterad filterklick-hantering för att säkerställa korrekt toggle-beteende
@@ -117,12 +100,13 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
     //SÖKFÄLT
     <div className="compact-filter-container">
       <div className="compact-filter-header">
+      <div className="search-input-wrapper">
         <div 
           className="search-icon" 
           onClick={handleSearchIconClick}
           ref={searchIconRef}
           role="button"
-          aria-label={isSearchActive ? "Stäng sökning" : "Öppna sökning"}
+          aria-label="Sök"
           tabIndex={0}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
@@ -134,19 +118,21 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
           type="text"
           placeholder="Sök bland Marvel filmer..."
           value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}  // Uppdaterar värdet när användaren skriver
-          className={`compact-search-input ${isSearchActive ? 'active' : ''}`}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="compact-search-input"
         />
         {searchTerm && (
           <button 
             type="button" 
             className="clear-button" 
-            onClick={() => onSearchChange('')}  // När knappen klickas, rensa sökfältet
+            onClick={() => onSearchChange('')}
             aria-label="Rensa sökning"
           >
             <span aria-hidden="true">×</span>
           </button>
         )}
+      </div>
+
 
         <div className="compact-filter-buttons">
           {/* Filter-knapp som visar filterpanelen */}
@@ -171,7 +157,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
                 d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
               />
             </svg>
-            <span>Filtrera</span>
+            <span className="filter-font">Filtrera</span>
           </button>
                   
           <button
@@ -195,7 +181,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
                 d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
               />
             </svg>
-            <span>Sortera</span>
+            <span className="sort-font">Sortera</span>
           </button>
         </div>
       </div>

@@ -191,7 +191,7 @@ function App() {
                 )}
 
                 {!loading && !error && (
-                  <section className="movies-section" style={{ marginTop: isMobile ? '100px' : '0' }}>
+                  <section className="movies-section">
                     <output className="movies-count" aria-live="polite">
                       Visar {sortedMovies.length} av {movies.length} filmer
                     </output>

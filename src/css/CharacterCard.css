@@ -77,7 +77,22 @@
   }
   
 /* ==== Responsiv design för CharacterCard ==== */
-@media (max-width: 600px) {
+@media (max-width: 668px) {
+  .character-card {
+    width: 150px;
+  }
+  
+  .character-image-container {
+    width: 130px;
+    height: 130px;
+  }
+
+  .character-name {
+    font-size: 1.0rem;
+  }
+}
+
+@media (max-width: 490px) {
   .character-card {
     width: 160px;
   }
@@ -89,5 +104,34 @@
 
   .character-name {
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 350px) {
+  .character-card {
+    width: 120px;
+  }
+  
+  .character-image-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .character-name {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 260px) {
+  .character-card {
+    width: 140px;
+  }
+  
+  .character-image-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .character-name {
+    font-size: 1.0rem;
   }
 }

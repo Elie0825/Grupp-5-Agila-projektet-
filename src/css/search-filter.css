@@ -1,9 +1,11 @@
-/* Sökformulär och filterkomponent */
+/* Sökfält och filterkomponent - Förbättrad responsivitet */
+
 .compact-filter-container {
   position: relative;
   max-width: 1200px;
   margin: 0 auto 20px;
-  
+  box-sizing: border-box;
+  padding: 0 1rem;
 }
 
 .compact-filter-header {
@@ -12,125 +14,105 @@
   align-items: center;
   gap: 1rem;
   margin: 1rem 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Förhindra ombrytning för att hålla allt på samma rad */
   position: relative;
 }
 
-.compact-filter-right-group {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+/* Wrappers och container för sökfält */
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 500px; /* Max bredd på skärmar större än 1200px */
+  min-width: 140px; /* Minsta bredd oavsett skärmstorlek */
+  order: 1;
 }
 
-/* Förbättrad sökikon med toggle-funktionalitet */
+.compact-search-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  padding-left: 35px; /* Plats för sök-ikon */
+  padding-right: 35px; /* Plats för clear-knapp */
+  border-radius: 0.5rem;
+  border: 1px solid #FFF;
+  background: rgba(255, 255, 255, 0.05);
+  
+
+
+  color: var(--Color-Neutral-neutral-lightest, #EEE);
+
+  /* Text/Regular/Normal */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+
+}
+
+.compact-search-input::placeholder {
+  color: #ccc;
+  font-family: Roboto;
+}
+
+.compact-search-input:focus {
+  box-shadow: 0 0 0 2px #518cca;
+}
+
+/* Sök- och rensa-ikoner */
 .search-icon {
   position: absolute;
   left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   width: 20px;
   height: 20px;
   color: #ccc;
-  cursor: pointer; /* Visa att den är klickbar */
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.search-icon:hover {
-  color: white;
-  transform: scale(1.1);
-}
-
-.search-icon:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
-  border-radius: 50%;
-}
-
-.compact-search-input {
-  position: relative;
-  flex: 1;
-  max-width: 500px;
-  padding: 0.6rem 1rem;
-  padding-left: 30px;
-  padding-right: 30px;
-  order: 1;
-  margin-right: auto;
-  /* style på sök rutan/fältet */
-  border-radius: 0.5rem;
-  border: 1px solid #FFF;
-  background: rgba(255, 255, 255, 0.05);
-  /* Style på texten i fältet*/
-  color: rgba(255, 255, 255, 0.56);
-  /* Brödtext */
-  line-height: 1.5rem; /* 150% */
-  transition: all 0.3s ease-in-out; /* Smidigare övergångar */
-  font-family: Inter;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.compact-search-input::placeholder {
-  color: #ccc;
-  font-family: 'Inter', sans-serif; /* Samma font för placeholder */
-}
-
-.compact-search-input:focus {
-  box-shadow: 0 0 0 2px #518cca;
-  border-color: #518cca;
+  z-index: 1;
 }
 
 .clear-button {
   position: absolute;
-  right: 50%;
+  right: 10px; /* Fast position relativt till wrapper */
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #ccc;
-  font-size: 40px;
+  color: #FFF;
+  font-size: 24px;
   cursor: pointer;
   z-index: 1;
-  transition: color 0.2s ease;
 }
 
 .clear-button:hover {
   color: white;
 }
 
+/* Filter- och sorteringsknappar */
 .compact-filter-buttons {
   display: flex;
   gap: 1rem;
   order: 2;
-  margin-left: auto;
-  
+  flex-shrink: 0; /* Förhindra att knapparna krymper */
+}
+
+.filter-font, .sort-font {
+color: #FFF;
+
+/* Brödtext */
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
 }
 
 .filter-icon, .sort-icon {
   width: 20px;
   height: 20px;
   margin-right: 6px;
-}
-
-/* Förbättrade filterkanppar med tydligare toggle-feedback */
-.compact-filter-button,
-.compact-sort-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: #FFF;
-
-/* Brödtext */
-font-family: Inter;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; /* 150% */
-
-  
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
 }
 
 .compact-filter-button {
@@ -143,26 +125,22 @@ line-height: 24px; /* 150% */
   border: 1px solid white;
   border-radius: 6px;
   cursor: pointer;
-  
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  white-space: nowrap; /* Förhindra att texten bryts */
 }
 
 .compact-filter-button:hover {
   background-color: #17457a;
 }
 
-.compact-filter-button:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
-}
-
 .compact-filter-button.active {
   background-color: #e62429;
   color: white;
   border-color: #e62429;
-  transform: scale(1.05); /* Lägg till liten skaleffekt när aktiv */
 }
 
+/* Filter dropdown och relaterade element */
 .compact-filter-dropdown {
   position: absolute;
   top: 100%;
@@ -175,12 +153,6 @@ line-height: 24px; /* 150% */
   z-index: 100;
   margin-top: 8px;
   padding: 15px;
-  animation: fadeIn 0.2s ease-in-out; /* Lägg till animation */
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .compact-filter-section {
@@ -216,18 +188,11 @@ line-height: 24px; /* 150% */
   gap: 6px;
   font-size: 15px;
   cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.compact-checkbox-group label:hover,
-.compact-radio-group label:hover {
-  color: #e62429;
 }
 
 .compact-range-slider {
   width: 100%;
   margin: 5px 0;
-  cursor: pointer;
 }
 
 .compact-select {
@@ -236,12 +201,6 @@ line-height: 24px; /* 150% */
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 13px;
-  transition: border-color 0.2s ease;
-}
-
-.compact-select:focus {
-  border-color: #518cca;
-  outline: none;
 }
 
 .compact-filter-actions {
@@ -257,12 +216,10 @@ line-height: 24px; /* 150% */
   color: #666;
   font-size: 13px;
   cursor: pointer;
-  transition: color 0.2s;
 }
 
 .compact-clear-button:hover {
   text-decoration: underline;
-  color: #e62429;
 }
 
 .compact-apply-button {
@@ -274,157 +231,175 @@ line-height: 24px; /* 150% */
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
 }
 
 .compact-apply-button:hover {
   background-color: #c11a1f;
-  transform: translateY(-1px);
 }
 
-.compact-apply-button:active {
-  transform: translateY(1px);
+/* Responsiva stilar - Börjar redan vid 1200px för en mjukare övergång */
+@media (max-width: 1200px) {
+  .search-input-wrapper {
+    max-width: 400px; /* Minska maxbredden på medelstora skärmar */
+  }
 }
 
-.compact-sort-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  background-color: #0f2f58;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.3s;
+@media (max-width: 992px) {
+  .search-input-wrapper {
+    max-width: 350px;
+  }
+  
+  .compact-filter-button {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
 }
 
-.compact-sort-button:hover {
-  background-color: #17457a;
+/* Börja anpassa redan vid 850px för att undvika kollision */
+@media (max-width: 850px) {
+  .search-input-wrapper {
+    max-width: 300px;
+    min-width: 140px;
+  }
+  
+  .compact-filter-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .compact-filter-header {
+    gap: 0.8rem; /* Minska mellanrummet */
+  }
 }
 
-/* Lägg till marginal mellan sökrutan och filmräknaren i mobilvy */
 @media (max-width: 768px) {
-  .movies-section {
-    margin-top: 20px !important;
-  }
-
-  .movies-count {
-    display: inline-block;
-    margin-bottom: 15px;
+  .search-input-wrapper {
+    max-width: 250px;
   }
 }
 
-/* Responsiva justeringar */
-@media (max-width: 480px) {
-  .clear-button {
-    font-size: 24px;
-    right: 5px;
+@media (max-width: 680px) {
+  .search-input-wrapper {
+    max-width: 220px;
   }
-
-  .compact-search-input {
-    padding-left: 15px;
-    padding-right: 15px;
+  
+  .compact-filter-header {
+    gap: 0.6rem;
   }
-}
-
-@media (max-width: 512px) {
-  .compact-search-input {
-    display: none;
-    transition: all 0.3s ease;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .compact-search-input.active {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    margin-top: 10px;
-  }
-
-  .search-icon {
-    cursor: pointer;
-    margin-left: 10px;
-    width: 30px;
-    height: 30px;
-    position: relative; /* Ändra till relativ positionering i mobilvy */
-    left: auto; /* Ta bort absolut positionering */
-  }
-}
-
-@media (max-width: 512px) {
+  
   .compact-filter-buttons {
-    display: flex;
-    align-items: center;
+    gap: 0.6rem;
   }
+}
 
+@media (max-width: 600px) {
+  .search-input-wrapper {
+    max-width: 200px;
+  }
+  
+  .compact-filter-button {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Ikoner istället för text vid 512px */
+@media (max-width: 512px) {
+  .search-input-wrapper {
+    max-width: 160px;
+  }
+  
   .compact-filter-button {
     background: none;
     border: none;
-    padding: 0;
-    margin-left: 10px;
+    padding: 8px;
+    margin-left: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  .compact-search-input {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 0.8rem;
+  }
+  
   .compact-filter-button span {
     display: none; /* Dölj text */
   }
-
+  
   .compact-filter-button svg {
     width: 24px;
     height: 24px;
     color: white;
-    transition: color 0.2s ease, transform 0.2s ease;
   }
-
-  .compact-filter-button:hover svg {
-    transform: scale(1.1);
-  }
-
+  
   .compact-filter-button.active svg {
-    color: #e62429; /* Marvel-röd färg för aktiv knapp */
+    color: #FFF; 
+  }
+  
+  .clear-button {
+    font-size: 20px;
   }
 }
 
-@media (max-width: 512px) {
-  .compact-search-input {
-    display: none;
-    transition: all 0.3s ease;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-overflow: clip; /* Klipp av texten */
-    white-space: nowrap; /* Förhindra radbrytning */
-    overflow: hidden; 
-    text-indent: -9999px; /* Skjut ut texten utanför visningsområdet */
-    width: 0; /* Minska bredden till 0 */
-    padding: 0;
-  }
-
-  .compact-search-input::placeholder {
-    color: transparent; /* Göm placeholder */
-  }
-
-  .compact-search-input.active {
-    display: block;
-    width: calc(100% - 200px); /* Anpassad bredd */
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 20px;
-    padding: 0 15px;
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.2);
-    text-indent: 0; /* Återställ texten */
+/* För mindre skärmar */
+@media (max-width: 450px) {
+  .compact-filter-header {
+    padding: 0; /* Minska padding */
+    gap: 0.4rem; /* Minska mellanrum */
   }
   
-  .compact-search-input.active::placeholder {
-    color: rgba(255, 255, 255, 0.5); /* Visa placeholder i aktivt läge */
+  .search-input-wrapper {
+    min-width: 120px;
+  }
+  
+  .compact-search-input {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 0.7rem;
+  }
+  
+  .compact-filter-button {
+    padding: 5px;
+    margin-left: 2px;
+  }
+  
+  .compact-filter-button svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .search-icon {
+    left: 8px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .clear-button {
+    right: 8px;
+    font-size: 18px;
+  }
+}
+
+/* Extra åtgärd för mycket små skärmar */
+@media (max-width: 363px) {
+  .compact-filter-container {
+    padding: 0 0.5rem; /* Minska container padding */
+  }
+  
+  .search-input-wrapper {
+    min-width: 100px;
+  }
+  
+  .compact-filter-button {
+    padding: 4px;
+    margin-left: 1px;
+  }
+  
+  .compact-filter-button svg {
+    width: 18px;
+    height: 18px;
   }
 }
