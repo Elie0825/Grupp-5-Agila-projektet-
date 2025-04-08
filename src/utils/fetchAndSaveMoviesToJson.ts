@@ -6,6 +6,11 @@ import { Movie } from '../types/movie';
 // OMDb API-nyckel
 const OMDB_API_KEY = "8f57b2c1";
 
+// Skyddade fält som inte ska uppdateras
+const PROTECTED_FIELDS: Array<keyof Pick<Movie, 'overview' | 'cover_url' | 'trailer_url'>> = [
+  'overview', 'cover_url', 'trailer_url'
+];
+
 // Dummy implementation av calculateAverageRating för att uppfylla interface
 const calculateAverageRating = function(this: Movie): number | null {
   const ratings = [
@@ -37,6 +42,26 @@ interface OMDbResponse {
 
 export async function fetchAndSaveMoviesToJson(): Promise<void> {
   try {
+    // Första: Läs in befintliga filmer från JSON-filen om den finns
+    const jsonFilePath = path.join(process.cwd(), 'public', 'marvelmovies.json');
+    let existingMovies: Movie[] = [];
+    
+    if (fs.existsSync(jsonFilePath)) {
+      try {
+        console.log("Läser in befintliga filmer från JSON-filen...");
+        const fileContent = fs.readFileSync(jsonFilePath, 'utf-8');
+        existingMovies = JSON.parse(fileContent);
+        console.log(`Läste in ${existingMovies.length} befintliga filmer.`);
+      } catch (error) {
+        console.warn("Kunde inte läsa in befintlig JSON-fil:", error);
+      }
+    }
+    
+    // Skapa en map för att enkelt hitta befintliga filmer via ID
+    const existingMoviesMap = new Map(
+      existingMovies.map(movie => [movie.id, movie])
+    );
+    
     // Steg 1: Hämta grunddata från MCU API
     console.log("Hämtar filmer från MCU API...");
     const response = await axios.get<MCUApiResponse>("https://mcuapi.herokuapp.com/api/v1/movies");
@@ -92,14 +117,28 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
       // Vänta lite så vi inte överbelastar API:et (max 1000 req/dag)
       await new Promise(resolve => setTimeout(resolve, 300));
       
-      // Lägg till betyg till filmen
+      // Hitta befintlig film
+      const existingMovie = existingMoviesMap.get(movie.id);
+      
+      // Skapa ett nytt objekt med nya data
       const enrichedMovie: Movie = {
         ...movie,
-        imdb_rating,
-        rt_rating,
-        mc_rating,
+        // Lägg till nya betyg men behåll befintliga om nya är null
+        imdb_rating: imdb_rating !== null ? imdb_rating : (existingMovie?.imdb_rating ?? null),
+        rt_rating: rt_rating !== null ? rt_rating : (existingMovie?.rt_rating ?? null),
+        mc_rating: mc_rating !== null ? mc_rating : (existingMovie?.mc_rating ?? null),
         calculateAverageRating
       };
+      
+      // Bevara skyddade fält från den befintliga filmen om den finns
+      if (existingMovie) {
+        // Loopa genom skyddade fält och kopiera dem explicit
+        for (const field of PROTECTED_FIELDS) {
+          if (existingMovie[field] !== undefined) {
+            enrichedMovie[field] = existingMovie[field];
+          }
+        }
+      }
       
       enrichedMovies.push(enrichedMovie);
     }
@@ -109,8 +148,6 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
     if (!fs.existsSync(publicDirPath)) {
       fs.mkdirSync(publicDirPath, { recursive: true });
     }
-    
-    const jsonFilePath = path.join(publicDirPath, 'marvelmovies.json');
     
     // Skapa en version av objektet som kan serialiseras till JSON
     const serializableMovies = enrichedMovies.map(movie => {
@@ -129,7 +166,7 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
   }
 }
 
- // Kör alltid när filen körs direkt eller från tsx/Node ESM
+// Kör alltid när filen körs direkt eller från tsx/Node ESM
 fetchAndSaveMoviesToJson().then(() => {
   console.log("Script avslutat.");
   process.exit(0);
