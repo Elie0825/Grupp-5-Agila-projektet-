@@ -7,10 +7,9 @@
 }
 
 .characters-hero {
-  max-width: 1440px; /* Maxbredd enligt bild 3 */
-  margin: 0 auto; /* Centrera innehållet horisontellt */
+  margin: 0; /* Centrera innehållet horisontellt */
+  margin-bottom: 5rem;
   width: 100%;
-  height: 60vh;
   min-height: 30rem;
   display: flex;
   align-items: center;
@@ -32,7 +31,6 @@
     url('/headerbild.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  margin-bottom: 2rem;
 }
 
 .characters-hero h1 {
@@ -147,6 +145,7 @@ margin-top: 2rem;
   
   .characters-hero {
     padding: 3rem 1rem; /* Minska padding på mindre skärmar */
+    margin-bottom: 2rem;
   }
 }
 
