@@ -294,7 +294,7 @@ line-height: 24px; /* 150% */
 
 @media (max-width: 600px) {
   .search-input-wrapper {
-    max-width: 200px;
+    max-width: 180px;
   }
   
   .compact-filter-button {
@@ -303,8 +303,40 @@ line-height: 24px; /* 150% */
   }
 }
 
-/* Ikoner istället för text vid 512px */
-@media (max-width: 512px) {
+@media (max-width: 520px) {
+  .search-input-wrapper {
+    max-width: 150px;
+  }
+  
+  .compact-filter-button {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+  .compact-sort-button {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .search-input-wrapper {
+    max-width: 130px;
+  }
+  
+  .compact-filter-button {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+  .compact-sort-button {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+
+}
+
+/* Ikoner istället för text vid 480px */
+@media (max-width: 460px) {
   .search-input-wrapper {
     max-width: 160px;
   }

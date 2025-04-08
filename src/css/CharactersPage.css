@@ -19,7 +19,6 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 4rem 2rem;
   box-sizing: border-box; /* Viktigt! */
   background-image: 
     linear-gradient(

@@ -66,7 +66,6 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 4rem 2rem;
   background-image: 
     linear-gradient(
       180deg, 
@@ -113,7 +112,6 @@ body {
   color: #FFF;
   align-self: stretch;
   text-align: center;
-  text-shadow: -2px -2px 3px var(--Sekundr, #024A88);
   font-family: Impact;
   font-size: 56px;
   font-style: normal;
@@ -198,7 +196,7 @@ body {
 }
 
 @media (max-width: 1286px) {
-  .characters-hero, .main-header {
+  .main-header {
     padding: 1rem; /* Lägg till padding när skärmen krymper */
   }
 
@@ -229,27 +227,111 @@ body {
   @media (max-width: 670px) {
     .movie-grid {
       /* 2 kort per rad för mindre skärmar */
-      grid-template-columns: repeat(2, minmax(200px, 1fr));
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
       gap: 5px; 
     }
 
     .movie-image-container {
       position: relative;
       width: 100%;
-      height: 350px;
-      width: 200px;
+      height: 250px;
+      width: 150px;
       overflow: hidden;
     }
     .movie-card {
-      width: 200px;
+      width: 160px;
     }
 
   }
-  
-  @media (max-width: 420px) {
+
+  @media (max-width: 610px) {
     .movie-grid {
-      /* 1 kort per rad för mobila enheter */
-      grid-template-columns: repeat(1, minmax(200px, 1fr));
-      gap: 5px;
+      /* 2 kort per rad för mindre skärmar */
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 5px; 
+    }
+
+    .movie-image-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      width: 140px;
+      overflow: hidden;
+    }
+    .movie-card {
+      width: 140px;
+    }
+
+  }
+
+  
+  @media (max-width: 460px) {
+    .movie-grid {
+      /* Behåll 2 kort per rad istället för 1 */
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 10px;
+      justify-items: center;
+    }
+  
+    /* Minska storleken på filmkorten */
+    .movie-card {
+      width: 120px;
+    }
+  
+    /* Justera höjd för bildcontainern */
+    .movie-image-container {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      width: 120px;
+      overflow: hidden;
+    }
+  }
+
+  @media (max-width: 410px) {
+    .movie-grid {
+      /* Behåll 2 kort per rad istället för 1 */
+      grid-template-columns: repeat(3, minmax(100px, 1fr));
+      gap: 10px;
+      justify-items: center;
+    }
+  
+    /* Minska storleken på filmkorten */
+    .movie-card {
+      width: 100px;
+    }
+  
+    /* Justera höjd för bildcontainern */
+    .movie-image-container {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      width: 100px;
+      overflow: hidden;
+    }
+  }
+
+
+
+  @media (max-width: 350px) {
+    .movie-grid {
+      /* Behåll 2 kort per rad istället för 1 */
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
+      gap: 10px;
+      justify-items: center;
+    }
+  
+    /* Minska storleken på filmkorten */
+    .movie-card {
+      width: 130px;
+    }
+  
+    /* Justera höjd för bildcontainern */
+    .movie-image-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      width: 130px;
+      overflow: hidden;
     }
   }
