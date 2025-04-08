@@ -261,25 +261,25 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
           <div className="ratings-container-inline">
             {movie.imdb_rating && (
               <div className="rating-badge">
-                <h4>IMDB</h4>
-                <span className="rating-icon">⭐</span>
-                <span className="rating-value">{Number(movie.imdb_rating).toFixed(1)}</span>
+                <img src="/imdb-logo.png" alt="IMDB logo" className="rating-logo" />
+                <div className="rating-value">{Number(movie.imdb_rating).toFixed(1)}/10</div>
+                <h4 className="rating-name">IMDb</h4>
               </div>
             )}
             
             {movie.rt_rating && (
               <div className="rating-badge">
-                <h4>Rotten Tomatoes</h4>
-                <span className="rating-icon">🍅</span>
-                <span className="rating-value">{Number(movie.rt_rating)}%</span>
+                <img src="/rt-logo.png" alt="Rotten Tomatoes logo" className="rating-logo" />
+                <div className="rating-value">{Number(movie.rt_rating)}%</div>
+                <h4 className="rating-name">Rotten Tomatoes</h4>
               </div>
             )}
             
             {movie.mc_rating && (
               <div className="rating-badge">
-                <h4>Metacritic</h4>
-                <span className="rating-icon">📊</span>
-                <span className="rating-value">{Number(movie.mc_rating)}</span>
+                <img src="/mt-logo.png" alt="Metacritic logo" className="rating-logo" />
+                <div className="rating-value">{Number(movie.mc_rating)}</div>
+                <h4 className="rating-name">Metacritic</h4>
               </div>
             )}
           </div>

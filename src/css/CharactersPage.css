@@ -6,7 +6,33 @@
   box-sizing: border-box;
 }
 
-.characters-hero {
+.characters-page .characters-hero {
+  /* Samma som main-header men med annan bakgrundsbild */
+  background-image: 
+    linear-gradient(
+      180deg, 
+      rgba(11, 15, 52, 0.00) 13.36%, 
+      rgba(10, 19, 54, 0.26) 34.36%, 
+      rgba(9, 24, 56, 0.58) 50.36%, 
+      rgba(8, 27, 58, 0.82) 76.86%, 
+      #071E3B 100%
+    ), 
+    url('/header-universum.svg');
+
+    display: flex;
+width: 1440px;
+height: 712px;
+padding: 158px 120px 356px 120px;
+flex-direction: column;
+align-items: center;
+gap: 131px;
+flex-shrink: 0;
+  
+}
+
+/* OBS FINNS DUBBELSTRUKUR HÄR*/
+
+.universum-hero {
   margin: 0; /* Centrera innehållet horisontellt */
   margin-bottom: 5rem;
   width: 100%;
@@ -28,7 +54,7 @@
       rgba(8, 27, 58, 0.82) 76.86%, 
       #071E3B 100%
     ), 
-    url('/headerbild.svg');
+    url('/header-universum.svg');
   background-size: cover;
   background-repeat: no-repeat;
 }

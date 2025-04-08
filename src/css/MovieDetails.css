@@ -200,31 +200,37 @@ gap: 0.8rem; /* Minska mellanrummet */
 }
 
 .rating-badge {
-display: flex;
-align-items: center;
-gap: 0.45rem;
-background-color: rgba(255, 255, 255, 0.15);
-padding: 0.25rem 0.5rem;
-border-radius: 6px;
-font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  width: 110px; /* Mindre bredd */
+  height: auto; /* Låt höjden anpassas efter innehållet */
+  padding: 12px; /* Mindre padding */
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.11);
 }
 
-.rating-badge h4 {
-margin: 0;
-font-size: 0.8rem;
-color: rgba(255, 255, 255, 0.7);
-font-weight: 600;
+
+
+h4.rating-name {
+  font-size: 12px;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 4px 0 0 0;
+  height: 36px; /* Fast höjd för att hålla alla namn i linje */
+  display: flex;
+  align-items: center; /* Centrera texten vertikalt inom den fasta höjden */
+  justify-content: center; /* Centrera texten horisontellt */
+  text-align: center; /* Backup för text-centrering */
+  width: 100%; /* Se till att ta upp hela bredden */
 }
 
-.rating-icon {
-font-size: 1rem;
-display: flex;
-align-items: center;
-}
 
 .rating-value {
-font-size: 0.9rem;
-font-weight: 600;
+  font-size: 24px; /* Något mindre textstorlek */
+  font-weight: bold;
+  margin-top: 4px;
 }
 
 /* Coming soon styling */
@@ -305,6 +311,13 @@ flex-direction: row;
 justify-content: space-between;
 align-items: flex-start;
 margin-bottom: 0.5rem;
+}
+
+.rating-logo {
+  width: 28px; /* Något mindre logo */
+  height: 28px;
+  aspect-ratio: 1;
+  margin-bottom: 8px;
 }
 
 .average-rating {

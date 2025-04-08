@@ -84,6 +84,35 @@ body {
   margin-bottom: 2rem;
 }
 
+.characters-hero {
+  margin: 0; /* Centrera innehållet horisontellt */
+  margin-bottom: 5rem;
+  width: 100%;
+  min-height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* Viktigt! */
+  background-image: 
+    linear-gradient(
+      180deg, 
+      rgba(11, 15, 52, 0.00) 13.36%, 
+      rgba(10, 19, 54, 0.26) 34.36%, 
+      rgba(9, 24, 56, 0.58) 50.36%, 
+      rgba(8, 27, 58, 0.82) 76.86%, 
+      #071E3B 100%
+    ), 
+    url('/headerbild.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+
 .movies-section {
   max-width: 1200px;
   margin: 0 auto;

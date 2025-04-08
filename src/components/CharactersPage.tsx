@@ -83,12 +83,12 @@ const CharactersPage: React.FC = () => {
   return (
     <main className="characters-page">
       <header className="characters-hero">
-        <p className="text">
+        {/* <p className="text">
           <span className="big-span">Marvelous RATINGS <br /></span>
           Utforska dina favoritkaraktärer från Marvel-universumet!
           Lär dig mer om karaktärernas bakgrund och vilka filmer de medverkar i.
           <br /> Allt samlat, allt Marvel, MARVELOUS!
-        </p>
+        </p>*/}
       </header>
 
       <section className="search-section">
