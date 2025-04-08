@@ -5,7 +5,7 @@ const MarvelTimeline: React.FC = () => {
   return (
     <div className="mt-container">
       <header className="mt-header">
-        <img src="/public/images/HERO Header.svg" alt="Hero heder" />
+        <img src="/media/hero-header.svg" alt="Hero header" />
         <div className="mt-header__text">
           <h1>MARVELOUS HISTORIA</h1>
           <p>
@@ -33,8 +33,8 @@ const MarvelTimeline: React.FC = () => {
           </p>
 
           <figure className="mt-figure">
-            <img src="/public/Stan Lee 1.svg" alt="Stan Lee logo" />
-            <img src="/public/tidning omslag 1.svg" alt="tidning omslag" />
+            <img src="/media/stan-lee.svg" alt="Stan Lee logo" />
+            <img src="/media/tidning-omslag.svg" alt="tidning omslag" />
           </figure>
 
           <h3>Från serietidningar till bioduken – Marvels första filmsteg</h3>
@@ -46,8 +46,8 @@ const MarvelTimeline: React.FC = () => {
           </p>
 
           <figure className="mt-figure">
-            <img src="/public/blade omslag 1.svg" alt="Blade omslag logo" />
-            <img src="/public/Xmen omslag 1.svg" alt="X-Men omslag logo" />
+            <img src="/media/blade-omslag.svg" alt="Blade omslag logo" />
+            <img src="/media/x-men-omslag.svg" alt="X-Men omslag logo" />
           </figure>
 
           <h3>Disney kliver in – en ny era för Marvel</h3>
@@ -62,8 +62,8 @@ const MarvelTimeline: React.FC = () => {
           </p>
 
           <figure className="mt-figure">
-            <img src="/public/Iron man  1.svg" alt="Iron Man logo" />
-            <img src="/public/marvel blir del av disney 1.svg" alt="Disney plus Marvel logo" />
+            <img src="/media/iron-man.svg" alt="Iron Man logo" />
+            <img src="/media/marvel-and-disney.svg" alt="Disney plus Marvel logo" />
           </figure>
         </section>
       </main>

@@ -26,6 +26,7 @@ jobs:
 
       - name: 🛠️ Kör scriptet som uppdaterar filmer
         run: npx tsx src/utils/fetchAndSaveMoviesToJson.ts
+        # Notera att vi INTE kör saveMarvelCharacters.ts
 
       - name: 🔼 Lägg till, committa & pusha
         run: |
