@@ -1,0 +1,165 @@
+[33mcommit d983cec5501044a631ccb87c94de3d279a3470a7[m[33m ([m[1;36mHEAD -> [m[1;32mElie-branch[m[33m)[m
+Author: elief <elie.faniar@stud.sti.se>
+Date:   Tue Apr 8 01:18:17 2025 +0200
+
+    Hero banner till Historia sidan + css
+
+[33mcommit 433fd229bc8bc4518db0dfde3f50722af523073b[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Mon Apr 7 18:06:31 2025 +0200
+
+    Fixing routing issues after merge renaming components for purpose
+
+[33mcommit b67efa53e2719c563a7d98068b3c90d66b5b57b2[m[33m ([m[1;31morigin/Gustav-branch[m[33m)[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Mon Apr 7 16:37:51 2025 +0200
+
+    sparar in för byte av branch
+
+[33mcommit 03a855dd54be4b14a204f33e7b333ede8d8c8f76[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Mon Apr 7 12:30:45 2025 +0200
+
+    fixat sortera och filtrear onclick knappar
+
+[33mcommit 55ed2bd800b300e45907f3d51adb0dd7c963fba2[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Mon Apr 7 11:10:47 2025 +0200
+
+    fixat hamburgermeny
+
+[33mcommit 886e03c57bb7a4354607428a375234e969e48eb3[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Mon Apr 7 08:39:46 2025 +0200
+
+    ccs förändringar i header och movie grid samt resposivitet
+
+[33mcommit 49219fb4b2af156e92c79f1e65f6f00d4880c3b3[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 19:23:00 2025 +0200
+
+    ändrat css för navbar. spara inför ändring av hero css
+
+[33mcommit b47142da9dfd3dccd44683450f3b323891d8f5d1[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 17:25:43 2025 +0200
+
+    fixat media queries för responsivitet
+
+[33mcommit 1f60ddb0e0cc0afa4f905c75c45dd7ac1a235a90[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 11:00:13 2025 +0200
+
+    sparar inför byte av branch
+
+[33mcommit da8a8c2bc5a784a86b7a33570567bfd478e9a0a2[m
+Merge: fb0244c 5d483bc
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 02:15:51 2025 +0200
+
+    🔁 Merge gustav-test into master och löste konflikter
+
+[33mcommit 5d483bcd464a58a2745012063442022f4256426a[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 02:11:22 2025 +0200
+
+    lagt till nya bilder för karaktärskort och adderat mappning mellan kort och karaktärer
+
+[33mcommit fb0244ca33154a08b30e3202dedce0e1334c979e[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 01:52:49 2025 +0200
+
+    spara innan byte till test branch
+
+[33mcommit 1de39dec737e0f1d12bc8a0e05b505868957ba33[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sun Apr 6 01:25:45 2025 +0200
+
+    lagt till bilder för karaktärer och uppdaterat marvelmovies.json
+
+[33mcommit 221a49fe974ba63e810c89a15561d0270e125ce6[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:53:46 2025 +0200
+
+    testa ändra från lokal bild till cover url från api
+
+[33mcommit 2668a3f41a1d6be283aad828b94404d7b57ca3d8[m
+Merge: 4376d7c fd475b8
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:37:31 2025 +0200
+
+    Merge pull request #5 from gustavnybergs/gustav-test
+    
+    tsc/node esm uppdatering i utils
+
+[33mcommit fd475b8965508c6d84da89e46cde86f36bba0a72[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:36:32 2025 +0200
+
+    tsc/node esm uppdatering i utils
+
+[33mcommit 4376d7c4769a53106a1315296587b7b75bc1eeed[m
+Merge: d6bc8de 22cfa43
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:33:03 2025 +0200
+
+    Merge pull request #4 from gustavnybergs/gustav-test
+    
+    🔧 Uppdaterade GitHub Action till tsx och la till tsx som devDependency
+
+[33mcommit 22cfa431be5904dd36f7dd2acc314acb7b4dfa51[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:32:31 2025 +0200
+
+    🔧 Uppdaterade GitHub Action till tsx och la till tsx som devDependency
+
+[33mcommit d6bc8de2b2dcd25548306f89b34d67855dfea6cd[m
+Merge: 52acaf0 4ab7a0e
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:26:42 2025 +0200
+
+    Merge pull request #3 from gustavnybergs/gustav-test
+    
+    🔧 Fixade type: module för GitHub Action
+
+[33mcommit 4ab7a0e10e92b1023319f5f5ba4372f2bccb8243[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:26:08 2025 +0200
+
+    🔧 Fixade type: module för GitHub Action
+
+[33mcommit 52acaf04d8174d1e3c422293ccd6d0702ba0c664[m
+Merge: fddcb87 5aeab19
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:19:30 2025 +0200
+
+    Merge pull request #2 from gustavnybergs/gustav-test
+    
+    🛠️ La till GitHub Action för automatisk uppdatering av filmer
+
+[33mcommit 5aeab1942cd3d076223a24954a69581ad61d91e7[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:16:02 2025 +0200
+
+    🛠️ La till GitHub Action för automatisk uppdatering av filmer
+
+[33mcommit fddcb87b2c2e0da3bff15d27865dfdf56496361b[m
+Merge: f5dd462 1f879dc
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:06:29 2025 +0200
+
+    Merge pull request #1 from gustavnybergs/gustav-test
+    
+    rensade verision, tagit bort backend implementation
+
+[33mcommit 1f879dc73f7239161ffa9a2f75daba5e4d062701[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 23:03:50 2025 +0200
+
+    rensade verision, tagit bort backend implementation
+
+[33mcommit f5dd4626a97d7596753224c8b416b5e4857f7ac2[m
+Author: gustavnybergs <Gustavnybergs@gmail.com>
+Date:   Sat Apr 5 21:28:43 2025 +0200
+
+    Startar om Marvel-projektet från grunden
