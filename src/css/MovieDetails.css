@@ -120,6 +120,8 @@ width: 100%; /* Säkerställ full bredd */
 box-sizing: border-box; /* Inkludera padding i width */
 }
 
+
+
 .details-header h2 {
 margin: 0;
 font-size: 2rem;
@@ -309,13 +311,14 @@ margin-bottom: 0.5rem;
 font-size: 2rem;
 font-weight: bold;
 border-radius: 8px;
-color: white;
+color: #FFF;
 flex-shrink: 0;
 padding: 0;
 text-align: right;
 min-width: 70px; /* Minsta bredd för konsekvent layout */
 position: static; /* Ta bort absolute positioning */
 margin-right: 20px;
+
 }
 
 .movie-year,

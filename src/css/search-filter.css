@@ -35,17 +35,23 @@
   border-radius: 0.5rem;
   border: 1px solid #FFF;
   background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.56);
-  font-family: Inter;
-  font-size: 1rem;
+  
+
+
+  color: var(--Color-Neutral-neutral-lightest, #EEE);
+
+  /* Text/Regular/Normal */
+  font-family: Roboto;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5rem;
+  line-height: 150%; /* 24px */
+
 }
 
 .compact-search-input::placeholder {
   color: #ccc;
-  font-family: 'Inter', sans-serif;
+  font-family: Roboto;
 }
 
 .compact-search-input:focus {
@@ -90,6 +96,17 @@
   gap: 1rem;
   order: 2;
   flex-shrink: 0; /* Förhindra att knapparna krymper */
+}
+
+.filter-font, .sort-font {
+color: #FFF;
+
+/* Brödtext */
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
 }
 
 .filter-icon, .sort-icon {

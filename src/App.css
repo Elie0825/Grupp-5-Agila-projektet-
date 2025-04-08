@@ -110,7 +110,7 @@ body {
 
 .big-span {
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
+  color: #FFF;
   align-self: stretch;
   text-align: center;
   text-shadow: -2px -2px 3px var(--Sekundr, #024A88);
@@ -119,8 +119,8 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 120%; /* 67.2px */
-  margin-top: 200px;
-  margin-bottom: 50px;
+  margin-top: 250px;
+  margin-bottom: 20px;
   font-size: calc(1.5rem + 2vw); /* Responsiv textstorlek */
   max-width: 100%;
   word-wrap: break-word; /* Bryt långa ord */
