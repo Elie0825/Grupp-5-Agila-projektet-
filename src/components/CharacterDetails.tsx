@@ -232,6 +232,7 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
             <div className="section-divider"></div>
             <h3 className="section-title">Medverkar i</h3>
             
+            {/* Viktigt! Se till att hela grid-containern är korrekt positionerad */}
             <div className="character-movies-grid">
               {characterMovies.map((movie) => {
                 // Beräkna genomsnittsbetyg för filmen
@@ -257,32 +258,33 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
                 return (
                   <article 
                     key={movie.id} 
-                    className="movie-card"
+                    className="character-movie-card"
                     onClick={onMovieClick ? () => onMovieClick(movie) : undefined}
                   >
-                    <div className="movie-image-container">
+                    <div className="movie-poster-container">
                       <img 
                         src={getImagePath(movie.cover_url)} 
                         alt={`Filmposter för ${movie.title}`}
-                        className="movie-image"
+                        className="movie-poster"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/headerbild.svg';
                         }}
                       />
                     </div>
                     
+                    {/* Info-sektion med betyg, titel och eventuellt "Coming soon" */}
                     <section className="movie-info">
-                      {isReleased ? (
+                      {isReleased && ratingValue !== null ? (
                         <div className="movie-rating">
-                          {ratingValue !== null ? ratingValue.toFixed(1) : "N/A"}
+                          {ratingValue.toFixed(1)}
                         </div>
-                      ) : (
+                      ) : !isReleased && (
                         <span className="coming-soon-card">Coming soon...</span>
                       )}
                       
-                      <h2 className="movie-title">{movie.title}</h2>
+                      <h3 className="movie-title">{movie.title}</h3>
                     </section>
-                  </article>
+                  </article>  
                 );
               })}
             </div>

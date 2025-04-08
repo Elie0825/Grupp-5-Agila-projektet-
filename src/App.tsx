@@ -30,20 +30,20 @@ function App() {
       try {
         setLoading(true);
         const fetchedMovies = await fetchMarvelMovies();
-    
+
         console.log('Fetchade filmer:', fetchedMovies); // Lägg till denna logg
-    
+
         if (!Array.isArray(fetchedMovies)) {
           setError("API:t returnerade inget giltigt format.");
           return;
         }
-    
+
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
           setMovies(fetchedMovies);
         }
-    
+
       } catch (err) {
         console.error('Fullständigt fel:', err);
         setError("Ett fel uppstod vid hämtning av filmer.");
@@ -51,7 +51,7 @@ function App() {
         setLoading(false);
       }
     };
-    
+
     getMovies();
   }, []);
 
@@ -68,7 +68,7 @@ function App() {
   const handleCloseDetails = () => {
     setSelectedMovie(null);
   };
-  
+
   const handleCloseCharacterDetails = () => {
     setSelectedCharacter(null);
   };
@@ -80,9 +80,9 @@ function App() {
       movie.rt_rating ? movie.rt_rating / 10 : null,
       movie.mc_rating ? movie.mc_rating / 10 : null
     ].filter((rating): rating is number => rating !== null && rating !== undefined);
-    
+
     if (ratings.length === 0) return null;
-    
+
     return parseFloat((ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1));
   };
 
@@ -91,8 +91,8 @@ function App() {
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesPhase = selectedPhase === null || movie.phase === selectedPhase;
     const averageRating = calculateAverageRating(movie);
-    
-    const matchesRating = selectedRating === null || 
+
+    const matchesRating = selectedRating === null ||
       (averageRating !== null && averageRating >= selectedRating);
 
     return matchesSearch && matchesPhase && matchesRating;
@@ -123,11 +123,11 @@ function App() {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 512);
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
 
   // Hämta unika faser
   const phases = [...new Set(movies.map(movie => movie.phase))].sort();
@@ -144,10 +144,12 @@ function App() {
               <header className="characters-hero">
                 <p className="text">
                   <span className="big-span">Marvelous RATINGS <br /></span>
-                  Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!<br />
-                  Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.<br />
-                  Utforska Marvel-universumet och hitta nästa film att uppleva!<br />
-                  <br /> Allt samlat, allt Marvel, MARVELOUS!
+                  <span className="small-span">
+                    Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!<br />
+                    Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.<br />
+                    Utforska Marvel-universumet och hitta nästa film att uppleva!<br />
+                    <br /> Allt samlat, allt Marvel, MARVELOUS!
+                  </span>
                 </p>
               </header>
 
@@ -173,7 +175,7 @@ function App() {
                       </output>
                     </section>
 
-                    <section className="movie-grid"> 
+                    <section className="movie-grid">
                       {[...Array(10)].map((_, i) => (
                         <div key={i} className="ghost-card" aria-hidden="true" />
                       ))}
@@ -191,7 +193,7 @@ function App() {
                 )}
 
                 {!loading && !error && (
-                  <section className="movies-section" style={{ marginTop: isMobile ? '100px' : '0' }}>
+                  <section className="movies-section">
                     <output className="movies-count" aria-live="polite">
                       Visar {sortedMovies.length} av {movies.length} filmer
                     </output>
@@ -216,12 +218,12 @@ function App() {
               {selectedMovie && (
                 <MovieDetails
                   movie={selectedMovie}
-                  movies={movies} 
+                  movies={movies}
                   onClose={handleCloseDetails}
                   onCharacterClick={handleCharacterClick}
                 />
               )}
-              
+
               {selectedCharacter && (
                 <CharacterDetails
                   character={selectedCharacter}

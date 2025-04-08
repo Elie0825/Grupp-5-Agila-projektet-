@@ -1,16 +1,31 @@
+/* index.css - grundläggande fixar */
 :root {
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100dvw; /* Använd hela viewporten */
+  overflow-x: hidden; /* Dölj horisontell scrolling */
+}
+
+/* Förhindrar att något kan orsaka horisontell scroll */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box; /* Viktigt för att padding inte ska läggas utanför width */
+}
+
+/* Se till att alla element hanterar padding innanför width */
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 a {
@@ -25,12 +40,7 @@ a:hover {
 
 
 /* Förhindrar att något kan orsaka horisontell scroll */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  width: 100%;
-}
+
 
 
 /* ========== TYPOGRAFI ========== */

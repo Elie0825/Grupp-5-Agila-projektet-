@@ -1,23 +1,24 @@
-
-
 .characters-page {
-color: white;
+  color: #FFF;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .characters-hero {
-  max-width: 1440px; /* Maxbredd enligt bild 3 */
-  margin: 0 auto; /* Centrera innehållet horisontellt */
+  margin: 0; /* Centrera innehållet horisontellt */
+  margin-bottom: 5rem;
   width: 100%;
-  height: 60vh;
   min-height: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #FFF;
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 4rem 2rem;
+  box-sizing: border-box; /* Viktigt! */
   background-image: 
     linear-gradient(
       180deg, 
@@ -30,14 +31,13 @@ color: white;
     url('/headerbild.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  margin-bottom: 2rem;
 }
 
 .characters-hero h1 {
 font-size: 2.5rem;
 font-weight: bold;
 margin-bottom: 1rem;
-color: white;
+color: #FFF;
 opacity: 0.7;
 font-family: 'Inter', sans-serif;
 }
@@ -46,23 +46,25 @@ font-family: 'Inter', sans-serif;
 font-size: 1.1rem;
 max-width: 800px;
 margin: 0 auto 0.5rem;
-opacity: 0.9;
 }
 
 .search-container {
-max-width: 600px;
-margin: 0 auto 2rem;
-padding: 0 1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  width: 100%;
+  transition: max-width 0.3s ease;
 }
 
 .search-input {
-width: 100%;
-padding: 0.8rem 1.2rem;
-border-radius: 30px;
-border: 1px solid #333;
-background-color: rgba(255, 255, 255, 0.1);
-color: white;
-font-size: 1rem;
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border-radius: 30px;
+  border: 1px solid #333;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  font-size: 1rem;
+  transition: all 0.3s ease; /* Mjuk övergång för alla förändringar */
 }
 
 .search-input:focus {
@@ -75,13 +77,16 @@ color: rgba(255, 255, 255, 0.5);
 }
 
 .characters-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-gap: 2rem;
-max-width: 1200px;
-margin: 0 auto;
-padding: 0 1rem 3rem;
-justify-items: center; /* Centrera korten i sina celler */
+  display: grid;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-items: center;
+  
+  /* Standard: 4 kort per rad på vanliga skärmstorlekar */
+  grid-template-columns: repeat(4, 1fr);
+
 }
 
 /* Loading styles */
@@ -133,22 +138,135 @@ margin-top: 2rem;
 
 /* ==== Responsiv design för CharactersPage ==== */
 @media (max-width: 768px) {
-    .characters-hero h1 {
-      font-size: 2rem;
-    }
+  .characters-hero h1 {
+    font-size: 2rem;
+  }
+
   
-    .characters-grid {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 1rem;
-    }
+  .characters-hero {
+    padding: 3rem 1rem; /* Minska padding på mindre skärmar */
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .characters-hero {
+    padding: 2rem 1rem;
+    height: auto; /* Låt höjden anpassa sig efter innehållet */
+    min-height: 20rem;
+  }
+
+  .characters-hero h1 {
+    font-size: 1.8rem;
+  }
+}
+
+
+/* === RESPONSIVA BRYTPUNKTER FÖR KARAKTÄRSKORTEN === */
+@media (min-width: 1400px) {
+  .characters-grid {
+    /* Extra stort: 5 kort per rad */
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .characters-grid {
+    /* Stor: 4 kort per rad (samma som standard) */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (max-width: 950px) {
+  .characters-grid {
+    /* Mellan: 3 kort per rad */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 668px) {
+  .characters-grid {
+    /* Liten: 3 kort per rad */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 490px) {
+  .characters-grid {
+    /* Mobil: fortsatt 2 kort per rad */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (max-width: 340px) {
+  .characters-grid {
+    /* väldigt små skärmar, 2 kort per rad */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (max-width: 260px) {
+  .characters-grid {
+    /* extremt små skärmar for safety, 1 kort per rad */
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+}
+
+/* === RESPONSIVA BRYTPUNKTER FÖR SÖKRUTAN === */
+@media (max-width: 1200px) {
+  .search-container {
+    max-width: 550px; /* Något mindre på stora skärmar */
+  }
+}
+
+@media (max-width: 950px) {
+  .search-container {
+    max-width: 500px; /* Ännu mindre på medelstora skärmar */
+  }
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    max-width: 450px;
   }
   
-  @media (max-width: 480px) {
-    .characters-hero {
-      padding: 3rem 1rem;
-    }
-  
-    .characters-hero h1 {
-      font-size: 1.8rem;
-    }
+  .search-input {
+    padding: 0.7rem 1rem; /* Något mindre padding */
+    font-size: 0.95rem; /* Lite mindre text */
   }
+}
+
+@media (max-width: 668px) {
+  .search-container {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-container {
+    max-width: 70%; /* Basera på procentuell bredd istället för fasta pixlar */
+    margin: 0 auto 1.5rem;
+  }
+  
+  .search-input {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .search-container {
+    max-width: 70%; /* Nästan full bredd på mycket små skärmar */
+    margin: 0 auto 1rem;
+  }
+  
+  .search-input {
+    padding: 0.5rem 0.8rem;
+  }
+}

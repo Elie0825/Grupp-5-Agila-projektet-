@@ -28,7 +28,7 @@
   .movie-image {
     width: 100%;
     height: 100%;
-    border-radius: 9px;
+    border-radius: 0.5625rem;
     object-fit: cover;
     display: block;
     transition: all 0.3s ease;
@@ -50,7 +50,7 @@
   
   /* Info-sektionen från ursprungliga MovieCard */
   .movie-info { 
-    padding: 0.8rem;
+    padding: 0.625rem 0.44rem;
     display: flex;
     flex-direction: column;
   }
@@ -92,13 +92,31 @@
   }
   
   /* Responsiv design för mindre skärmar */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    .movie-card {
+      width: 200px;
+    }
+    
+    .movie-image-container {
+      height: 300px;
+    }
+  
+    .movie-rating {
+      font-size: 1.3rem;
+    }
+  
+    .movie-title {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 672px) {
     .movie-card {
       width: 160px;
     }
     
     .movie-image-container {
-      height: 200px;
+      height: 250px;
     }
   
     .movie-rating {
