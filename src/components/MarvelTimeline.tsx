@@ -5,7 +5,7 @@ const MarvelTimeline: React.FC = () => {
   return (
     <div className="marvel-historia">
       <header className="marvel-historia-header">
-        <img src="/public/images/HERO Header.svg" alt="Hero heder" />
+        <img src="/public/HERO Header.svg" alt="Hero heder" />
         <div className="header-text">
           <h1>MARVELOUS HISTORIA</h1>
           <p>
