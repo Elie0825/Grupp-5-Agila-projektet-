@@ -25,6 +25,7 @@
   max-width: 500px; /* Max bredd på skärmar större än 1200px */
   min-width: 140px; /* Minsta bredd oavsett skärmstorlek */
   order: 1;
+  display: flex;
 }
 
 .compact-search-input {
@@ -33,25 +34,28 @@
   padding-left: 35px; /* Plats för sök-ikon */
   padding-right: 35px; /* Plats för clear-knapp */
   border-radius: 0.5rem;
-  border: 1px solid #FFF;
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #FFFFFF;
+  background: #0f2f58;
   
 
 
-  color: var(--Color-Neutral-neutral-lightest, #EEE);
+  color: #FFFFFF;
 
   /* Text/Regular/Normal */
-  font-family: Roboto;
+  font-family: 'Inter';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
 
+  width: -webkit-fill-available;
+  flex: 1;
+
 }
 
 .compact-search-input::placeholder {
   color: #ccc;
-  font-family: Roboto;
+  font-family: 'Inter';
 }
 
 .compact-search-input:focus {
