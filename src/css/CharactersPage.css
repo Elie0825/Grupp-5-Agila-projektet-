@@ -152,12 +152,115 @@
 
 /* Footer */
 .characters-footer {
+text-align: center;
+padding: 1.5rem;
+background-color: rgba(0, 0, 0, 0.3);
+color: rgb(255, 255, 255);
+font-size: 0.9rem;
+margin-top: 2rem;
+
+/* === GHOSTCARDS FOR CHARACTERS  ===*/
+.ghost-character {
+  width: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: pulse 1.5s infinite ease-in-out;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
   text-align: center;
   padding: 1.5rem;
   background-color: rgba(0, 0, 0, 0.3);
   color: rgb(255, 255, 255);
   font-size: 0.9rem;
   margin-top: 2rem;
+}
+
+.ghost-character-image {
+  width: 180px;
+  height: 180px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.ghost-character-name {
+  width: 70%;
+  height: 16px;
+  margin-top: 12px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.ghost-character-real-name {
+  width: 50%;
+  height: 10px;
+  margin-top: 8px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsiva anpassningar för ghost character cards */
+@media (max-width: 668px) {
+  .ghost-character {
+    width: 150px;
+    height: 200px;
+  }
+  
+  .ghost-character-image {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (max-width: 490px) {
+  .ghost-character {
+    width: 160px;
+    height: 200px;
+  }
+  
+  .ghost-character-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 350px) {
+  .ghost-character {
+    width: 120px;
+    height: 160px;
+  }
+  
+  .ghost-character-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 260px) {
+  .ghost-character {
+    width: 140px;
+    height: 180px;
+  }
+  
+  .ghost-character-image {
+    width: 120px;
+    height: 120px;
+  }
+}
 }
 
 /* ==== Responsiv design för CharactersPage ==== */
