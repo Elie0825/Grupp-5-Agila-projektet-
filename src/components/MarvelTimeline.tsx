@@ -69,7 +69,11 @@ const MarvelTimeline: React.FC = () => {
         </section>
       </main>
 
-      <footer className="mt-footer">Data hämtad från MCU och OMDb API</footer>
+      <footer className="mt-footer"><p>
+  Data från MCU, OMDb & Superhero API. <br />
+  © {new Date().getFullYear()} Marvelous Ratings.<br />
+  Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
+</p></footer>
     </div>
   );
 };
