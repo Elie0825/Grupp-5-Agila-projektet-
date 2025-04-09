@@ -11,13 +11,14 @@
   z-index: 1000;
   /* Här återställer vi den ursprungliga bakgrunden utan skugga för genomskinlighet */
   background: linear-gradient(180deg, rgba(7, 30, 59, 0.89) 15.25%, rgba(7, 29, 59, 0.83) 34.48%, rgba(8, 27, 57, 0.69) 58.52%, rgba(9, 23, 56, 0.47) 81.6%, rgba(11, 15, 52, 0.00) 100%);
- /*box-shadow: none; om none så behövs den inte*/
+  /*box-shadow: none; om none så behövs den inte*/
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 72px;
-  height: 99px;
+  height: 91px;
   box-sizing: border-box;
+  padding-bottom: 4px;
 }
 
 /* Logo styling */
