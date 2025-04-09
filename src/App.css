@@ -42,6 +42,14 @@ body {
   to { opacity: 1; }
 }
 
+.main-footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
 
 
 /* Containern för hela applikationen */
