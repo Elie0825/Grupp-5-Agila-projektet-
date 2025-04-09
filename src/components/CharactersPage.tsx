@@ -63,11 +63,22 @@ const CharactersPage: React.FC = () => {
   }, [searchTerm, characters]);
 
   const handleCharacterClick = (character: MarvelCharacters) => {
+    // Rensa all navigationhistorik när karaktären öppnas direkt från grid
+    localStorage.removeItem("backToMovieId");
+    localStorage.removeItem("backToCharacterId");
+    
     setSelectedCharacter(character);
     setSelectedMovie(null); // Stäng filmdetaljer om öppna
   };
 
   const handleMovieClick = (movie: Movie) => {
+    // Kontrollera om klicket kommer från hemsidan/griden och inte från en redan öppen modal
+    if (!selectedCharacter && !selectedMovie) {
+      // Rensa all navigationhistorik
+      localStorage.removeItem("backToMovieId");
+      localStorage.removeItem("backToCharacterId");
+    }
+    
     setSelectedMovie(movie);
     setSelectedCharacter(null); // Stäng karaktärsdetaljer
   };
