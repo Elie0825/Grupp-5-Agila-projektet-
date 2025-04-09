@@ -5,24 +5,62 @@ import { Movie } from '../types/movie';
  * @returns Promise som resolvar till en array av filmdata
  */
 export const fetchMarvelMovies = async (): Promise<Movie[]> => {
-  console.group('📥 Hämtar Marvel-filmer');
   try {
-    console.log('Hämtar från /marvelmovies.json');
+    console.log('[API] Försöker hämta filmer från marvelmovies.json');
     
-    const response = await fetch('/marvelmovies.json');
+    // Viktigt: Se till att hämta från rätt sökväg och med rätt caching-inställningar
+    const response = await fetch('/marvelmovies.json', { 
+      cache: 'no-store',  // Viktigt: Förhindra caching av gamla data
+      headers: { 
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
+    
     if (!response.ok) {
-      throw new Error(`HTTP-fel: ${response.status} ${response.statusText}`);
+      console.error(`[API] HTTP-fel vid hämtning: ${response.status} ${response.statusText}`);
+      throw new Error(`Kunde inte hämta filmer: ${response.status} ${response.statusText}`);
     }
     
     const rawData = await response.json();
-    console.log(`Hämtade ${rawData.length} objekt från JSON-filen`);
+    console.log(`[API] Hämtade rådata: ${rawData.length} objekt`);
     
-    // Validera film-objekten
-    const validMovies = validateMovies(rawData);
-    console.log(`Validerade filmer: ${validMovies.length} av ${rawData.length} är giltiga`);
+    // Logga de första och sista objekten för att se strukturen
+    if (rawData.length > 0) {
+      console.log('[API] Första objektets struktur:', 
+        Object.keys(rawData[0]).map(key => `${key}: ${typeof rawData[0][key]}`).join(', ')
+      );
+    }
+
+    // Validera men behåll så många filmer som möjligt 
+    const validMovies = rawData.filter((movie: any, index: number) => {
+      // Minimala valideringskrav - bara se till att id och title finns
+      const isValid = movie && typeof movie === 'object' && 
+                      typeof movie.id === 'number' && 
+                      typeof movie.title === 'string';
+      
+      if (!isValid) {
+        console.error(`[API] Ogiltig film på index ${index}:`, movie);
+      } else {
+        // Kontrollera och logga om de viktiga fälten saknas men filtrerar inte bort filmen
+        const missingFields = [];
+        if (movie.release_date === undefined) missingFields.push('release_date');
+        if (movie.duration === undefined) missingFields.push('duration');
+        if (movie.chronology === undefined) missingFields.push('chronology');
+        if (movie.phase === undefined) missingFields.push('phase');
+        
+        if (missingFields.length > 0) {
+          console.warn(`[API] Film "${movie.title}" saknar fält (men visas ändå): ${missingFields.join(', ')}`);
+        }
+      }
+      
+      return isValid;
+    });
+    
+    console.log(`[API] Efter validering: ${validMovies.length} av ${rawData.length} filmer är giltiga`);
     
     // Lägg till beräkningsfunktionen för genomsnittsbetyg
-    const movies: Movie[] = validMovies.map((movie: Movie) => {
+    const moviesWithCalculation = validMovies.map((movie: any) => {
       return {
         ...movie,
         calculateAverageRating: function() {
@@ -38,53 +76,12 @@ export const fetchMarvelMovies = async (): Promise<Movie[]> => {
       };
     });
     
-    console.log(`Returnerar ${movies.length} filmer`);
-    console.groupEnd();
-    return movies;
-    
+    return moviesWithCalculation;
   } catch (error) {
-    console.error('Fel vid hämtning av filmer:', error);
-    console.groupEnd();
+    console.error('[API] Fel vid hämtning av filmer:', error);
     throw error;
   }
 };
-
-/**
- * Validerar en array av filmobjekt
- * @param movies Array av rådata att validera
- * @returns Array av validerade Movie-objekt
- */
-function validateMovies(movies: any[]): Movie[] {
-  return movies.filter((movie: any, index: number) => {
-    // Kontrollera nödvändiga fält
-    const isValid = movie && 
-                   typeof movie === 'object' && 
-                   typeof movie.id === 'number' &&
-                   typeof movie.title === 'string' &&
-                   typeof movie.release_date === 'string' &&
-                   typeof movie.duration === 'number' &&
-                   typeof movie.chronology === 'number' &&
-                   typeof movie.phase === 'number';
-    
-    if (!isValid) {
-      console.warn(`Ogiltig film på index ${index}:`, movie);
-      
-      // Logga specifika problem för diagnostik
-      if (!movie) {
-        console.error('Film är null eller undefined');
-      } else {
-        if (typeof movie.id !== 'number') console.error(`Film "${movie.title || 'Utan titel'}" har ogiltig id: ${movie.id}`);
-        if (typeof movie.title !== 'string') console.error(`Film ID ${movie.id || 'okänd'} har ogiltig titel: ${movie.title}`);
-        if (typeof movie.release_date !== 'string') console.error(`Film "${movie.title || 'Utan titel'}" har ogiltigt release-datum: ${movie.release_date}`);
-        if (typeof movie.duration !== 'number') console.error(`Film "${movie.title || 'Utan titel'}" har ogiltig duration: ${movie.duration}`);
-        if (typeof movie.chronology !== 'number') console.error(`Film "${movie.title || 'Utan titel'}" har ogiltig chronology: ${movie.chronology}`);
-        if (typeof movie.phase !== 'number') console.error(`Film "${movie.title || 'Utan titel'}" har ogiltig phase: ${movie.phase}`);
-      }
-    }
-    
-    return isValid;
-  });
-}
 
 /**
  * Hämtar en specifik Marvel-film baserat på ID

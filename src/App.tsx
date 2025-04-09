@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchMarvelMovies } from "./services/api";
 import { fetchMarvelCharacters } from "./services/characterApi";
-import { analyzeMoviesData } from './services/debugTools';
 import { Movie } from "./types/movie";
 import { MarvelCharacters } from "./types/character";
 import MovieCard from "./components/MovieCard";
@@ -14,6 +13,7 @@ import MarvelTimeline from "./components/MarvelTimeline";
 import CharactersPage from "./components/CharactersPage";
 import "./App.css";
 import "./css/Navbar.css";
+import { inspectMoviesFile } from './services/debugTools';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -32,13 +32,14 @@ function App() {
         setLoading(true);
         console.log('[App] Startar hämtning av filmer');
         
+        // Kör inspektion för diagnostik (kan tas bort när allt fungerar)
+        await inspectMoviesFile();
+        
         const fetchedMovies = await fetchMarvelMovies();
         console.log(`[App] Fick tillbaka ${fetchedMovies.length} filmer från API`);
         
-        // Analysera rådata från API
-        analyzeMoviesData(fetchedMovies);
-        
         if (!Array.isArray(fetchedMovies)) {
+          console.error('[App] API returnerade inte en array:', fetchedMovies);
           setError("API:t returnerade inget giltigt format.");
           return;
         }
@@ -46,7 +47,11 @@ function App() {
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
-          console.log(`[App] Sparar ${fetchedMovies.length} filmer i state`);
+          // Dubbelkolla att vi har data för de första filmobjekten
+          fetchedMovies.slice(0, 3).forEach((movie, i) => {
+            console.log(`[App] Film ${i+1}: "${movie.title}", ID: ${movie.id}, Release: ${movie.release_date}, Duration: ${movie.duration}`);
+          });
+          
           setMovies(fetchedMovies);
         }
       } catch (err) {
