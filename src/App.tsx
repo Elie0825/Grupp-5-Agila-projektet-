@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchMarvelMovies } from "./services/api";
 import { fetchMarvelCharacters } from "./services/characterApi";
+import { analyzeMoviesData } from './services/debugTools';
 import { Movie } from "./types/movie";
 import { MarvelCharacters } from "./types/character";
 import MovieCard from "./components/MovieCard";
@@ -29,29 +30,33 @@ function App() {
     const getMovies = async () => {
       try {
         setLoading(true);
+        console.log('[App] Startar hämtning av filmer');
+        
         const fetchedMovies = await fetchMarvelMovies();
-
-        console.log('Fetchade filmer:', fetchedMovies); // Lägg till denna logg
-
+        console.log(`[App] Fick tillbaka ${fetchedMovies.length} filmer från API`);
+        
+        // Analysera rådata från API
+        analyzeMoviesData(fetchedMovies);
+        
         if (!Array.isArray(fetchedMovies)) {
           setError("API:t returnerade inget giltigt format.");
           return;
         }
-
+        
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
+          console.log(`[App] Sparar ${fetchedMovies.length} filmer i state`);
           setMovies(fetchedMovies);
         }
-
       } catch (err) {
-        console.error('Fullständigt fel:', err);
+        console.error('[App] Fullständigt fel:', err);
         setError("Ett fel uppstod vid hämtning av filmer.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     getMovies();
   }, []);
 

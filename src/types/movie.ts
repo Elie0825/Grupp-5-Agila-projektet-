@@ -6,21 +6,29 @@ export interface Root {
 
 // Grundläggande filmtyp från API
 export interface Movie {
-  calculateAverageRating(): unknown;
   id: number;
-  rating: number | null;
   title: string;
   release_date: string;
   duration: number;
-  overview?: string;
-  cover_url: string;
-  trailer_url?: string;
+  overview?: string | null;
+  cover_url: string | null;
+  trailer_url?: string | null;
   phase: number;
-  saga: string;
+  saga?: string | null;
   chronology: number;
+  post_credit_scenes?: number;
+  directed_by?: string[];
   imdb_rating?: number | null;  // IMDb betyg (0-10)
   rt_rating?: number | null;    // Rotten Tomatoes betyg (0-100%)
   mc_rating?: number | null;    // Metacritic betyg (0-100)
+  box_office?: string | number | null;
+  rating?: number | null;       // Behåll för bakåtkompatibilitet
+  
+  // Definiera metoden som valfri eftersom den kan saknas i JSON-data
+  calculateAverageRating?: () => number | null;
+  
+  // Tillåt andra egenskaper för flexibilitet
+  [key: string]: any;
 }
 
 // Props-interfaces
@@ -32,6 +40,8 @@ export interface MovieCardProps {
 export interface MovieDetailsProps {
   movie: Movie;
   onClose: () => void;
+  onCharacterClick?: (character: any) => void;
+  movies?: Movie[]; // För att hitta relaterade filmer
 }
 
 export interface SearchFilterProps {
