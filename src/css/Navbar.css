@@ -10,8 +10,8 @@
   width: 100%;
   z-index: 1000;
   /* Här återställer vi den ursprungliga bakgrunden utan skugga för genomskinlighet */
-  background: linear-gradient(180deg, rgba(7, 30, 59, 0.78) 0%, rgba(11, 15, 52, 0.00) 100%);
-  box-shadow: none;
+  background: linear-gradient(180deg, rgba(7, 30, 59, 0.89) 15.25%, rgba(7, 29, 59, 0.83) 34.48%, rgba(8, 27, 57, 0.69) 58.52%, rgba(9, 23, 56, 0.47) 81.6%, rgba(11, 15, 52, 0.00) 100%);
+ /*box-shadow: none; om none så behövs den inte*/
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +33,8 @@
 /* Desktop menu styling */
 .nav-links-container {
   display: flex;
-  margin-left: auto; /* Flytta länkarna till höger */
+  margin-left: auto;
+  /* Flytta länkarna till höger */
 }
 
 .nav-links {
@@ -46,7 +47,7 @@
 
 .nav-links li {
   margin-left: 24px;
-  
+
 }
 
 .nav-links a {
@@ -60,7 +61,8 @@
   padding: 5px 0;
   position: relative;
   transition: color 0.3s;
-  white-space: nowrap; /* Förhindrar rad-brytning */
+  white-space: nowrap;
+  /* Förhindrar rad-brytning */
 }
 
 .nav-links a:hover {
@@ -89,7 +91,8 @@
   width: 30px;
   height: 30px;
   position: relative;
-  margin-left: auto; /* Placera till höger */
+  margin-left: auto;
+  /* Placera till höger */
 }
 
 .menu-toggle span {
