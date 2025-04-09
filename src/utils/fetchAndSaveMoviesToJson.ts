@@ -6,9 +6,11 @@ import { Movie } from '../types/movie';
 // OMDb API-nyckel
 const OMDB_API_KEY = "8f57b2c1";
 
-// Skyddade fält som inte ska uppdateras
-const PROTECTED_FIELDS: Array<keyof Pick<Movie, 'overview' | 'cover_url' | 'trailer_url'>> = [
-  'overview', 'cover_url', 'trailer_url'
+// Skyddade fält som inte ska uppdateras eller måste bevaras
+const PROTECTED_FIELDS: Array<keyof Movie> = [
+  'overview', 'cover_url', 'trailer_url', 
+  'release_date', 'duration', 'chronology', 'phase',
+  'saga', 'post_credit_scenes', 'directed_by'
 ];
 
 // Dummy implementation av calculateAverageRating för att uppfylla interface
@@ -81,7 +83,8 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
       
       try {
         // Använd filmens titel och år för sökning
-        const year = new Date(movie.release_date).getFullYear();
+        const releaseDate = movie.release_date || (existingMoviesMap.get(movie.id)?.release_date || '');
+        const year = releaseDate ? new Date(releaseDate).getFullYear() : '';
         const query = encodeURIComponent(movie.title);
         
         console.log(`Söker efter "${movie.title}" (${year}) på OMDb...`);
@@ -120,9 +123,19 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
       // Hitta befintlig film
       const existingMovie = existingMoviesMap.get(movie.id);
       
-      // Skapa ett nytt objekt med nya data
+      // Skapa ett nytt objekt med nya data och bevara viktiga fält
       const enrichedMovie: Movie = {
         ...movie,
+        // Säkerställ att viktiga fält finns (använd befintliga värden eller standardvärden)
+        release_date: movie.release_date || (existingMovie?.release_date || '2000-01-01'),
+        duration: typeof movie.duration === 'number' ? movie.duration : (existingMovie?.duration || 120),
+        chronology: typeof movie.chronology === 'number' ? movie.chronology : (existingMovie?.chronology || 1),
+        phase: typeof movie.phase === 'number' ? movie.phase : (existingMovie?.phase || 1),
+        saga: movie.saga || (existingMovie?.saga || 'Unknown Saga'),
+        cover_url: movie.cover_url || (existingMovie?.cover_url || ''),
+        trailer_url: movie.trailer_url || (existingMovie?.trailer_url || ''),
+        overview: movie.overview || (existingMovie?.overview || ''),
+        
         // Lägg till nya betyg men behåll befintliga om nya är null
         imdb_rating: imdb_rating !== null ? imdb_rating : (existingMovie?.imdb_rating ?? null),
         rt_rating: rt_rating !== null ? rt_rating : (existingMovie?.rt_rating ?? null),
@@ -130,12 +143,12 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
         calculateAverageRating
       };
       
-      // Bevara skyddade fält från den befintliga filmen om den finns
+      // Bevara ytterligare skyddade fält från den befintliga filmen om den finns
       if (existingMovie) {
         // Loopa genom skyddade fält och kopiera dem explicit
         for (const field of PROTECTED_FIELDS) {
-          if (existingMovie[field] !== undefined) {
-            enrichedMovie[field] = existingMovie[field];
+          if (existingMovie[field] !== undefined && (movie[field] === undefined || movie[field] === null)) {
+            (enrichedMovie as any)[field] = existingMovie[field];
           }
         }
       }
@@ -151,6 +164,15 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
     
     // Skapa en version av objektet som kan serialiseras till JSON
     const serializableMovies = enrichedMovies.map(movie => {
+      // Kontrollera och logga saknade viktiga fält
+      const missingFields = ['release_date', 'duration', 'chronology', 'phase'].filter(
+        field => movie[field as keyof Movie] === undefined
+      );
+      
+      if (missingFields.length > 0) {
+        console.warn(`Varning: Film "${movie.title}" saknar fortfarande fält: ${missingFields.join(', ')}`);
+      }
+      
       const { calculateAverageRating, ...movieWithoutFunction } = movie;
       return movieWithoutFunction;
     });
