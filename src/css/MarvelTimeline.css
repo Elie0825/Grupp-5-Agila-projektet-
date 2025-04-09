@@ -55,9 +55,14 @@
   
   /* Main Content Styles */
   .mt-content {
-    max-width: 1200px;
+    display: flex;
+    max-width: 100dvh;
     margin: 2rem auto;
     padding: 0 1rem;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
   }
   
   .mt-history-section {
