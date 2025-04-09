@@ -60,8 +60,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
       <section className="movie-info">
         {isMovieReleased(movie.release_date) ? (
           <div className="movie-rating">
-            {ratingValue !== null ? ratingValue.toFixed(1) : "N/A"}
-          </div>
+          <span className="rating-value">{ratingValue !== null ? ratingValue.toFixed(1) : "N/A"}</span>
+        </div>
         ) : (
           <span className="coming-soon-card">Coming soon...</span>
         )}
