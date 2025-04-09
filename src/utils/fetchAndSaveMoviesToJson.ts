@@ -10,7 +10,7 @@ const OMDB_API_KEY = "8f57b2c1";
 const PROTECTED_FIELDS: Array<keyof Movie> = [
   'overview', 'cover_url', 'trailer_url', 
   'release_date', 'duration', 'chronology', 'phase',
-  'saga', 'post_credit_scenes', 'directed_by'
+  'saga', 'post_credit_scenes', 'directed_by', 'title'
 ];
 
 // Dummy implementation av calculateAverageRating för att uppfylla interface
