@@ -293,7 +293,11 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
         
         {/* Footer */}
         <footer className="details-footer">
-          <p className="data-source">Data hämtad från Marvel API</p>
+        <p>
+        Data från MCU, OMDb & Superhero API. <br />
+        © {new Date().getFullYear()} Marvelous Ratings.<br />
+        Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
+        </p>
         </footer>
       </article>
     </aside>

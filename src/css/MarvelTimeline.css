@@ -145,12 +145,12 @@
   
   /* Footer Styles */
   .mt-footer {
-    background-color: #0710;
-    color: #fff;
     text-align: center;
     padding: 1.5rem;
-    margin-top: 3rem;
-    font-size: 0.9rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgb(255, 255, 255);
+    font-size: 0.95rem;
+    margin-top: 2rem;
   }
   
   /* Responsive Design */
