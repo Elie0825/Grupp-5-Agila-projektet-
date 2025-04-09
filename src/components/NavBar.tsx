@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
               to="/" 
               className={location.pathname === "/" ? "active" : ""}
             >
-              Hem
+              Filmer
             </Link>
           </li>
           <li>
@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
               to="/characters" 
               className={location.pathname === "/characters" ? "active" : ""}
             >
-              Marvel Universum
+              Karaktärer
             </Link>
           </li>
           <li>
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
               to="/marvel-historia" 
               className={location.pathname === "/marvel-historia" ? "active" : ""}
             >
-              Marvel Historia
+              Marvels Historia
             </Link>
           </li>
         </ul>

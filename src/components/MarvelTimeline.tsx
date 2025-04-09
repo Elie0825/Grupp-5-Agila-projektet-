@@ -7,22 +7,14 @@ const MarvelTimeline: React.FC = () => {
       <header className="mt-header">
         <img src="/media/hero-header.svg" alt="Hero header" />
         <div className="mt-header__text">
-          <h1>MARVELOUS HISTORIA</h1>
-          <p>
-            Välkommen till Marvel Studios Historia – din resa genom Marvels ursprung! Här får du en inblick i hur Marvel Studios växte från serietidningar till filmimperium.
-          </p>
-          <p>
-            Enkel att följa. Episk i varje kapitel. Utforska Marvels arv och lär dig om resan som skapade filmerna vi älskar!
-          </p>
-          <p>
-            Marvels historia är fantastisk från allra första början.
-          </p>
+          <h1>MARVELS HISTORIA</h1>
+       <p>Från färgglada serier till ett globalt filmimperium</p>
         </div>
       </header>
 
       <main className="mt-content">
         <section className="mt-history-section">
-          <h2>Från färgglada serier till ett globalt filmimperium</h2>
+          
 
           <h3>Superhjältar på papper – Marvels serier och Stan Lees arv</h3>
           <p>
@@ -47,10 +39,19 @@ const MarvelTimeline: React.FC = () => {
 
           <figure className="mt-figure">
             <img src="/media/blade-omslag.svg" alt="Blade omslag logo" />
-            <img src="/media/x-men-omslag.svg" alt="X-Men omslag logo" />
+            <img src="/media/x-men-omslag 1.svg" alt="X-Men omslag logo" />
           </figure>
+          <h3>Marvel Studios – födelsen av ett filmiskt universum</h3>
 
-          <h3>Disney kliver in – en ny era för Marvel</h3>
+        <p>Även om Marvel Studios grundades redan 1996, dröjde det till 2008 innan de lanserade sin första egenproducerade film: "Iron Man", med Robert Downey Jr. i huvudrollen.</p>
+        <p>Filmen blev inte bara en succé – den lade grunden för det som kom att kallas Marvel Cinematic Universe (MCU).</p> 
+        <p>Idén var banbrytande: varje film skulle vara en del av ett större narrativt pussel.</p>
+        <p>Hjältarna skulle kunna mötas, påverka varandras världar och bygga upp mot större händelser – något som kulminerade i filmer som "The Avengers" (2012).</p>
+        <p>MCU blev snabbt ett av världens mest framgångsrika och älskade filmprojekt.</p>
+        <img src="/media/iron-man.svg" alt="Iron Man logo"  className="iron"/> 
+
+              <h4>Disney kliver in – en ny era för Marvel</h4>
+          
           <p>
             År 2009 förvärvades Marvel Entertainment av The Walt Disney Company för cirka 4 miljarder dollar. Köpet gav Marvel tillgång till Disneys enorma resurser, globala distributionskanaler och kreativa nätverk.
           </p>
@@ -62,13 +63,17 @@ const MarvelTimeline: React.FC = () => {
           </p>
 
           <figure className="mt-figure">
-            <img src="/media/iron-man.svg" alt="Iron Man logo" />
-            <img src="/media/marvel-and-disney.svg" alt="Disney plus Marvel logo" />
+          
+            <img src="/media/marvel-and-disney.svg" alt="Disney plus Marvel logo" className="Marvel-logo-bild" />
           </figure>
         </section>
       </main>
 
-      <footer className="mt-footer">Data hämtad från MCU och OMDb API</footer>
+      <footer className="mt-footer"><p>
+  Data från MCU, OMDb & Superhero API. <br />
+  © {new Date().getFullYear()} Marvelous Ratings.<br />
+  Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
+</p></footer>
     </div>
   );
 };

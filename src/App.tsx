@@ -167,9 +167,10 @@ function App() {
                 <p className="text">
                   <span className="big-span">Marvelous RATINGS <br /></span>
                   <span className="small-span">
-                    Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!<br />
-                    Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.<br />
-                    Utforska Marvel-universumet och hitta nästa film att uppleva!<br />
+                  Välkommen till Marvelous Ratings – din guide i Marvels fantastiska filmuniversum!<br />
+                  Här kan du enkelt utforska bland Marvel-filmer och karaktärerna i dem!<br />
+                  Hos oss hittar du de senaste betygen från IMDb, Rotten Tomatoes och Metacritic 
+                  <br />— och vi sammanställer dem åt dig!!<br />
                     <br /> Allt samlat, allt Marvel, MARVELOUS!
                   </span>
                 </p>
@@ -221,7 +222,9 @@ function App() {
                     </output>
 
                     {sortedMovies.length === 0 ? (
-                      <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
+                      <p className="no-results-hem">Inga filmer matchade dina sökkriterier!<br />
+                      Försök med en annan sökning eller kontrollera din anslutning.
+                      </p>
                     ) : (
                       <section className="movie-grid" role="feed" aria-busy="false">
                         {sortedMovies.map(movie => (
@@ -255,9 +258,13 @@ function App() {
                 />
               )}
 
-              <footer>
-                <p>Data hämtad från MCU API &copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
-              </footer>
+            <footer className="main-footer">
+            <p>
+            Data från MCU, OMDb & Superhero API. <br />
+            © {new Date().getFullYear()} Marvelous Ratings.<br />
+            Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
+            </p>
+            </footer>
             </div>
           }
         />
