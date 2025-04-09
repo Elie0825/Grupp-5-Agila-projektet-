@@ -83,12 +83,7 @@ const CharactersPage: React.FC = () => {
   return (
     <main className="characters-page">
       <header className="characters-hero">
-        {/* <p className="text">
-          <span className="big-span">Marvelous RATINGS <br /></span>
-          Utforska dina favoritkaraktärer från Marvel-universumet!
-          Lär dig mer om karaktärernas bakgrund och vilka filmer de medverkar i.
-          <br /> Allt samlat, allt Marvel, MARVELOUS!
-        </p>*/}
+        {/* Hero content */}
       </header>
 
       <section className="search-section">
@@ -106,9 +101,25 @@ const CharactersPage: React.FC = () => {
 
       <section className="characters-content">
         {loading ? (
-          <div className="loading" role="status">
-            <span>Laddar karaktärer...</span>
-          </div>
+          <>
+            <section className="status-message">
+              <div className="loading" role="status" aria-live="polite">
+                <span className="loading-spinner"></span>
+                <p>Laddar karaktärer...</p>
+              </div>
+            </section>
+
+            <div className="characters-grid">
+              {/* Visa 12 ghost character cards under laddningen */}
+              {[...Array(12)].map((_, i) => (
+                <div key={i} className="ghost-character" aria-hidden="true">
+                  <div className="ghost-character-image"></div>
+                  <div className="ghost-character-name"></div>
+                  <div className="ghost-character-real-name"></div>
+                </div>
+              ))}
+            </div>
+          </>
         ) : error ? (
           <article className="error-message" role="alert">
             <h2>Ett fel uppstod</h2>
@@ -144,7 +155,7 @@ const CharactersPage: React.FC = () => {
       {selectedMovie && (
         <MovieDetails
           movie={selectedMovie}
-          movies={movies} // Skickar med movies-array för förbättrad matchning
+          movies={movies}
           onClose={handleCloseMovieDetails}
           onCharacterClick={handleCharacterClick}
         />

@@ -31,7 +31,7 @@ function App() {
         setLoading(true);
         const fetchedMovies = await fetchMarvelMovies();
 
-        console.log('Fetchade filmer:', fetchedMovies); // Lägg till denna logg
+        console.log('Fetchade filmer:', fetchedMovies); 
 
         if (!Array.isArray(fetchedMovies)) {
           setError("API:t returnerade inget giltigt format.");

@@ -1,4 +1,3 @@
-// src/services/characterApi.ts
 import { MarvelCharacters } from '../types/character';
 
 /**

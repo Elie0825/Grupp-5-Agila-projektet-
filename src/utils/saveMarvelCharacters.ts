@@ -23,7 +23,7 @@ type SuperheroApiResponse = {
 // Funktion för att vänta
 const wait = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
-// Hämta karaktärer från ID 601 till 731
+// Hämta karaktärer i omgångar pga så många
 const startId = 600;
 const endId = 731;
 const characterIds = Array.from({ length: endId - startId + 1 }, (_, i) => startId + i);
