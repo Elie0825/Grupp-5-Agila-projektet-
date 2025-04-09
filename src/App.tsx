@@ -66,11 +66,23 @@ function App() {
   }, []);
 
   const handleMovieClick = (movie: Movie) => {
+    // Om en film klickas direkt från hemsidan/griden, rensa all navigeringshistorik
+    if (!selectedMovie && !selectedCharacter) {
+      localStorage.removeItem("backToMovieId");
+      localStorage.removeItem("backToCharacterId");
+    }
+    
     setSelectedMovie(movie);
     setSelectedCharacter(null); // Stäng karaktärsdetaljerna om öppna
   };
 
   const handleCharacterClick = (character: MarvelCharacters) => {
+    // Om en karaktär klickas direkt från hemsidan/griden, rensa all navigeringshistorik
+    if (!selectedMovie && !selectedCharacter) {
+      localStorage.removeItem("backToMovieId");
+      localStorage.removeItem("backToCharacterId");
+    }
+    
     setSelectedCharacter(character);
     setSelectedMovie(null); // Stäng filmdetaljerna
   };
