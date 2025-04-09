@@ -8,32 +8,30 @@
 
 .characters-page .characters-hero {
   /* Samma som main-header men med annan bakgrundsbild */
-  background-image: 
-    linear-gradient(
-      180deg, 
-      rgba(11, 15, 52, 0.00) 13.36%, 
-      rgba(10, 19, 54, 0.26) 34.36%, 
-      rgba(9, 24, 56, 0.58) 50.36%, 
-      rgba(8, 27, 58, 0.82) 76.86%, 
-      #071E3B 100%
-    ), 
-    url('/header-universum.svg');
+  background-image:
+    linear-gradient(180deg,
+      rgba(11, 15, 52, 0.00) 13.36%,
+      rgba(10, 19, 54, 0.26) 34.36%,
+      rgba(9, 24, 56, 0.58) 50.36%,
+      rgba(8, 27, 58, 0.82) 76.86%,
+      #071E3B 100%),
+    url('HERO Header 2025-04-04 Marveluniversum.svg');
 
-    display: flex;
-width: 1440px;
-height: 712px;
-padding: 158px 120px 356px 120px;
-flex-direction: column;
-align-items: center;
-gap: 131px;
-flex-shrink: 0;
-  
+  display: flex;
+  width: 100%;
+  height: 712px;
+  padding: 158px 120px 356px 120px;
+  flex-direction: column;
+  align-items: center;
+  gap: 131px;
+  flex-shrink: 0;
 }
 
 /* OBS FINNS DUBBELSTRUKUR HÄR*/
 
 .universum-hero {
-  margin: 0; /* Centrera innehållet horisontellt */
+  margin: 0;
+  /* Centrera innehållet horisontellt */
   margin-bottom: 5rem;
   width: 100%;
   min-height: 30rem;
@@ -44,34 +42,33 @@ flex-shrink: 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-sizing: border-box; /* Viktigt! */
-  background-image: 
-    linear-gradient(
-      180deg, 
-      rgba(11, 15, 52, 0.00) 13.36%, 
-      rgba(10, 19, 54, 0.26) 34.36%, 
-      rgba(9, 24, 56, 0.58) 50.36%, 
-      rgba(8, 27, 58, 0.82) 76.86%, 
-      #071E3B 100%
-    ), 
+  box-sizing: border-box;
+  /* Viktigt! */
+  background-image:
+    linear-gradient(180deg,
+      rgba(11, 15, 52, 0.00) 13.36%,
+      rgba(10, 19, 54, 0.26) 34.36%,
+      rgba(9, 24, 56, 0.58) 50.36%,
+      rgba(8, 27, 58, 0.82) 76.86%,
+      #071E3B 100%),
     url('/header-universum.svg');
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .characters-hero h1 {
-font-size: 2.5rem;
-font-weight: bold;
-margin-bottom: 1rem;
-color: #FFF;
-opacity: 0.7;
-font-family: 'Inter', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #FFF;
+  opacity: 0.7;
+  font-family: 'Inter', sans-serif;
 }
 
 .characters-hero p {
-font-size: 1.1rem;
-max-width: 800px;
-margin: 0 auto 0.5rem;
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 0.5rem;
 }
 
 .search-container {
@@ -85,21 +82,22 @@ margin: 0 auto 0.5rem;
 .search-input {
   width: 100%;
   padding: 0.8rem 1.2rem;
-  border-radius: 30px;
-  border: 1px solid #333;
-  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  border: 1px solid #FFFF;
+  background-color: #0f2f58;
   color: #FFF;
   font-size: 1rem;
-  transition: all 0.3s ease; /* Mjuk övergång för alla förändringar */
+  transition: all 0.3s ease;
+  /* Mjuk övergång för alla förändringar */
 }
 
 .search-input:focus {
-outline: none;
-box-shadow: 0 0 0 2px #518cca;
+  outline: none;
+  box-shadow: 0 0 0 2px #518cca;
 }
 
 .search-input::placeholder {
-color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .characters-grid {
@@ -109,7 +107,7 @@ color: rgba(255, 255, 255, 0.5);
   max-width: 1200px;
   margin: 0 auto;
   justify-items: center;
-  
+
   /* Standard: 4 kort per rad på vanliga skärmstorlekar */
   grid-template-columns: repeat(4, 1fr);
 
@@ -117,39 +115,39 @@ color: rgba(255, 255, 255, 0.5);
 
 /* Loading styles */
 .loading {
-text-align: center;
-padding: 2rem;
-font-size: 1.2rem;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
 }
 
 /* Error styles */
 .error-message {
-text-align: center;
-padding: 2rem;
-max-width: 600px;
-margin: 0 auto;
-background-color: rgba(255, 255, 255, 0.05);
-border-radius: 8px;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }
 
 .error-message h2 {
-color: #e62429;
-margin-bottom: 1rem;
+  color: #e62429;
+  margin-bottom: 1rem;
 }
 
 /* No results */
 .no-results {
-text-align: center;
-padding: 2rem;
-max-width: 600px;
-margin: 0 auto;
-background-color: rgba(255, 255, 255, 0.05);
-border-radius: 8px;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }
 
 .no-results h2 {
-color: #e62429;
-margin-bottom: 1rem;
+  color: #e62429;
+  margin-bottom: 1rem;
 }
 
 /* Footer */
@@ -171,6 +169,12 @@ margin-top: 2rem;
   animation: pulse 1.5s infinite ease-in-out;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
+  font-size: 0.9rem;
+  margin-top: 2rem;
 }
 
 .ghost-character-image {
@@ -257,7 +261,6 @@ margin-top: 2rem;
     height: 120px;
   }
 }
-
 }
 
 /* ==== Responsiv design för CharactersPage ==== */
@@ -266,9 +269,10 @@ margin-top: 2rem;
     font-size: 2rem;
   }
 
-  
+
   .characters-hero {
-    padding: 3rem 1rem; /* Minska padding på mindre skärmar */
+    padding: 3rem 1rem;
+    /* Minska padding på mindre skärmar */
     margin-bottom: 2rem;
   }
 }
@@ -276,7 +280,8 @@ margin-top: 2rem;
 @media (max-width: 480px) {
   .characters-hero {
     padding: 2rem 1rem;
-    height: auto; /* Låt höjden anpassa sig efter innehållet */
+    height: auto;
+    /* Låt höjden anpassa sig efter innehållet */
     min-height: 20rem;
   }
 
@@ -345,13 +350,15 @@ margin-top: 2rem;
 /* === RESPONSIVA BRYTPUNKTER FÖR SÖKRUTAN === */
 @media (max-width: 1200px) {
   .search-container {
-    max-width: 550px; /* Något mindre på stora skärmar */
+    max-width: 550px;
+    /* Något mindre på stora skärmar */
   }
 }
 
 @media (max-width: 950px) {
   .search-container {
-    max-width: 500px; /* Ännu mindre på medelstora skärmar */
+    max-width: 500px;
+    /* Ännu mindre på medelstora skärmar */
   }
 }
 
@@ -359,10 +366,12 @@ margin-top: 2rem;
   .search-container {
     max-width: 450px;
   }
-  
+
   .search-input {
-    padding: 0.7rem 1rem; /* Något mindre padding */
-    font-size: 0.95rem; /* Lite mindre text */
+    padding: 0.7rem 1rem;
+    /* Något mindre padding */
+    font-size: 0.95rem;
+    /* Lite mindre text */
   }
 }
 
@@ -374,10 +383,11 @@ margin-top: 2rem;
 
 @media (max-width: 600px) {
   .search-container {
-    max-width: 70%; /* Basera på procentuell bredd istället för fasta pixlar */
+    max-width: 70%;
+    /* Basera på procentuell bredd istället för fasta pixlar */
     margin: 0 auto 1.5rem;
   }
-  
+
   .search-input {
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
@@ -386,10 +396,11 @@ margin-top: 2rem;
 
 @media (max-width: 450px) {
   .search-container {
-    max-width: 70%; /* Nästan full bredd på mycket små skärmar */
+    max-width: 70%;
+    /* Nästan full bredd på mycket små skärmar */
     margin: 0 auto 1rem;
   }
-  
+
   .search-input {
     padding: 0.5rem 0.8rem;
   }
