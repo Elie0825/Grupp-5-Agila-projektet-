@@ -229,8 +229,8 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
             {/* Visa genomsnittsbetyget */}
             {isMovieReleased(movie.release_date) && ratingValue && (
               <div className="average-rating">
-                {ratingValue.toFixed(1)}/10
-              </div>
+              <span className="average-rating-value">{ratingValue.toFixed(1)}/10</span>
+            </div>
             )}
           </div>
           
