@@ -161,26 +161,26 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
           </button>
                   
           <button
-            ref={sortButtonRef}
-            className={`compact-filter-button ${showSort ? "active" : ""}`} 
-            onClick={handleSortClick} // Använd den nya hanteraren för att toggle
-            aria-label={showSort ? "Stäng sortering" : "Öppna sortering"}
-            aria-expanded={showSort}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="sort-icon"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
-              />
-            </svg>
+        ref={sortButtonRef}
+        className={`compact-filter-button ${showSort ? "active" : ""}`} 
+        onClick={handleSortClick}
+        aria-label={showSort ? "Stäng sortering" : "Öppna sortering"}
+        aria-expanded={showSort}
+      >
+              <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="sort-icon"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
+          />
+        </svg>
             <span className="sort-font">Sortera</span>
           </button>
         </div>
@@ -203,30 +203,13 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
               />
             </div>
 
-            {/* Filter för att välja fas (t.ex. fas 1, fas 2, etc.) */}
-            <div className="compact-filter-group">
-              <h4>Fas</h4>
-              <select
-                value={selectedPhase || ""} // Värdet på den valda fasen
-                onChange={(e) => onPhaseChange(e.target.value ? parseInt(e.target.value) : null)} // Uppdaterar fasen vid val
-                className="compact-select"
-              >
-                <option value="">Alla faser</option>
-                {phases.map((phase) => (
-                  <option key={phase} value={phase}>
-                    Fas {phase}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             {/* Knapp för att rensa alla filter */}
             <div className="compact-filter-actions">
               <button
                 className="compact-clear-button"
                 onClick={handleClearAll} // Rensar alla filter
               >
-                Rensa alla filter
+                Rensa filter
               </button>
               {/* Knapp för att tillämpa valda filter */}
               <button className="compact-apply-button" onClick={handleApply}>
@@ -237,64 +220,67 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         </div>
       )}
 
-      {/* Om sorteringspanelen är öppen, visa sorteringsalternativen */}
-      {showSort && (
-        <div className="compact-filter-dropdown" ref={sortRef}>
-          <div className="compact-filter-section">
-            <h4>Sortera efter</h4>
-            <div className="compact-radio-group">
-              {/* Sortering efter titel */}
-              <label>
-                <input
-                  type="radio"
-                  name="sort"
-                  value="title"
-                  checked={sortBy === "title"} // Markera den som vald om titeln är vald
-                  onChange={() => onSortChange("title")} // Uppdaterar sorteringen till titel
-                />
-                Titel (A-Ö)
-              </label>
-              {/* Sortering efter betyg */}
-              <label>
-                <input
-                  type="radio"
-                  name="sort"
-                  value="rating"
-                  checked={sortBy === "rating"} // Markera den som vald om betyg är valt
-                  onChange={() => onSortChange("rating")} // Uppdaterar sorteringen till betyg
-                />
-                Betyg (Hög-Låg)
-              </label>
-              {/* Sortering efter releasedatum */}
-              <label>
-                <input
-                  type="radio"
-                  name="sort"
-                  value="release"
-                  checked={sortBy === "release"} // Markera den som vald om releasedatum är valt
-                  onChange={() => onSortChange("release")} // Uppdaterar sorteringen till releasedatum
-                />
-                Releasedatum (Nyast först)
-              </label>
-              {/* Sortering efter kronologisk ordning */}
-              <label> 
-                <input
-                  type="radio"
-                  name="sort"
-                  value="chronology"
-                  checked={sortBy === "chronology"} // Markera den som vald om kronologi är valt
-                  onChange={() => onSortChange("chronology")} // Uppdaterar sorteringen till kronologisk ordning
-                />
-                Kronologisk ordning (MCU)
-              </label>
-            </div>
-            {/* Knapp för att tillämpa vald sortering */}
-            <button className="compact-apply-button" onClick={handleApply}>
-              Tillämpa
-            </button>
-          </div>
-        </div>
-      )}
+{/* Om sorteringspanelen är öppen, visa sorteringsalternativen */}
+{showSort && (
+  <div className="compact-filter-dropdown" ref={sortRef}>
+    <div className="compact-filter-section">
+      <h4>Sortera efter</h4>
+      <div className="compact-radio-group">
+        {/* Sortering efter kronologisk ordning */}
+        <label> 
+          <input
+            type="radio"
+            name="sort"
+            value="chronology"
+            checked={sortBy === "chronology"} // Markera den som vald om kronologi är valt
+            onChange={() => onSortChange("chronology")} // Uppdaterar sorteringen till kronologisk ordning
+          />
+          Kronologisk ordning (MCU)
+        </label>
+
+        {/* Sortering efter betyg */}
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="rating"
+            checked={sortBy === "rating"} // Markera den som vald om betyg är valt
+            onChange={() => onSortChange("rating")} // Uppdaterar sorteringen till betyg
+          />
+          Betyg (Hög-Låg)
+        </label>
+
+        {/* Sortering efter releasedatum */}
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="release"
+            checked={sortBy === "release"} // Markera den som vald om releasedatum är valt
+            onChange={() => onSortChange("release")} // Uppdaterar sorteringen till releasedatum
+          />
+          Releasedatum (Nyast först)
+        </label>
+
+        {/* Sortering efter titel */}
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="title"
+            checked={sortBy === "title"} // Markera den som vald om titeln är vald
+            onChange={() => onSortChange("title")} // Uppdaterar sorteringen till titel
+          />
+          Titel (A-Ö)
+        </label>
+      </div>
+      {/* Knapp för att tillämpa vald sortering */}
+      <button className="compact-apply-button" onClick={handleApply}>
+        Tillämpa
+      </button>
+    </div>
+  </div>
+)}
     </div>
   );
 };

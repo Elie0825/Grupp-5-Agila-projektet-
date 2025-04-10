@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MarvelCharacters } from '../types/character';
 import { Movie } from '../types/movie';
 import '../css/CharacterDetails.css';
+import '../css/gobackbutton.css'; // Importera den nya CSS-filen
 
 interface CharacterDetailsProps {
   character: MarvelCharacters;
@@ -19,7 +20,29 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
   // Fallback-bild om image_url saknas eller är felaktig
   const defaultImage = '/placeholder-character.jpg';
   
+  // Tillbaka-knapp state
+  const [backToMovieId, setBackToMovieId] = useState<string | null>(null);
+  
+  // Hämta film att gå tillbaka till från localStorage
+  useEffect(() => {
+    const savedMovieId = localStorage.getItem("backToMovieId");
+    setBackToMovieId(savedMovieId);
+  }, []);
+  
   const modalRef = useRef<HTMLDivElement>(null);
+
+  /** TILLFÄLLIG DEBUG */
+  const debugNavigationState = (action: string) => {
+    console.log(`[${action}] Navigation state:`, {
+      backToMovieId: localStorage.getItem("backToMovieId"),
+      backToCharacterId: localStorage.getItem("backToCharacterId"),
+      previousMovieId: localStorage.getItem("previousMovieId"),
+      previousCharacterId: localStorage.getItem("previousCharacterId")
+    });
+  };
+
+  /** TILLFÄLLIG DEBUG */
+
 
   // Hämta filmer som karaktären medverkar i
   const getMoviesForCharacter = (characterMovies: string[], allMovies: Movie[]): Movie[] => {
@@ -113,6 +136,52 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
     e.stopPropagation();
   };
 
+  // Hantera klick på en film med tillbaka-logik
+  const handleMovieClick = (movie: Movie) => {
+    debugNavigationState("BEFORE handleMovieClick");
+    
+    if (onMovieClick) {
+      // Spara nuvarande karaktärs-ID för att kunna gå tillbaka till den
+      localStorage.setItem("backToCharacterId", character.id.toString());
+      
+      // Spara tidigare film-ID som "previousMovieId" om det finns ett
+      const previousMovieId = localStorage.getItem("backToMovieId");
+      if (previousMovieId) {
+        localStorage.setItem("previousMovieId", previousMovieId);
+      }
+
+      debugNavigationState("AFTER handleMovieClick");
+      
+      onMovieClick(movie);
+      onClose();
+    }
+  };
+
+  // Hantera tillbaka-knapp
+  const handleBackToMovie = () => {
+    debugNavigationState("BEFORE handleBackToMovie");
+    
+    if (backToMovieId && onMovieClick) {
+      const movie = movies.find(m => m.id.toString() === backToMovieId);
+      if (movie) {
+        // Återställ "previousMovieId" till "backToMovieId" om det finns
+        const previousId = localStorage.getItem("previousMovieId");
+        if (previousId) {
+          localStorage.setItem("backToMovieId", previousId);
+          localStorage.removeItem("previousMovieId");
+        } else {
+          // Annars ta bort backToMovieId om det inte finns någon tidigare
+          localStorage.removeItem("backToMovieId");
+        }
+        
+        debugNavigationState("AFTER handleBackToMovie");
+        
+        onMovieClick(movie);
+        onClose();
+      }
+    }
+  };
+
   // Beräkna genomsnittsbetyg för en film
   const calculateAverageRating = (movie: Movie): number | null => {
     const ratings = [
@@ -175,6 +244,29 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
         <button className="close-button" onClick={handleClose} aria-label="Stäng detaljer">
           ×
         </button>
+        
+        {backToMovieId && (
+        <button 
+          className="go-back-button" 
+          onClick={handleBackToMovie}
+          aria-label="Tillbaka till film"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            strokeWidth="1.5" 
+            stroke="currentColor" 
+            className="size-6"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" 
+            />
+          </svg>
+        </button>
+      )}
         
         {/* Bakgrundsbild med blur */}
         {character.image_url && (
@@ -250,7 +342,7 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
                 const isReleased = new Date(movie.release_date) <= new Date();
                 
                 // Korrigera bildsökvägen om den börjar med "public/"
-                const getImagePath = (path: string | undefined): string => {
+                const getImagePath = (path: string | null | undefined): string => {
                   if (!path) return '/headerbild.svg';
                   return path.replace('public/', '');
                 };
@@ -259,7 +351,7 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
                   <article 
                     key={movie.id} 
                     className="character-movie-card"
-                    onClick={onMovieClick ? () => onMovieClick(movie) : undefined}
+                    onClick={() => handleMovieClick(movie)}
                   >
                     <div className="movie-poster-container">
                       <img 
@@ -293,7 +385,11 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
         
         {/* Footer */}
         <footer className="details-footer">
-          <p className="data-source">Data hämtad från Marvel API</p>
+        <p>
+        Data från MCU, OMDb & Superhero API. <br />
+        © {new Date().getFullYear()} Marvelous Ratings.<br />
+        Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
+        </p>
         </footer>
       </article>
     </aside>

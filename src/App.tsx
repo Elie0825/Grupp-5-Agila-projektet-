@@ -13,6 +13,7 @@ import MarvelTimeline from "./components/MarvelTimeline";
 import CharactersPage from "./components/CharactersPage";
 import "./App.css";
 import "./css/Navbar.css";
+import { inspectMoviesFile } from './services/debugTools';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -29,38 +30,59 @@ function App() {
     const getMovies = async () => {
       try {
         setLoading(true);
+        console.log('[App] Startar hämtning av filmer');
+        
+        // Kör inspektion för diagnostik (kan tas bort när allt fungerar)
+        await inspectMoviesFile();
+        
         const fetchedMovies = await fetchMarvelMovies();
-
-        console.log('Fetchade filmer:', fetchedMovies); // Lägg till denna logg
-
+        console.log(`[App] Fick tillbaka ${fetchedMovies.length} filmer från API`);
+        
         if (!Array.isArray(fetchedMovies)) {
+          console.error('[App] API returnerade inte en array:', fetchedMovies);
           setError("API:t returnerade inget giltigt format.");
           return;
         }
-
+        
         if (fetchedMovies.length === 0) {
           setError("Inga filmer hittades. API:et kan vara nere.");
         } else {
+          // Dubbelkolla att vi har data för de första filmobjekten
+          fetchedMovies.slice(0, 3).forEach((movie, i) => {
+            console.log(`[App] Film ${i+1}: "${movie.title}", ID: ${movie.id}, Release: ${movie.release_date}, Duration: ${movie.duration}`);
+          });
+          
           setMovies(fetchedMovies);
         }
-
       } catch (err) {
-        console.error('Fullständigt fel:', err);
+        console.error('[App] Fullständigt fel:', err);
         setError("Ett fel uppstod vid hämtning av filmer.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     getMovies();
   }, []);
 
   const handleMovieClick = (movie: Movie) => {
+    // Om en film klickas direkt från hemsidan/griden, rensa all navigeringshistorik
+    if (!selectedMovie && !selectedCharacter) {
+      localStorage.removeItem("backToMovieId");
+      localStorage.removeItem("backToCharacterId");
+    }
+    
     setSelectedMovie(movie);
     setSelectedCharacter(null); // Stäng karaktärsdetaljerna om öppna
   };
 
   const handleCharacterClick = (character: MarvelCharacters) => {
+    // Om en karaktär klickas direkt från hemsidan/griden, rensa all navigeringshistorik
+    if (!selectedMovie && !selectedCharacter) {
+      localStorage.removeItem("backToMovieId");
+      localStorage.removeItem("backToCharacterId");
+    }
+    
     setSelectedCharacter(character);
     setSelectedMovie(null); // Stäng filmdetaljerna
   };
@@ -145,9 +167,10 @@ function App() {
                 <p className="text">
                   <span className="big-span">Marvelous RATINGS <br /></span>
                   <span className="small-span">
-                    Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!<br />
-                    Här hittar du de senaste betygen och recensionerna från IMDb, Rotten Tomatoes och Metacritic, allt på ett ställe. Enkelt. Episkt.<br />
-                    Utforska Marvel-universumet och hitta nästa film att uppleva!<br />
+                  Välkommen till Marvelous Ratings – din guide i Marvels fantastiska filmuniversum!<br />
+                  Här kan du enkelt utforska bland Marvel-filmer och karaktärerna i dem!<br />
+                  Hos oss hittar du de senaste betygen från IMDb, Rotten Tomatoes och Metacritic 
+                  <br />— och vi sammanställer dem åt dig!!<br />
                     <br /> Allt samlat, allt Marvel, MARVELOUS!
                   </span>
                 </p>
@@ -199,7 +222,9 @@ function App() {
                     </output>
 
                     {sortedMovies.length === 0 ? (
-                      <p className="no-results">Inga filmer matchade dina sökkriterier.</p>
+                      <p className="no-results-hem">Inga filmer matchade dina sökkriterier!<br />
+                      Försök med en annan sökning eller kontrollera din anslutning.
+                      </p>
                     ) : (
                       <section className="movie-grid" role="feed" aria-busy="false">
                         {sortedMovies.map(movie => (
@@ -233,9 +258,13 @@ function App() {
                 />
               )}
 
-              <footer>
-                <p>Data hämtad från MCU API &copy; <time dateTime={new Date().getFullYear().toString()}>{new Date().getFullYear()}</time> Marvel Filmvisare</p>
-              </footer>
+            <footer className="main-footer">
+            <p>
+            Data från MCU, OMDb & Superhero API. <br />
+            © {new Date().getFullYear()} Marvelous Ratings.<br />
+            Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
+            </p>
+            </footer>
             </div>
           }
         />

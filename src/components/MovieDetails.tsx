@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Movie } from '../types/movie';
 import { MarvelCharacters } from '../types/character';
 import '../css/MovieDetails.css';
+import '../css/gobackbutton.css'; // Importera den nya CSS-filen
 import { fetchMarvelCharacters } from '../services/characterApi';
 
 interface MovieDetailsProps {
   movie: Movie;
   onClose: () => void;
   onCharacterClick?: (character: MarvelCharacters) => void;
-  movies?: Movie[]; // Ny prop för att få tillgång till alla filmer
+  movies?: Movie[]; // Prop för att få tillgång till alla filmer
 }
 
 const MovieDetails: React.FC<MovieDetailsProps> = ({ 
@@ -20,6 +21,8 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
   const [characters, setCharacters] = useState<MarvelCharacters[]>([]);
   const [loading, setLoading] = useState(true);
   const [trailerError, setTrailerError] = useState(false);
+  // Lägg till ny state för tillbaka-knapp
+  const [backToCharacterId, setBackToCharacterId] = useState<string | null>(null);
   
   // Hämta karaktärer när komponenten laddas
   useEffect(() => {
@@ -36,7 +39,27 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
     
     getCharacters();
   }, []);
+
+  // Kontrollera om det finns en karaktär att gå tillbaka till
+  useEffect(() => {
+    const savedCharacterId = localStorage.getItem("backToCharacterId");
+    setBackToCharacterId(savedCharacterId);
+  }, []);
   
+
+  /** TILLFÄLLIG DEBUG */
+  const debugNavigationState = (action: string) => {
+    console.log(`[${action}] Navigation state:`, {
+      backToMovieId: localStorage.getItem("backToMovieId"),
+      backToCharacterId: localStorage.getItem("backToCharacterId"),
+      previousMovieId: localStorage.getItem("previousMovieId"),
+      previousCharacterId: localStorage.getItem("previousCharacterId")
+    });
+  };
+
+  /** TILLFÄLLIG DEBUG */
+
+
   // Filtrera karaktärer som medverkar i den aktuella filmen med förbättrad matchningslogik
   const charactersInMovie = characters.filter(character => 
     character.movies.some(movieTitle => {
@@ -130,12 +153,51 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
     e.stopPropagation();
   };
   
-  // Hantera klick på en karaktär
+  // Hantera klick på en karaktär med ny logik för tillbaka-knapp
   const handleCharacterCardClick = (character: MarvelCharacters) => (e: React.MouseEvent) => {
     e.stopPropagation(); // Förhindra att modal stängs
+    
+    debugNavigationState("BEFORE handleCharacterCardClick");
+    
     if (onCharacterClick) {
+      // Spara nuvarande film-ID för att kunna gå tillbaka till den
+      localStorage.setItem("backToMovieId", movie.id.toString());
+      
+      // Spara tidigare karaktärs-ID som "previousCharacterId" om det finns ett
+      const previousCharacterId = localStorage.getItem("backToCharacterId");
+      if (previousCharacterId) {
+        localStorage.setItem("previousCharacterId", previousCharacterId);
+      }
+      
+      debugNavigationState("AFTER handleCharacterCardClick");
+      
       onCharacterClick(character);
       onClose(); // Stäng filmdetaljer när man öppnar karaktärsdetaljer
+    }
+  };
+
+  // Ny funktion för att hantera tillbakaknappen
+  const handleBackToCharacter = () => {
+    debugNavigationState("BEFORE handleBackToCharacter");
+    
+    if (backToCharacterId && onCharacterClick) {
+      const character = characters.find(c => c.id.toString() === backToCharacterId);
+      if (character) {
+        // Återställ "previousCharacterId" till "backToCharacterId" om det finns
+        const previousId = localStorage.getItem("previousCharacterId");
+        if (previousId) {
+          localStorage.setItem("backToCharacterId", previousId);
+          localStorage.removeItem("previousCharacterId");
+        } else {
+          // Annars ta bort backToCharacterId om det inte finns någon tidigare
+          localStorage.removeItem("backToCharacterId");
+        }
+        
+        debugNavigationState("AFTER handleBackToCharacter");
+        
+        onCharacterClick(character);
+        onClose();
+      }
     }
   };
 
@@ -201,6 +263,29 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
           ×
         </button>
         
+        {backToCharacterId && (
+        <button 
+          className="go-back-button" 
+          onClick={handleBackToCharacter}
+          aria-label="Tillbaka till karaktär"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            strokeWidth="1.5" 
+            stroke="currentColor" 
+            className="size-6"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" 
+            />
+          </svg>
+        </button>
+      )}
+        
         {/* Bakgrundsbild med blur */}
         {movie.cover_url && (
           <div 
@@ -229,7 +314,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
             {/* Visa genomsnittsbetyget */}
             {isMovieReleased(movie.release_date) && ratingValue && (
               <div className="average-rating">
-                {ratingValue.toFixed(1)}/10
+                <span className="average-rating-value">{ratingValue.toFixed(1)}/10</span>
               </div>
             )}
           </div>
@@ -258,36 +343,36 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
           <h3 className="section-title">Betyg</h3>
 
           {isMovieReleased(movie.release_date) ? (
-          <div className="ratings-container-inline">
-            {movie.imdb_rating && (
-              <div className="rating-badge">
-                <h4>IMDB</h4>
-                <span className="rating-icon">⭐</span>
-                <span className="rating-value">{Number(movie.imdb_rating).toFixed(1)}</span>
-              </div>
-            )}
-            
-            {movie.rt_rating && (
-              <div className="rating-badge">
-                <h4>Rotten Tomatoes</h4>
-                <span className="rating-icon">🍅</span>
-                <span className="rating-value">{Number(movie.rt_rating)}%</span>
-              </div>
-            )}
-            
-            {movie.mc_rating && (
-              <div className="rating-badge">
-                <h4>Metacritic</h4>
-                <span className="rating-icon">📊</span>
-                <span className="rating-value">{Number(movie.mc_rating)}</span>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="coming-soon">
-            <p>Coming soon...</p>
-          </div>
-        )}
+            <div className="ratings-container-inline">
+              {movie.imdb_rating && (
+                <div className="rating-badge">
+                  <img src="/imdb-logo.png" alt="IMDB logo" className="rating-logo" />
+                  <div className="rating-value">{Number(movie.imdb_rating).toFixed(1)}/10</div>
+                  <h4 className="rating-name">IMDb</h4>
+                </div>
+              )}
+              
+              {movie.rt_rating && (
+                <div className="rating-badge">
+                  <img src="/rt-logo.png" alt="Rotten Tomatoes logo" className="rating-logo" />
+                  <div className="rating-value">{Number(movie.rt_rating)}%</div>
+                  <h4 className="rating-name">Rotten Tomatoes</h4>
+                </div>
+              )}
+              
+              {movie.mc_rating && (
+                <div className="rating-badge">
+                  <img src="/mt-logo.png" alt="Metacritic logo" className="rating-logo" />
+                  <div className="rating-value">{Number(movie.mc_rating)}</div>
+                  <h4 className="rating-name">Metacritic</h4>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="coming-soon">
+              <p>Coming soon...</p>
+            </div>
+          )}
         </section>
         
         {/* Övrig information från databasen */}

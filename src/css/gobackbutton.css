@@ -1,0 +1,46 @@
+/* gobackbutton.css */
+/* Stilar för tillbaka-knappen som används i både MovieDetails och CharacterDetails */
+
+.go-back-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  z-index: 10;
+  /* Ökat z-index för att säkerställa att knappen är överst */
+  position: absolute;
+  top: 12px;
+  /* Justerat för att placera över bilden */
+  left: 8px;
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);  behövs inte har skugga*/
+  /* Lägg till lite skugga för bättre synlighet */
+}
+.go-back-button svg {
+  width: 25px;
+  height: 30px;
+}
+.go-back-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+
+  /* För att säkerställa att tillbaka-knappen är mer synlig */
+
+  /* För mobila enheter */
+  @media (max-width: 768px) {
+    .go-back-button {
+      top: 12px;
+      left: 12px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }

@@ -1,567 +1,617 @@
-
-
 /* === Modal ==== */
 .modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: rgba(0, 0, 0, 0.6);
-backdrop-filter: blur(10px);
--webkit-backdrop-filter: blur(10px);
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 1rem;
-z-index: 1000;
-overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1000;
+  overflow: hidden;
 }
 
 .movie-details {
-position: relative;
-background-color: rgba(15, 23, 42, 0.8);
-border-radius: 12px;
-max-width: 500px; /* Minska från 800px till 500px */
-max-height: 90vh;
-width: 90%;
-color: white;
-overflow-y: auto;
-display: flex;
-flex-direction: column;
+  position: relative;
+  background-color: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  max-width: 500px;
+  /* Minska från 800px till 500px */
+  max-height: 90vh;
+  width: 90%;
+  color: white;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Bakgrundseffekten med blur */
 .details-background {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-size: cover;
-background-position: center;
-filter: blur(75px);
-opacity: 0.9;
-z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(75px);
+  opacity: 0.9;
+  z-index: 0;
 }
 
 /* Stängknapp */
 .close-button {
-background: rgba(255, 255, 255, 0.2);
-border: none;
-color: white;
-border-radius: 50%;
-width: 32px;
-height: 32px;
-font-size: 1.5rem;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-padding: 0;
-line-height: 1;
-z-index: 10; /* Ökat z-index för att säkerställa att knappen är överst */
-position: absolute;
-top: 12px; /* Justerat för att placera över bilden */
-right: 12px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Lägg till lite skugga för bättre synlighet */
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  z-index: 10;
+  /* Ökat z-index för att säkerställa att knappen är överst */
+  position: absolute;
+  top: 12px;
+  /* Justerat för att placera över bilden */
+  right: 12px;
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);  behövs inte har skugga*/
+  /* Lägg till lite skugga för bättre synlighet */
 }
 
 .close-button:hover {
-background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* Filmpostern som visas överst */
 .details-top-section {
-width: 100%;
-display: flex;
-justify-content: center;
-margin: 0;
-padding: 20px 0 0 0; /* Lägg till padding i toppen för att matcha sidorna */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 20px 0 0 0;
+  /* Lägg till padding i toppen för att matcha sidorna */
 }
 
 .details-poster {
-width: 80%; /* Detta ger 10% marginal på varje sida (100% - 80% = 20%, delat på 2 sidor = 10% per sida) */
-max-height: 450px;
-margin: 0 auto; /* Centrera horisontellt */
-border-radius: 12px;
-overflow: hidden;
-opacity: 1; 
-z-index: 2; 
+  width: 80%;
+  /* Detta ger 10% marginal på varje sida (100% - 80% = 20%, delat på 2 sidor = 10% per sida) */
+  max-height: 450px;
+  margin: 0 auto;
+  /* Centrera horisontellt */
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 1;
+  z-index: 2;
 }
 
 .details-poster img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .no-poster {
-height: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: #eee;
-color: #333;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+  color: #333;
 }
 
 /* Titeln under postern */
 .details-header {
-position: relative;
-z-index: 2;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 1.5rem 1rem 1rem 1rem;
-background: none;
-border-bottom: none;
-width: 100%; /* Säkerställ full bredd */
-box-sizing: border-box; /* Inkludera padding i width */
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 1rem 1rem 1rem;
+  background: none;
+  border-bottom: none;
+  width: 100%;
+  /* Säkerställ full bredd */
+  box-sizing: border-box;
+  /* Inkludera padding i width */
 }
 
 
 
 .details-header h2 {
-margin: 0;
-font-size: 2rem;
-font-weight: 700;
-line-height: 1.2;
-text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-word-wrap: break-word;
-hyphens: auto;
-padding-right: 10px; /* Mellanrum till betyget */
-max-width: calc(100% - 80px); /* Lämna plats för betyget *//* Extra padding för att säkerställa avstånd till betyget */
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  word-wrap: break-word;
+  hyphens: auto;
+  padding-right: 10px;
+  /* Mellanrum till betyget */
+  max-width: calc(100% - 80px);
+  /* Lämna plats för betyget */
+  /* Extra padding för att säkerställa avstånd till betyget */
 }
 
 .movie-meta {
-display: flex;
-flex-direction: row;
-align-items: center;
-flex-wrap: wrap;
-gap: 1rem;
-margin-bottom: 0.75rem;
-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .movie-year {
-font-size: 1rem;
+  font-size: 1rem;
 }
 
 .movie-duration {
-font-size: 1rem;
+  font-size: 1rem;
 }
 
 /* Filmrutnät */
 .movie-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-gap: 20px;
-justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
 }
 
 /* Genre tags */
 .genre-tags {
-display: flex;
-flex-wrap: wrap;
-gap: 0.5rem;
-margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .phase-tag {
-background-color: rgba(255, 255, 255, 0.2);
-color: white;
-padding: 0.25rem 0.75rem;
-border-radius: 20px;
-font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
 }
 
 .genre-tag {
-background-color: rgba(255, 255, 255, 0.2);
-color: white;
-padding: 0.25rem 0.75rem;
-border-radius: 20px;
-font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
 }
 
 /* Betygssektion */
 .ratings-section {
-margin: 1rem 0;
-padding: 0 1rem;
-position: relative;
-z-index: 1;
+  margin: 1rem 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .ratings-container-inline {
-display: flex;
-align-items: center;
-flex-wrap: wrap;
-gap: 0.8rem; /* Minska mellanrummet */
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.8rem;
+  /* Minska mellanrummet */
 }
 
 .rating-badge {
-display: flex;
-align-items: center;
-gap: 0.45rem;
-background-color: rgba(255, 255, 255, 0.15);
-padding: 0.25rem 0.5rem;
-border-radius: 6px;
-font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  width: 50dvh;
+  /* Alex */
+  /* tidigre 110px */
+  /* Mindre bredd */
+  height: 15dvh;
+  /* tidigare auto */
+  /* Låt höjden anpassas efter innehållet */
+  padding: 12px;
+  /* Mindre padding */
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.11);
 }
 
-.rating-badge h4 {
-margin: 0;
-font-size: 0.8rem;
-color: rgba(255, 255, 255, 0.7);
-font-weight: 600;
+
+
+h4.rating-name {
+  font-size: clamp(0.5rem, 3vw, 0.8rem);
+  /* font-size: 12px;*/
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 4px 0 0 0;
+  height: 36px;
+  /* Fast höjd för att hålla alla namn i linje */
+  display: flex;
+  align-items: center;
+  /* Centrera texten vertikalt inom den fasta höjden */
+  justify-content: center;
+  /* Centrera texten horisontellt */
+  text-align: center;
+  /* Backup för text-centrering */
+  /* width: 100%; ej nödvändigt */
+  /* Se till att ta upp hela bredden */
 }
 
-.rating-icon {
-font-size: 1rem;
-display: flex;
-align-items: center;
-}
 
 .rating-value {
-font-size: 0.9rem;
-font-weight: 600;
+  font-size: clamp(1.1rem, 5vw, 1.7rem);
+  /*font-size: 24px; */
+  /* Något mindre textstorlek */
+  font-weight: bold;
+  margin-top: 4px;
+
 }
 
 /* Coming soon styling */
 .coming-soon {
-display: flex;
-align-items: center;
-padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
 .coming-soon p {
-font-style: italic;
-color: rgba(255, 255, 255, 0.7);
-font-size: 1rem;
-margin: 0;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  margin: 0;
 }
 
 /* Horisontell linje mellan sektioner */
 .section-divider {
-height: 1px;
-background-color: rgba(255, 255, 255, 0.3);
-margin-bottom: 1rem;
-margin-top: 0.8rem;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 1rem;
+  margin-top: 0.8rem;
 }
 
 /* Gemensam styling för sektionstitlar */
 .section-title {
-font-size: 1.25rem;
-margin: 0 0 0.75rem 0;
-padding-bottom: 0.5rem;
-color: rgba(255, 255, 255, 0.9);
-font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
 }
 
 /* About the movie section */
 .about-movie-section {
-margin: 0 0 1rem 0;
-padding: 0 1rem;
-position: relative;
-z-index: 1;
+  margin: 0 0 1rem 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .about-movie-section p {
-line-height: 1.5;
-font-size: 0.95rem; /* Något mindre font för bättre passform */
-margin-top: 0.5rem;
+  line-height: 1.5;
+  font-size: clamp(0.8rem, 3vw, 0.95rem);
+  /*font-size: 0.95rem;*/
+  /* Något mindre font för bättre passform */
+  margin-top: 0.5rem;
 }
 
 /* Trailer-sektion */
 .trailer-section {
-margin: 0 0 1.5rem 0;
-padding: 0 1rem;
-position: relative;
-z-index: 1;
+  margin: 0 0 1.5rem 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .trailer-container {
-position: relative;
-padding-bottom: 56.25%; /* 16:9 aspect ratio */
-height: 0;
-margin: 0;
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
+  height: 0;
+  margin: 0;
 }
 
 .trailer-container iframe {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-border-radius: 8px;
-border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
 }
 
 /* Wrapper för titel och betyg för bättre layout */
 .title-rating-wrapper {
-display: flex;
-width: 100%;
-flex-direction: row;
-justify-content: space-between;
-align-items: flex-start;
-margin-bottom: 0.5rem;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.rating-logo {
+  /* dynamisk size */
+  width: 4dvh;
+  /*width: 28px;*/
+  /* Något mindre logo */
+  /* dynamisk size */
+  height: 4dvh;
+  /*height: 28px;*/
+  aspect-ratio: 1;
+  margin-bottom: 8px;
 }
 
 .average-rating {
-font-size: 2rem;
-font-weight: bold;
-border-radius: 8px;
-color: #FFF;
-flex-shrink: 0;
-padding: 0;
-text-align: right;
-min-width: 70px; /* Minsta bredd för konsekvent layout */
-position: static; /* Ta bort absolute positioning */
-margin-right: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  color: #FFF;
+  flex-shrink: 0;
+  padding: 0;
+  text-align: right;
+  min-width: 70px;
+  /* Minsta bredd för konsekvent layout */
+  position: static;
+  /* Ta bort absolute positioning */
+  margin-right: 20px;
 
 }
 
 .movie-year,
 .movie-duration {
-margin-right: 10px;
+  margin-right: 10px;
 }
 
 
 /* KARAKTÄRSSEKTION I MODALEN  */
 .characters-section {
-margin: 0 0 1.5rem 0;
-padding: 0 1rem;
-position: relative;
-z-index: 1;
+  margin: 0 0 1.5rem 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .movie-characters-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-gap: 1rem;
-margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .movie-character-card {
-display: flex;
-flex-direction: column;
-align-items: center;
-transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
 .movie-character-card:hover {
-transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .character-avatar-container {
-width: 100px;
-height: 100px;
-border-radius: 50%;
-overflow: hidden;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .character-avatar {
-width: 100%;
-height: 100%;
-object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .movie-character-card .character-name {
-margin: 0.5rem 0 0 0;
-font-size: 0.9rem;
-text-align: center;
-font-weight: bold;
-max-width: 100%;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-color: white;
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: bold;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: white;
 }
 
 .movie-character-card .character-real-name {
-font-size: 0.8rem;
-text-align: center;
-color: rgba(255, 255, 255, 0.7);
-margin: 0.1rem 0 0 0;
-font-style: italic;
+  font-size: 0.8rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.1rem 0 0 0;
+  font-style: italic;
 }
 
 
 /*FALLBACK TRAILER CSS*/
 
 .trailer-fallback {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background-color: rgba(0, 0, 0, 0.1);
-border-radius: 8px;
-padding: 2rem;
-margin-top: 1rem;
-text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .trailer-button {
-display: inline-block;
-margin-top: 1rem;
-padding: 0.75rem 1.5rem;
-background-color: #e62429; /* Marvel röd */
-color: white;
-border-radius: 4px;
-text-decoration: none;
-font-weight: bold;
-transition: all 0.2s ease;
-cursor: pointer;
-border: none;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #e62429;
+  /* Marvel röd */
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
 }
 
 .trailer-button:hover {
-background-color: #c41e24;
-transform: translateY(-2px);
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #c41e24;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .trailer-button:active {
-transform: translateY(0);
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ==== Responsiv design för MovieDetails ==== */
 @media (max-width: 640px) {
-    /* Layout för modal */
-    .modal-overlay {
-      padding: 0.5rem;
-    }
-    
-    .movie-details {
-      width: 95%;
-      max-width: 400px;
-      margin: 0 auto;
-      border-radius: 10px;
-    }
-    
-    /* Poster/bildvisning */
-    .details-poster {
-      width: 85%;
-      max-height: 380px;
-    }
-    
-    /* Behåll header och metadata på samma rad */
-    .title-rating-wrapper {
-      flex-direction: row !important;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.5rem;
-    }
-    
-    .details-header h2 {
-      font-size: 1.5rem;
-      max-width: calc(100% - 80px) !important;
-      margin: 0;
-      padding-right: 10px;
-    }
-    
-    .average-rating {
-      font-size: 1.5rem;
-      position: static !important;
-    }
-    
-    /* Behåll movie-meta på samma rad */
-    .movie-meta {
-      flex-direction: row !important;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    
-    /* Karaktärsgrid i MovieDetails */
-    .movie-characters-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    
-    .character-avatar-container {
-      width: 70px;
-      height: 70px;
-    }
-    
-    .movie-character-card .character-name {
-      font-size: 0.75rem;
-      margin-top: 0.3rem;
-    }
-    
-    /* Mindre padding för att utnyttja utrymmet bättre */
-     
-    .characters-section, 
-    .about-movie-section, 
-    .about-character-section,
-    .ratings-section,
-    .trailer-section {
-      padding: 0 0.75rem;
-      
-    }
 
-    
-    
-    /* Mindre sektionsmarginaler */
-    .section-divider {
-      margin-bottom: 0.6rem;
-      margin-top: 0.6rem;
-    }
+  /* Layout för modal */
+  .modal-overlay {
+    padding: 0.5rem;
   }
-  
-  /* För mycket små skärmar */
-  @media (max-width: 480px) {
-    .movie-details {
-      width: 98%;
-      max-width: 350px;
-    }
-    
-    .details-header h2 {
-      font-size: 1.3rem;
-    }
-    
-    .average-rating {
-      font-size: 1.3rem;
-    }
-    
-    /* Karaktärsgrid - 2 kolumner på mycket små skärmar */
-    .movie-characters-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .character-avatar-container {
-      width: 80px;
-      height: 80px;
-    }
-    
-    /* Anpassa trailer-container höjd för bättre proportioner */
-    .trailer-container {
-      padding-bottom: 65%;
-    }
+
+  .movie-details {
+    width: 95%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
   }
-  
-  /* För mycket breda telefoner i landskapsläge */
-  @media (min-width: 641px) and (max-width: 850px) {
-    .movie-details {
-      max-width: 450px;
-    }
+
+  /* Poster/bildvisning */
+  .details-poster {
+    width: 85%;
+    max-height: 380px;
   }
-  
-  /* För iPhone-storlekar */
-  @media (max-width: 390px) {
-    .movie-details {
-      max-width: 320px;
-    }
-    
-    .movie-characters-grid {
-      gap: 8px;
-    }
-    
-    .character-avatar-container {
-      width: 70px;
-      height: 70px;
-    }
+
+  /* Behåll header och metadata på samma rad */
+  .title-rating-wrapper {
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
   }
+
+  .details-header h2 {
+    font-size: 1.5rem;
+    max-width: calc(100% - 80px) !important;
+    margin: 0;
+    padding-right: 10px;
+  }
+
+  .average-rating {
+    font-size: 1.5rem;
+    position: static !important;
+  }
+
+  /* Behåll movie-meta på samma rad */
+  .movie-meta {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Karaktärsgrid i MovieDetails */
+  .movie-characters-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .character-avatar-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .movie-character-card .character-name {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+  }
+
+  /* Mindre padding för att utnyttja utrymmet bättre */
+
+  .characters-section,
+  .about-movie-section,
+  .about-character-section,
+  .ratings-section,
+  .trailer-section {
+    padding: 0 0.75rem;
+
+  }
+
+
+
+  /* Mindre sektionsmarginaler */
+  .section-divider {
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+  }
+}
+
+/* För mycket små skärmar */
+@media (max-width: 480px) {
+  .movie-details {
+    width: 98%;
+    max-width: 350px;
+  }
+
+  .details-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .average-rating {
+    font-size: 1.3rem;
+  }
+
+  /* Karaktärsgrid - 2 kolumner på mycket små skärmar */
+  .movie-characters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .character-avatar-container {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Anpassa trailer-container höjd för bättre proportioner */
+  .trailer-container {
+    padding-bottom: 65%;
+  }
+}
+
+/* För mycket breda telefoner i landskapsläge */
+@media (min-width: 641px) and (max-width: 850px) {
+  .movie-details {
+    max-width: 450px;
+  }
+}
+
+/* För iPhone-storlekar */
+@media (max-width: 390px) {
+  .movie-details {
+    max-width: 320px;
+  }
+
+  .movie-characters-grid {
+    gap: 8px;
+  }
+
+  .character-avatar-container {
+    width: 70px;
+    height: 70px;
+  }
+}
