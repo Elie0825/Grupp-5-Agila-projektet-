@@ -23,8 +23,9 @@ html, body {
   box-sizing: border-box; /* Viktigt för att padding inte ska läggas utanför width */
 }
 
-input, textarea, select {
-  font-size: 16px;
+input, textarea, select,
+input[class], textarea[class], select[class] {
+  font-size: 16px !important;
 }
  
 
