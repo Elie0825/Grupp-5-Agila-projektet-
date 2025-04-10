@@ -3,7 +3,7 @@
     "id": 31,
     "name": "Ant-Man",
     "real_name": "Scott Lang",
-    "description": "Ant-Man, skapad av författaren Stan Lee och tecknaren Jack Kirby, gjorde sitt första framträdande i 'Avengers Vol 1 #181' (Mars 1979). Scott Lang, en ex-brottsling, får på sig den speciella dräkten och får förmågan att förminska sig själv, samtidigt som han behåller sin styrka.",
+    "description": "Vetenskap möter brott när en före detta tjuv kliver in i en värld av kvantfysik, heist och hjältemod. Med kraften att krympa och växa, och ett sinne för kaos och humor, blir Scott Lang en oväntad nyckelspelare i kampen om verkligheten själv. Hank Pym skapade teknologin – men det är Scott som gör den mänsklig.",
     "image_url": "/images/ant-man.svg",
     "movies": ["Ant-Man", "Captain America: Civil War", "Ant-Man and the Wasp", "Avengers: Endgame", "Ant-Man and the Wasp: Quantumania"]
   },
@@ -11,7 +11,7 @@
     "id": 106,
     "name": "Black Panther",
     "real_name": "T'Challa",
-    "description": "T'Challa, den kungliga hjälten Black Panther, debuterade i 'Fantastic Four Vol. 1 #52' (1966). Han är kung av det fiktiva afrikanska landet Wakanda, och hans krafter kommer från en magisk örn som han konsumerar som en del av sin traditionella ritual för att bli Black Panther.",
+    "description": "En trons arvtagare, en krigare utan like, en symbol för ett folk. T’Challa regerar över Wakanda – en nation dolt från världen men starkare än någon kunnat ana. Hans strider förs inte bara med klor, utan med visdom, tradition och teknologisk briljans.",
     "image_url": "/images/black-panther.svg",
     "movies": ["Captain America: Civil War", "Black Panther", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -19,7 +19,7 @@
     "id": 107,
     "name": "Black Widow",
     "real_name": "Natasha Romanoff",
-    "description": "Natasha Romanoff, Black Widow, gjorde sitt första framträdande i 'Tales of Suspense #52'. Hon är en före detta KGB-agent och en expert på närstrid och spionage. Black Widow är en av Avengers mest kompetenta medlemmar och en viktig del av Marvels filmuniversum.",
+    "description": "Formad i skuggorna av kalla krigets ruiner, uppfostrad till att inte känna något – men valde att känna allt. Natasha Romanoff är spion, mördare, Avenger. Bakom varje tystnad döljer sig ett mörkt förflutet. Framför henne: en chans till försoning, på hennes egna villkor.",
     "image_url": "/images/black-widow.svg",
     "movies": ["Iron Man 2", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "Black Widow"]
   },
@@ -27,7 +27,7 @@
     "id": 112,
     "name": "Blade",
     "real_name": "Eric Brooks",
-    "description": "Blade, en vampyrjägare och halvvampyr, gjorde sitt första framträdande i 'Tomb of Dracula Vol. 1 #10' (1973). Han jagar vampyrer och bekämpar övernaturliga hot, och hans unika förmåga att röra sig fritt mellan mänsklig och vampyrvärlden gör honom till en formidabel hjälte.",
+    "description": "Halvvampyr. Helvetesjägare. En man med svärd i handen och hämnd i hjärtat. Han går mellan två världar – och skyddar vår från det som ruvar i mörkret. Blade föddes i blod men valde att inte låta det definiera honom.",
     "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/33.jpg",
     "movies": ["Eternals (cameo)"]
   },
@@ -35,7 +35,7 @@
     "id": 149,
     "name": "Captain America",
     "real_name": "Steve Rogers",
-    "description": "Captain America, skapad av Jack Kirby och Joe Simon, debuterade i 'Captain America Comics #1' (Mars 1941). Steve Rogers var en späd ung man som genomgick ett experiment för att bli den ultimata supersoldaten. Hans kraftfulla shield är hans främsta vapen i kampen för rättvisa.",
+    "description": "En man ur sin tid, men aldrig ur sin plats. Steve Rogers – från mager idealist till den starkaste av alla soldater – bär mer än en sköld. Han bär hopp, tro, envishet. Genom krig, svek och framtidens kaos står han fast vid principer som andra överger.",
     "image_url": "/images/captain-america.svg",
     "movies": ["Captain America: The First Avenger", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -124,7 +124,7 @@
     "id": 431,
     "name": "Mantis",
     "real_name": "Mantis",
-    "description": "Mantis, skapad av Steve Englehart och Don Heck, debuterade i 'Avengers #112'. Hon är en mästare på kampsport och telepati, och hennes krafter gör att hon kan känna andras känslor och manipulera dem. Mantis är en av Guardians of the Galaxy-medlemmarna.",
+    "description": "Mantis,Empati som superkraft. Ensam i galaxens mörkaste hörn växte hon upp med känslor som inte var hennes egna. Hon rör vid andra – och känner allt, Hon är en mästare på kampsport och telepati, och hennes krafter gör att hon kan känna andras känslor och manipulera dem. Mantis är en av Guardians of the Galaxy-medlemmarna.",
     "image_url": "/images/mantis.png",
     "movies": ["Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -132,7 +132,7 @@
     "id": 479,
     "name": "Mysterio",
     "real_name": "Quentin Beck",
-    "description": "Mysterio, skapad av Stan Lee och Steve Ditko, debuterade i 'Amazing Spider-Man #13' (1964). Quentin Beck är en film-specialeffektsexpert som använder illusioner och trick för att skapa kaos och lura sina fiender. Han är en återkommande skurk för Spider-Man.",
+    "description": "Mysterio,  Quentin Beck är en film-specialeffektsexpert som använder illusioner och trick för att skapa kaos och lura sina fiender. Han är en återkommande skurk för Spider-Man.",
     "image_url": "/images/mysterio.png",
     "movies": ["Spider-Man: Far From Home"]
   },
@@ -140,7 +140,7 @@
     "id": 487,
     "name": "Nebula",
     "real_name": "Nebula",
-    "description": "Nebula, skapad av Roger Stern och John Buscema, debuterade i 'Avengers #257' (Juli, 1985). Nebula är en av Thanos adoptivdöttrar och en mästare på strid. Hon har genomgått flera cybernetiska förbättringar och är en av Guardians of the Galaxy och Avengers fiender.",
+    "description": "Maskin. Dotter. Krigare. Hatet i hennes ögon är inte bara mot sin far, Thanos – det är mot det hon själv blivit. Halvorganisk, halvrobotisk, men med en mänsklighet som vägrar dö. Bakom den hårda ytan finns systerskap, skuld och en längtan efter att bli hel.",
     "image_url": "/images/nebula.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -148,7 +148,7 @@
     "id": 489,
     "name": "Nick Fury",
     "real_name": "Nicholas Joseph Fury",
-    "description": "Nick Fury, skapad av Stan Lee och Jack Kirby, debuterade i 'Sgt. Fury and His Howling Commandos #1' (1963). Fury är en veteran inom den amerikanska armén och en nyckelfigur inom S.H.I.E.L.D., en organisation som bekämpar globala hot. Han spelar en avgörande roll i skapandet av Avengers.",
+    "description": "Han är inte en hjälte. Han är den som samlar dem. Alltid tre steg före alla andra. Med ett öga för hot – och en annan för framtiden – bygger han världens första försvarslinje: Avengers. Han säger lite. Han avslöjar ännu mindre. Men när världen står på randen till undergång, är det han som redan har en plan.",
     "image_url": "/images/nick-fury.png",
     "movies": ["Iron Man (post-credits)", "Iron Man 2", "Thor (post-credits)", "Captain America: The First Avenger (post-credits)", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Avengers: Infinity War (post-credits)", "Captain Marvel", "Avengers: Endgame", "Spider-Man: Far From Home", "Secret Invasion (TV Series)"]
   },
@@ -156,7 +156,7 @@
     "id": 498,
     "name": "Odin",
     "real_name": "Odin Borson",
-    "description": "Odin, skapad av Stan Lee och Jack Kirby, debuterade i 'Journey into Mystery #85'. Odin är den mäktigaste guden i Asgård och far till Thor. Han är en vis och mäktig härskare, och hans krafter omfattar bland annat magi och kontroll över åskan.",
+    "description": " Kungen över Asgård. Fader till gudar – och till kaos. Odins ord är lag, men hans beslut har ekat genom galaxerna i årtusenden. Han bär tyngden av forntida synder, fallna fiender och söner som han aldrig riktigt förstått. Mäktig, vis, men långt ifrån ofelbar.hans krafter omfattar bland annat magi och kontroll över åskan.",
     "image_url": "/images/odin.jpg",
     "movies": ["Thor", "Thor: The Dark World", "Thor: Ragnarok"]
   },
