@@ -20,7 +20,7 @@ const CharactersPage: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
+
         // Hämta karaktärer från den lokala JSON-filen
         const charactersResponse = await fetch('/marvelcharacters.json');
         if (!charactersResponse.ok) {
@@ -29,7 +29,7 @@ const CharactersPage: React.FC = () => {
         const charactersData: MarvelCharacters[] = await charactersResponse.json();
         setCharacters(charactersData);
         setFilteredCharacters(charactersData);
-        
+
         // Hämta filmer från den lokala JSON-filen
         const moviesResponse = await fetch('/marvelmovies.json');
         if (!moviesResponse.ok) {
@@ -37,7 +37,7 @@ const CharactersPage: React.FC = () => {
         }
         const moviesData: Movie[] = await moviesResponse.json();
         setMovies(moviesData);
-        
+
         setLoading(false);
       } catch (error) {
         console.error('Fel vid hämtning av data:', error);
@@ -66,7 +66,7 @@ const CharactersPage: React.FC = () => {
     // Rensa all navigationhistorik när karaktären öppnas direkt från grid
     localStorage.removeItem("backToMovieId");
     localStorage.removeItem("backToCharacterId");
-    
+
     setSelectedCharacter(character);
     setSelectedMovie(null); // Stäng filmdetaljer om öppna
   };
@@ -78,7 +78,7 @@ const CharactersPage: React.FC = () => {
       localStorage.removeItem("backToMovieId");
       localStorage.removeItem("backToCharacterId");
     }
-    
+
     setSelectedMovie(movie);
     setSelectedCharacter(null); // Stäng karaktärsdetaljer
   };
@@ -94,7 +94,13 @@ const CharactersPage: React.FC = () => {
   return (
     <main className="characters-page">
       <header className="characters-hero">
-        {/* Hero content */}
+        <p className="text">
+            <span className="big-span">Karaktärer 
+</span>
+                  <span className="small-span">
+                  Utforska bland de stora ikoniska karaktärerna.
+          </span>
+        </p>
       </header>
 
       <section className="search-section">
@@ -174,8 +180,10 @@ const CharactersPage: React.FC = () => {
 
       <footer className="characters-footer">
       <p>
-      Data från MCU, OMDb & Superhero API. <br />
-      © {new Date().getFullYear()} Marvelous Ratings.<br />
+      Data från MCU, OMDb & Superhero API. 
+
+      © {new Date().getFullYear()} Marvelous Ratings.
+
       Marvelous Ratings är ett fanprojekt och är inte associerat med Marvel eller Disney.
       </p>
       </footer>

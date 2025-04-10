@@ -7,54 +7,36 @@
 }
 
 .characters-page .characters-hero {
-  /* Samma som main-header men med annan bakgrundsbild */
-  background-image:
-    linear-gradient(180deg,
-      rgba(11, 15, 52, 0.00) 13.36%,
-      rgba(10, 19, 54, 0.26) 34.36%,
-      rgba(9, 24, 56, 0.58) 50.36%,
-      rgba(8, 27, 58, 0.82) 76.86%,
-      #071E3B 100%),
-    url('HERO Header 2025-04-04 Marveluniversum.svg');
-
   display: flex;
   width: 100%;
-  height: 712px;
-  padding: 158px 120px 356px 120px;
+  height: auto;
+  min-height: 10rem;
+  padding-top: 10rem;
+  padding-bottom: 4rem;
   flex-direction: column;
   align-items: center;
-  gap: 131px;
+  gap: 2rem;
   flex-shrink: 0;
 }
 
-/* OBS FINNS DUBBELSTRUKUR HÄR*/
-
-.universum-hero {
-  margin: 0;
-  /* Centrera innehållet horisontellt */
-  margin-bottom: 5rem;
-  width: 100%;
-  min-height: 30rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.characters-page .characters-hero .big-span {
+  text-transform: uppercase;
   color: #FFF;
+  align-self: stretch;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-  /* Viktigt! */
-  background-image:
-    linear-gradient(180deg,
-      rgba(11, 15, 52, 0.00) 13.36%,
-      rgba(10, 19, 54, 0.26) 34.36%,
-      rgba(9, 24, 56, 0.58) 50.36%,
-      rgba(8, 27, 58, 0.82) 76.86%,
-      #071E3B 100%),
-    url('/header-universum.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
+  font-family: Impact;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 67.2px */
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+  font-size: calc(1.5rem + 2vw); /* Responsiv textstorlek */
+  max-width: 100%;
+  word-wrap: break-word; /* Bryt långa ord */
 }
+
+/* OBS FINNS DUBBELSTRUKUR HÄR*/
 
 .characters-hero h1 {
   font-size: 2.5rem;
@@ -73,7 +55,7 @@
 
 .search-container {
   max-width: 600px;
-  margin: 0 auto 2rem;
+  margin: 2rem auto 2rem;
   padding: 0 1rem;
   width: 100%;
   transition: max-width 0.3s ease;
@@ -110,7 +92,6 @@
 
   /* Standard: 4 kort per rad på vanliga skärmstorlekar */
   grid-template-columns: repeat(4, 1fr);
-
 }
 
 /* Loading styles */
@@ -152,12 +133,13 @@
 
 /* Footer */
 .characters-footer {
-text-align: center;
-padding: 1.5rem;
-background-color: rgba(0, 0, 0, 0.3);
-color: rgb(255, 255, 255);
-font-size: 0.9rem;
-margin-top: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
 
 /* === GHOSTCARDS FOR CHARACTERS  ===*/
 .ghost-character {
@@ -169,12 +151,6 @@ margin-top: 2rem;
   animation: pulse 1.5s infinite ease-in-out;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  text-align: center;
-  padding: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: rgb(255, 255, 255);
-  font-size: 0.9rem;
-  margin-top: 2rem;
 }
 
 .ghost-character-image {
@@ -219,7 +195,7 @@ margin-top: 2rem;
     width: 150px;
     height: 200px;
   }
-  
+
   .ghost-character-image {
     width: 130px;
     height: 130px;
@@ -231,7 +207,7 @@ margin-top: 2rem;
     width: 160px;
     height: 200px;
   }
-  
+
   .ghost-character-image {
     width: 140px;
     height: 140px;
@@ -243,7 +219,7 @@ margin-top: 2rem;
     width: 120px;
     height: 160px;
   }
-  
+
   .ghost-character-image {
     width: 100px;
     height: 100px;
@@ -255,12 +231,11 @@ margin-top: 2rem;
     width: 140px;
     height: 180px;
   }
-  
+
   .ghost-character-image {
     width: 120px;
     height: 120px;
   }
-}
 }
 
 /* ==== Responsiv design för CharactersPage ==== */
@@ -268,7 +243,6 @@ margin-top: 2rem;
   .characters-hero h1 {
     font-size: 2rem;
   }
-
 
   .characters-hero {
     padding: 3rem 1rem;
@@ -282,7 +256,7 @@ margin-top: 2rem;
     padding: 2rem 1rem;
     height: auto;
     /* Låt höjden anpassa sig efter innehållet */
-    min-height: 20rem;
+    min-height: 10rem;
   }
 
   .characters-hero h1 {

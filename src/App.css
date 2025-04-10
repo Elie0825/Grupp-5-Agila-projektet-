@@ -92,7 +92,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.characters-hero {
+.app-container .characters-hero {
   margin: 0; /* Centrera innehållet horisontellt */
   margin-bottom: 5rem;
   width: 100%;
@@ -181,7 +181,6 @@ body {
   font-weight: 600;
   line-height: 24px; 
   font-size: calc(1.5rem + 2vw); /* Responsiv textstorlek */
-  
 }
 
 /* ========== STATUS-INDIKATORER ========== */
@@ -260,14 +259,14 @@ body {
       grid-template-columns: repeat(4, minmax(190px, 1fr));
     }
   }
-  
+
   @media (max-width: 900px) {
     .movie-grid {
       /* 3 kort per rad för mellanstora skärmar */
       grid-template-columns: repeat(3, minmax(200px, 1fr));
     }
   }
-  
+
   @media (max-width: 670px) {
     .movie-grid {
       /* 2 kort per rad för mindre skärmar */
@@ -308,7 +307,7 @@ body {
 
   }
 
-  
+
   @media (max-width: 460px) {
     .movie-grid {
       /* Behåll 2 kort per rad istället för 1 */
@@ -316,12 +315,12 @@ body {
       gap: 10px;
       justify-items: center;
     }
-  
+
     /* Minska storleken på filmkorten */
     .movie-card {
       width: 120px;
     }
-  
+
     /* Justera höjd för bildcontainern */
     .movie-image-container {
       position: relative;
@@ -339,12 +338,12 @@ body {
       gap: 10px;
       justify-items: center;
     }
-  
+
     /* Minska storleken på filmkorten */
     .movie-card {
       width: 100px;
     }
-  
+
     /* Justera höjd för bildcontainern */
     .movie-image-container {
       position: relative;
@@ -364,12 +363,12 @@ body {
       gap: 10px;
       justify-items: center;
     }
-  
+
     /* Minska storleken på filmkorten */
     .movie-card {
       width: 130px;
     }
-  
+
     /* Justera höjd för bildcontainern */
     .movie-image-container {
       position: relative;
