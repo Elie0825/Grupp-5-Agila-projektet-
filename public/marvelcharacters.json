@@ -3,7 +3,7 @@
     "id": 31,
     "name": "Ant-Man",
     "real_name": "Scott Lang",
-    "description": "Vetenskap möter brott när en före detta tjuv kliver in i en värld av kvantfysik, heist och hjältemod. Med kraften att krympa och växa, och ett sinne för kaos och humor, blir Scott Lang en oväntad nyckelspelare i kampen om verkligheten själv. Hank Pym skapade teknologin – men det är Scott som gör den mänsklig.",
+    "description": "Scott Lang är en före detta tjuv som får en ny chans som Ant-Man – en hjälte med förmågan att krympa och förstoras med hjälp av avancerad teknik. Hans humor, uppfinningsrikedom och starka band till sin dotter gör honom till en oväntad men värdefull medlem i superhjältevärlden.",
     "image_url": "/images/ant-man.svg",
     "movies": ["Ant-Man", "Captain America: Civil War", "Ant-Man and the Wasp", "Avengers: Endgame", "Ant-Man and the Wasp: Quantumania"]
   },
@@ -11,7 +11,7 @@
     "id": 106,
     "name": "Black Panther",
     "real_name": "T'Challa",
-    "description": "En trons arvtagare, en krigare utan like, en symbol för ett folk. T’Challa regerar över Wakanda – en nation dolt från världen men starkare än någon kunnat ana. Hans strider förs inte bara med klor, utan med visdom, tradition och teknologisk briljans.",
+    "description": "T’Challa är kung av Wakanda och bär manteln som Black Panther – en krigare som kombinerar tradition, teknologi och rättvisa. Han representerar styrka, visdom och ansvar, både som ledare för sitt folk och som hjälte i en större värld.",
     "image_url": "/images/black-panther.svg",
     "movies": ["Captain America: Civil War", "Black Panther", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -19,7 +19,7 @@
     "id": 107,
     "name": "Black Widow",
     "real_name": "Natasha Romanoff",
-    "description": "Formad i skuggorna av kalla krigets ruiner, uppfostrad till att inte känna något – men valde att känna allt. Natasha Romanoff är spion, mördare, Avenger. Bakom varje tystnad döljer sig ett mörkt förflutet. Framför henne: en chans till försoning, på hennes egna villkor.",
+    "description": "Natasha Romanoff, även känd som Black Widow, är en före detta spion med exceptionell stridsförmåga och skarp intelligens. Trots sin mörka bakgrund arbetar hon för att gottgöra sitt förflutna och är en avgörande del av Avengers.",
     "image_url": "/images/black-widow.svg",
     "movies": ["Iron Man 2", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "Black Widow"]
   },
@@ -27,7 +27,7 @@
     "id": 112,
     "name": "Blade",
     "real_name": "Eric Brooks",
-    "description": "Halvvampyr. Helvetesjägare. En man med svärd i handen och hämnd i hjärtat. Han går mellan två världar – och skyddar vår från det som ruvar i mörkret. Blade föddes i blod men valde att inte låta det definiera honom.",
+    "description": "Eric Brooks, känd som Blade, är en vampyrjägare med vampyrernas styrkor men utan deras svagheter. Han är en kompromisslös och mystisk figur som bekämpar övernaturliga hot med svärd, stil och en egen kod av rättvisa.",
     "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/33.jpg",
     "movies": ["Eternals (cameo)"]
   },
@@ -35,7 +35,7 @@
     "id": 149,
     "name": "Captain America",
     "real_name": "Steve Rogers",
-    "description": "En man ur sin tid, men aldrig ur sin plats. Steve Rogers – från mager idealist till den starkaste av alla soldater – bär mer än en sköld. Han bär hopp, tro, envishet. Genom krig, svek och framtidens kaos står han fast vid principer som andra överger.",
+    "description": "Steve Rogers, mer känd som Captain America, är en idealistisk super-soldat med ett hjärta lika starkt som sin sköld. Han står för rättvisa, mod och lojalitet, och är en symbol för hopp både i krig och fred.",
     "image_url": "/images/captain-america.svg",
     "movies": ["Captain America: The First Avenger", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -43,7 +43,7 @@
     "id": 155,
     "name": "Captain Marvel",
     "real_name": "Carol Danvers",
-    "description": "Carol Danvers, eller Captain Marvel, gjorde sitt första framträdande i 'Marvel Super-Heroes #13' (Mars, 1968). Hon är en stark och kraftfull hjälte som får sina krafter efter en olycka där hon får krafterna från den Kree-teknologiska rasen. Captain Marvel är känd för sin flygförmåga och styrka.",
+    "description": "Carol Danvers, även känd som Captain Marvel, är en före detta pilot som får kosmiska krafter efter en olycka. Hon är en av de mest kraftfulla hjältarna i MCU och kämpar för att skydda galaxer med både styrka och självförtroende.",
     "image_url": "/images/captain-marvel.png",
     "movies": ["Captain Marvel", "Avengers: Endgame", "Shang-Chi and the Legend of the Ten Rings (cameo)", "The Marvels"]
   },
@@ -51,7 +51,7 @@
     "id": 196,
     "name": "Doctor Strange",
     "real_name": "Stephen Strange",
-    "description": "Doctor Strange, skapad av Stan Lee och Steve Ditko, debuterade i 'Strange Tales #110' (Juli 1963). Stephen Strange var en neurokirurg som blev en mästare i de mystiska konsterna efter att ha förlorat sin förmåga att använda sina händer. Han blev den mest framstående magikern i Marvel-universumet.",
+    "description": "Stephen Strange är en briljant men arrogant kirurg som efter en livsförändrande olycka söker helande inom den mystiska konsten. Som Doctor Strange blir han en mäktig beskyddare av verklighetens strukturer och en nyckelfigur i MCU:s magiska sida.",
     "image_url": "/images/dr-strange.png",
     "movies": ["Doctor Strange", "Thor: Ragnarok", "Avengers: Infinity War", "Avengers: Endgame", "Spider-Man: No Way Home", "Doctor Strange in the Multiverse of Madness"]
   },
@@ -59,7 +59,7 @@
     "id": 226,
     "name": "Drax the Destroyer",
     "real_name": "Arthur Douglas",
-    "description": "Drax the Destroyer, debuterade i 'Iron Man #55' (Februari, 1973). Arthur Douglas, en död man, återuppväcktes genom en utomjordisk process och blev Drax. Hans mål är att hämnas sin familj som dödades av Thanos. Drax är känd för sin enorma styrka och tapperhet.",
+    "description": "Drax the Destroyer är en medlem av Guardians of the Galaxy, känd för sin bokstavliga humor och enorma styrka. Driven av en personlig förlust, kämpar han med lojalitet och tapperhet tillsammans med sitt färgstarka team.",
     "image_url": "/images/drax.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -67,7 +67,7 @@
     "id": 251,
     "name": "Falcon",
     "real_name": "Sam Wilson",
-    "description": "Sam Wilson, aka Falcon, debuterade i 'Captain America #117' (September 1969). Han blev den första svarta Marvel-hjälten och var Captain Americas närmaste vän. Som Falcon har han avancerade vingar och flygförmåga, vilket gör honom till en av de bästa krigare.",
+    "description": "Sam Wilson, även känd som Falcon, är en före detta militär med mekaniska vingar och stor stridserfarenhet. Han är modig, lojal och står för frihet och rättvisa, både som individ och som del av större allianser.",
     "image_url": "/images/falcon.png",
     "movies": ["Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Ant-Man", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "The Falcon and the Winter Soldier (TV Series)"]
   },
@@ -75,7 +75,7 @@
     "id": 275,
     "name": "Gamora",
     "real_name": "Gamora Zen Whoberi Ben Titan",
-    "description": "Gamora, dotter till Thanos, debuterade i 'Strange Tales #180' (Juni 1975). Hon är den sista överlevande av sin art och blev en mästare på strid och smygande. Som en av Guardians of the Galaxy har hon visat sig vara en stor kämpe.",
+    "description": "Gamora är en skicklig krigare och adoptivdotter till Thanos, med ett förflutet som lönnmördare. Hon söker försoning för sina tidigare handlingar och är en viktig del av Guardians of the Galaxy – både i strid och i hjärta.",
     "image_url": "/images/gamora.jpg",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -83,7 +83,7 @@
     "id": 303,
     "name": "Groot",
     "real_name": "Groot",
-    "description": "Groot är en humanoid växtvarelse från planeten X. Han debuterade i 'Tales to Astonish #13' (November 1960). Groot är känd för att kunna växa sig enorm och förvandla sig till en trädliknande figur. Han är en del av Guardians of the Galaxy och en av filmvärldens mest älskade karaktärer.",
+    "description": "Groot är en trädliknande varelse från planeten X, känd för att endast kunna säga frasen 'I am Groot'. Trots sitt begränsade språk uttrycker han stark lojalitet, mod och vänskap, särskilt som medlem i Guardians of the Galaxy.",
     "image_url": "/images/groot.jpg",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3", "I Am Groot (TV Series)"]
   },
@@ -91,7 +91,7 @@
     "id": 321,
     "name": "Hela",
     "real_name": "Hela",
-    "description": "Hela, skapad av Jack Kirby, debuterade i 'Journey into Mystery #102'. Hon är en av de mest fruktade skurkarna i Asgård och Thors äldre syster. Hela är en mäktig gudinna och besitter förmågan att kontrollera döden.",
+    "description": "Hela är en mäktig krigare och dotter till Odin, med titeln dödens gudinna. Hon har en skrämmande närvaro och förmågan att skapa vapen ur sin kropp, och hotar balansen i Asgård med sin brutala makthunger.",
     "image_url": "/images/hela.jpg",
     "movies": ["Thor: Ragnarok"]
   },
@@ -99,7 +99,7 @@
     "id": 332,
     "name": "Hulk",
     "real_name": "Bruce Banner",
-    "description": "Hulk debuterade i 'Incredible Hulk #1' (Maj 1962). Bruce Banner, en scientist, utsattes för en röntgenolycka som gav honom förmågan att förvandlas till den oemotståndliga gröna giganten Hulk, när han blir rasande. Hulk är känd för sin enorma styrka och nästan okrossbara kropp.",
+    "description": "Bruce Banner förvandlas till det gröna kraftpaketet Hulk efter en olycka med gammastrålning. Hans karaktär representerar konflikten mellan vetenskaplig kontroll och rå styrka, och han är både en fara och en tillgång i strid.",
     "image_url": "/images/hulk.png",
     "movies": ["The Incredible Hulk", "The Avengers", "Avengers: Age of Ultron", "Thor: Ragnarok", "Avengers: Infinity War", "Avengers: Endgame", "Shang-Chi and the Legend of the Ten Rings", "She-Hulk: Attorney at Law (TV Series)"]
   },
@@ -108,7 +108,7 @@
     "id": 346,
     "name": "Iron Man",
     "real_name": "Tony Stark",
-    "description": "Iron Man, skapad av Stan Lee, Larry Lieber, Don Heck och Jack Kirby, debuterade i 'Tales of Suspense #39' (Mars 1963). Tony Stark, en uppfinningsrik industrimagnat, skapar en avancerad stridsteknologi och använder den för att bekämpa ondska som Iron Man. Hans rustning ger honom övermänsklig styrka, flygförmåga och avancerade vapen.",
+    "description": "Tony Stark, även känd som Iron Man, är en genial miljardär som bygger en högteknologisk dräkt efter en traumatisk upplevelse. Han utvecklas från självisk vapentillverkare till en av de mest centrala och drivna hjältarna i MCU.",
     "image_url": "/images/iron-man.png",
     "movies": ["Iron Man", "The Incredible Hulk (cameo)", "Iron Man 2", "The Avengers", "Iron Man 3", "Avengers: Age of Ultron", "Captain America: Civil War", "Spider-Man: Homecoming", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -116,7 +116,7 @@
     "id": 414,
     "name": "Loki",
     "real_name": "Loki Laufeyson",
-    "description": "Loki, skapad av Stan Lee, Larry Lieber och Jack Kirby, debuterade i 'Journey into Mystery Vol. 1 #85'. Han är en av Marvels mest kända skurkar och Thor Odinsons adoptivbror. Loki är en mästare i magi och trickster, och han strävar ständigt efter att ta över Asgård.",
+    "description": "Loki, adoptivson till Odin och bror till Thor, är en mäktig magiker och trickster med komplexa motiv. Han rör sig mellan att vara fiende och allierad, och är en av MCU:s mest charmiga och oberäkneliga karaktärer.",
     "image_url": "/images/loki.png",
     "movies": ["Thor", "The Avengers", "Thor: The Dark World", "Thor: Ragnarok", "Avengers: Infinity War", "Avengers: Endgame", "Loki (TV Series)"]
   },
@@ -124,7 +124,7 @@
     "id": 431,
     "name": "Mantis",
     "real_name": "Mantis",
-    "description": "Mantis,Empati som superkraft. Ensam i galaxens mörkaste hörn växte hon upp med känslor som inte var hennes egna. Hon rör vid andra – och känner allt, Hon är en mästare på kampsport och telepati, och hennes krafter gör att hon kan känna andras känslor och manipulera dem. Mantis är en av Guardians of the Galaxy-medlemmarna.",
+    "description": "Mantis är en empatisk varelse med förmågan att känna och påverka andras känslor genom beröring. Hon är socialt ovan men modig, och bidrar med både känslomässig intelligens och styrka som medlem i Guardians of the Galaxy.",
     "image_url": "/images/mantis.png",
     "movies": ["Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -132,7 +132,7 @@
     "id": 479,
     "name": "Mysterio",
     "real_name": "Quentin Beck",
-    "description": "Mysterio,  Quentin Beck är en film-specialeffektsexpert som använder illusioner och trick för att skapa kaos och lura sina fiender. Han är en återkommande skurk för Spider-Man.",
+    "description": "Quentin Beck, alias Mysterio, är en före detta teknikspecialist som använder illusioner för att manipulera sin omgivning. Han är strategisk, övertygande och en ovanlig typ av motståndare för Spider-Man.",
     "image_url": "/images/mysterio.png",
     "movies": ["Spider-Man: Far From Home"]
   },
@@ -140,7 +140,7 @@
     "id": 487,
     "name": "Nebula",
     "real_name": "Nebula",
-    "description": "Maskin. Dotter. Krigare. Hatet i hennes ögon är inte bara mot sin far, Thanos – det är mot det hon själv blivit. Halvorganisk, halvrobotisk, men med en mänsklighet som vägrar dö. Bakom den hårda ytan finns systerskap, skuld och en längtan efter att bli hel.",
+    "description": "Nebula är en cybernetiskt modifierad krigare och adoptivdotter till Thanos. Hon har en komplicerad relation till sin syster Gamora och utvecklas från motståndare till en karaktär med djup, lojalitet och egen vilja.",
     "image_url": "/images/nebula.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -148,7 +148,7 @@
     "id": 489,
     "name": "Nick Fury",
     "real_name": "Nicholas Joseph Fury",
-    "description": "Han är inte en hjälte. Han är den som samlar dem. Alltid tre steg före alla andra. Med ett öga för hot – och en annan för framtiden – bygger han världens första försvarslinje: Avengers. Han säger lite. Han avslöjar ännu mindre. Men när världen står på randen till undergång, är det han som redan har en plan.",
+    "description": "Nick Fury är en strategisk ledare och grundare av Avengers-initiativet. Han arbetar bakom kulisserna med att skydda jorden från hot – både jordiska och utomjordiska – och är en central figur i MCU:s uppbyggnad.",
     "image_url": "/images/nick-fury.png",
     "movies": ["Iron Man (post-credits)", "Iron Man 2", "Thor (post-credits)", "Captain America: The First Avenger (post-credits)", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Avengers: Infinity War (post-credits)", "Captain Marvel", "Avengers: Endgame", "Spider-Man: Far From Home", "Secret Invasion (TV Series)"]
   },
@@ -156,23 +156,15 @@
     "id": 498,
     "name": "Odin",
     "real_name": "Odin Borson",
-    "description": " Kungen över Asgård. Fader till gudar – och till kaos. Odins ord är lag, men hans beslut har ekat genom galaxerna i årtusenden. Han bär tyngden av forntida synder, fallna fiender och söner som han aldrig riktigt förstått. Mäktig, vis, men långt ifrån ofelbar.hans krafter omfattar bland annat magi och kontroll över åskan.",
+    "description": "Odin är den visa och mäktiga kungen av Asgård samt far till Thor, Hela och adoptivfar till Loki. Hans beslut har format mycket av Asgårds historia, och han är en symbol för styrka, tradition och uppoffring.",
     "image_url": "/images/odin.jpg",
     "movies": ["Thor", "Thor: The Dark World", "Thor: Ragnarok"]
-  },
-  {
-    "id": 527,
-    "name": "Professor X",
-    "real_name": "Charles Xavier",
-    "description": "Professor X, skapad av Stan Lee och Jack Kirby, debuterade i 'X-Men #1' (September, 1963). Charles Xavier är en telepat och grundare av X-Men. Han arbetar för att skydda både människor och mutanter och har en skola för mutanta barn för att hjälpa dem utveckla sina krafter.",
-    "image_url": "/images/professor-x.png",
-    "movies": ["Doctor Strange in the Multiverse of Madness (Earth-838 variant)"]
   },
   {
     "id": 566,
     "name": "Rocket Raccoon",
     "real_name": "Rocket Raccoon",
-    "description": "Rocket Raccoon, skapad av Bill Mantlo och Keith Giffen, debuterade i 'Marvel Preview #7' (Juni, 1976). Rocket är en genetiskt modifierad räv med ett vapenarsenal och en vass tunga. Trots sin lilla storlek är han en formidabel krigare och en viktig medlem av Guardians of the Galaxy.",
+    "description": "Rocket är en genetiskt modifierad tvättbjörn med sinne för teknik, tung beväpning och sarkastisk humor. Bakom hans tuffa yta finns ett mörkt förflutet och en oväntad lojalitet mot sina vänner i Guardians of the Galaxy.",
     "image_url": "/images/rocket.jpg",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -180,7 +172,7 @@
     "id": 587,
     "name": "Shang-Chi",
     "real_name": "Shang-Chi",
-    "description": "Shang-Chi, skapad av Steve Englehart och Jim Starlin, debuterade i 'Special Marvel Edition #15' (December, 1973). Shang-Chi är en mästare på kampsport och en av de mest skickliga stridsspecialisterna i Marvel-universumet. Hans förmåga att bekämpa sina fiender med hand-till-hand-strid gör honom till en unik hjälte.",
+    "description": "Shang-Chi är en mästare i kampsport som brottas med sitt arv och sin plats i världen. Genom styrka, disciplin och inre balans visar han att man inte måste ha avancerad teknik eller magi för att vara en hjälte.",
     "image_url": "/images/shang-chi.png",
     "movies": ["Shang-Chi and the Legend of the Ten Rings"]
   },
@@ -188,7 +180,7 @@
     "id": 620,
     "name": "Spider-Man",
     "real_name": "Peter Parker",
-    "description": "Spider-Man, skapad av Stan Lee och Steve Ditko, debuterade i 'Amazing Fantasy #15'. Peter Parker får sina krafter från en radioaktiv spindel och använder sina superkrafter för att bekämpa brott. Hans känsliga spindelsinne och styrka gör honom till en av Marvels mest kända och älskade hjältar.",
+    "description": "Peter Parker, också känd som Spider-Man, är en tonåring som får spindelliknande krafter efter ett bett av en radioaktiv spindel. Han balanserar sitt liv som student med att bekämpa brott, och drivs av ansvar och hjärta.",
     "image_url": "/images/spider-man.png",
     "movies": ["Captain America: Civil War", "Spider-Man: Homecoming", "Avengers: Infinity War", "Avengers: Endgame", "Spider-Man: Far From Home", "Spider-Man: No Way Home"]
   },
@@ -196,7 +188,7 @@
     "id": 630,
     "name": "Star-Lord",
     "real_name": "Peter Quill",
-    "description": "Star-Lord, skapad av Steve Englehart och Steve Gan, debuterade i 'Marvel Preview #4' (Januari, 1976). Peter Quill, en människa uppvuxen i rymden, leder Guardians of the Galaxy. Hans mod, charm och skicklighet i strid gör honom till en av de mest populära karaktärerna i Marvel-universumet.",
+    "description": "Peter Quill, alias Star-Lord, är en halvmänsklig rymdäventyrare som leder Guardians of the Galaxy. Han kombinerar humor, känslor och ledarskap – ofta med sin ikoniska mixtape i öronen och sitt hjärta på rätt ställe.",
     "image_url": "/images/star-lord.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
@@ -204,7 +196,7 @@
     "id": 655,
     "name": "Thanos",
     "real_name": "Thanos",
-    "description": "Thanos, skapad av Jim Starlin, debuterade i 'Iron Man #55'. Thanos är en av de mest fruktade skurkarna i Marvel-universumet, och hans jakt på de mäktiga Infinity Stones är ett centralt tema i Avengers-filmerna. Hans mål är att utrota hälften av universums befolkning.",
+    "description": "Thanos är en strategisk och kraftfull varelse från planeten Titan, känd för sin starka tro på att universum behöver balans till varje pris. Han är både filosofisk och skrämmande, och representerar ett av de största hoten i MCU.",
     "image_url": "/images/thanos.png",
     "movies": ["The Avengers (mid-credits)", "Guardians of the Galaxy", "Avengers: Age of Ultron (mid-credits)", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -212,7 +204,7 @@
     "id": 659,
     "name": "Thor",
     "real_name": "Thor Odinson",
-    "description": "Thor, skapad av Stan Lee, Larry Lieber och Jack Kirby, debuterade i 'Journey Into Mystery #83' (Augusti, 1962). Thor är den nordiska åskguden och en av de mäktigaste medlemmarna i Avengers. Hans hammare, Mjolnir, ger honom förmågan att kontrollera åska och väder.",
+    "description": "Thor är åskguden från Asgård, beväpnad med kraften att kontrollera blixten och svinga en magisk hammare. Han går från impulsiv krigare till en mer ödmjuk hjälte och är en av de mest ikoniska figurerna i Marvels värld.",
     "image_url": "/images/thor.png",
     "movies": ["Thor", "The Avengers", "Thor: The Dark World", "Avengers: Age of Ultron", "Thor: Ragnarok", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder"]
   },
@@ -220,7 +212,7 @@
     "id": 703,
     "name": "War Machine",
     "real_name": "James Rhodes",
-    "description": "War Machine, skapad av Stan Lee, Don Heck och Gene Colan, debuterade i 'Iron Man #118' (1979). James Rhodes är en vän till Tony Stark och fungerar som en militär allierad. Han bär en rustning som är en kopia av Iron Man, vilket gör honom till en kraftfull krigare.",
+    "description": "James 'Rhodey' Rhodes, även känd som War Machine, är en erfaren militär och nära vän till Tony Stark. Med sin tunga rustning och stark känsla för plikt strider han tillsammans med Avengers i kampen för global säkerhet.",
     "image_url": "/images/war-machine.png",
     "movies": ["Iron Man", "Iron Man 2", "Iron Man 3", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame"]
   },
@@ -228,7 +220,7 @@
     "id": 708,
     "name": "Wasp",
     "real_name": "Hope van Dyne",
-    "description": "Wasp, skapad av Stan Lee och Jack Kirby, debuterade i 'Tales to Astonish #44'. Hope van Dyne är en medlem av Avengers och dotter till Hank Pym, den ursprungliga Wasp. Hon bär en högteknologisk rustning som gör henne liten som en insekt och ger henne förmågan att flyga och skjuta energistrålar.",
+    "description": "Hope van Dyne, också känd som Wasp, är en intelligent och kapabel hjälte som kan krympa, flyga och slå med kraft. Hon kombinerar vetenskapligt skarpsinne med mod, och är en viktig partner både på och utanför slagfältet.",
     "image_url": "/images/wasp.png",
     "movies": ["Ant-Man", "Ant-Man and the Wasp", "Avengers: Endgame", "Ant-Man and the Wasp: Quantumania"]
   },
@@ -237,23 +229,15 @@
     "id": 714,
     "name": "Winter Soldier",
     "real_name": "Bucky Barnes",
-    "description": "Winter Soldier, skapad av Ed Brubaker och Steve Epting, debuterade i 'Captain America Vol 5 #1' (Januari, 2005). Bucky Barnes, en gång Captain Americas bästa vän, blev hjärntvättad och omvandlad till en mörk, cybernetiskt förbättrad supersoldat, känd som Winter Soldier. Han spelar en nyckelroll i 'Captain America: The Winter Soldier'.",
+    "description": "Bucky Barnes, tidigare Winter Soldier, är en supersoldat med ett mörkt förflutet. Han kämpar för att återfå kontroll över sitt liv och är en karaktär som representerar både trauma och möjligheten till försoning.",
     "image_url": "/images/winter-soldier.png",
     "movies": ["Captain America: The First Avenger", "Captain America: The Winter Soldier", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "The Falcon and the Winter Soldier (TV Series)"]
-  },
-  {
-    "id": 717,
-    "name": "Wolverine",
-    "real_name": "Logan",
-    "description": "Wolverine, skapad av Roy Thomas, Len Wein och John Romita Sr., debuterade i 'Incredible Hulk Vol. 2 #180'. Logan, en mutant med förmågan att hela sig själv och ett skelett förstärkt med adamantium, är en av X-Mens mest ikoniska medlemmar. Hans vassa klor och krigiska natur gör honom till en farlig fiende och allierad.",
-    "image_url": "/images/wolverine.png",
-    "movies": ["Deadpool & Wolverine"]
   },
   {
     "id": 680,
     "name": "Ultron",
     "real_name": "Ultron",
-    "description": "Ultron, skapad av Roy Thomas och John Buscema, debuterade i 'Avengers #54' (Juli, 1968). Ultron är en avancerad artificiell intelligens och en av Avengers mest farliga fiender. Skapad av Hank Pym, har Ultron sin egen vilja och strävar efter att utrota mänskligheten.",
+    "description": "Ultron är en artificiell intelligens med avancerad teknologi och egna idéer om hur världen bör styras. Han är kraftfull, smart och en av de farligaste fienderna som Avengers har ställts inför.",
     "image_url": "/images/ultron.png",
     "movies": ["Avengers: Age of Ultron"]
   },
@@ -261,7 +245,7 @@
     "id": 683,
     "name": "Vision",
     "real_name": "Vision",
-    "description": "Vision, skapad av Roy Thomas och John Buscema, debuterade i 'Avengers #57' (Oktober, 1968). Vision är en syntetisk människa, skapad av Ultron, som senare går över till Avengers sida. Hans förmåga att ändra sin densitet och hans kraftfulla strålar gör honom till en viktig medlem av teamet.",
+    "description": "Vision är en syntetisk varelse skapad genom avancerad teknologi och en kraftfull energikälla. Han kombinerar logik med empati och utforskar vad det innebär att vara medveten och mänsklig.",
     "image_url": "/images/vision.png",
     "movies": ["Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "WandaVision (TV Series)"]
   },
@@ -269,7 +253,7 @@
     "id": 579,
     "name": "Scarlet Witch",
     "real_name": "Wanda Maximoff",
-    "description": "Scarlet Witch, skapad av Stan Lee och Jack Kirby, debuterade i 'X-Men #4' (Mars, 1964). Wanda Maximoff är en mutant med kraftfulla förmåg att manipulera verkligheten och skapa kaos med sina magiska krafter. Hon har varit både en hjälte och en skurk i Marvel-universumet.",
+    "description": "Wanda Maximoff, även kallad Scarlet Witch, har telekinetiska och verklighetsböjande krafter. Hon är komplex, kraftfull och formas av både kärlek, förlust och en inre längtan efter tillhörighet.",
     "image_url": "/images/scarlett-witch.png",
     "movies": ["Captain America: The Winter Soldier (mid-credits)", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "WandaVision (TV Series)", "Doctor Strange in the Multiverse of Madness"]
   },
@@ -277,7 +261,7 @@
     "id": 1001,
     "name": "Hawkeye",
     "real_name": "Clint Barton",
-    "description": "Hawkeye, skapad av Stan Lee och Don Heck, debuterade i 'Tales of Suspense #57' (September, 1964). Clint Barton är en expert på bågskytte och en av Avengers ursprungliga medlemmar. Han använder sin båge och pilar som sina främsta vapen i kampen mot ondskan.",
+    "description": "Clint Barton, känd som Hawkeye, är en mästare på bågskytte och en erfaren agent. Han är lojal, jordnära och spelar en viktig roll i teamet trots att han saknar övernaturliga krafter.",
     "image_url": "/images/hawk-eye.png",
     "movies": ["Thor", "The Avengers", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Endgame", "Hawkeye (TV Series)"]
   },
@@ -285,7 +269,7 @@
     "id": 1002,
     "name": "Wong",
     "real_name": "Wong",
-    "description": "Wong, skapad av Stan Lee och Steve Ditko, debuterade i 'Strange Tales #110' (Juli, 1963). Wong är en mästare i mystisk konst och en nära allierad till Doctor Strange. Han är en hängiven beskyddare av Kamar-Taj och hjälper till att skydda världen från övernaturliga hot.",
+    "description": "Wong är en mäktig magiker och beskyddare av Kamar-Taj. Med sitt lugna sätt, djupa kunskap om mystiska konster och stora ansvar är han en viktig del av MCU:s magiska värld.",
     "image_url": "/images/wong.png",
     "movies": ["Doctor Strange", "Avengers: Infinity War", "Avengers: Endgame", "Shang-Chi and the Legend of the Ten Rings", "Spider-Man: No Way Home", "Doctor Strange in the Multiverse of Madness", "She-Hulk: Attorney at Law (TV Series)"]
   },
@@ -293,7 +277,7 @@
     "id": 1004,
     "name": "Shuri",
     "real_name": "Shuri",
-    "description": "Shuri, skapad av Reginald Hudlin och John Romita Jr., debuterade i 'Black Panther Vol. 4 #2' (Maj, 2005). Shuri är T'Challas syster och en teknisk geni. Hon spelar en viktig roll i Wakanda och är också en av de största innovatörerna i Marvel-universumet.",
+    "description": "Shuri är prinsessan av Wakanda och ett tekniskt geni med en kvick personlighet. Hon skapar avancerade uppfinningar och är en drivande kraft i att kombinera tradition med innovation.",
     "image_url": "/images/shuri.jpg",
     "movies": ["Black Panther", "Avengers: Infinity War", "Avengers: Endgame", "Black Panther: Wakanda Forever"]
   },
@@ -301,7 +285,7 @@
     "id": 1005,
     "name": "M'Baku",
     "real_name": "M'Baku",
-    "description": "M'Baku, skapad av Roy Thomas och John Buscema, debuterade i 'Avengers #62' (Mars, 1969). M'Baku, ledare för Jabari-folket, är en mäktig krigare och en av Black Panthers allierade och motståndare. Hans karaktär utvecklas från antagonist till en hjälte.",
+    "description": "M'Baku är ledare för Jabari-stammen i Wakanda, en stark och stolt krigare med traditionell tro. Han är kraftfull, principfast och en respekterad figur i sitt folks framtid.",
     "image_url": "/images/mbaku.png",
     "movies": ["Black Panther", "Avengers: Infinity War", "Avengers: Endgame", "Black Panther: Wakanda Forever"]
   },
@@ -309,23 +293,15 @@
     "id": 1006,
     "name": "Killmonger",
     "real_name": "Erik Stevens",
-    "description": "Killmonger, skapad av Don McGregor och Rich Buckler, debuterade i 'Jungle Action #6' (September, 1973). Killmonger är en av Black Panthers största fiender. Hans strävan efter makt och hans hämndlystna natur gör honom till en skrämmande och komplex skurk.",
+    "description": "Erik Stevens, även kallad Killmonger, är en skicklig soldat med ett komplext förhållande till Wakanda. Han har starka idéer om rättvisa och förändring, vilket gör honom till en utmanande och karismatisk motståndare.",
     "image_url": "/images/killmonger.png",
     "movies": ["Black Panther", "What If...? (TV Series)"]
-  },
-  {
-    "id": 1007,
-    "name": "Deadpool",
-    "real_name": "Wade Wilson",
-    "description": "Deadpool, skapad av Fabian Nicieza och Rob Liefeld, debuterade i 'New Mutants #98' (Februari, 1991). Wade Wilson är en före detta soldat som genomgår en experimentell behandling som ger honom förmågan att hela sig själv. Deadpool är känd för sin humor, blodiga handlingar och brytande av den fjärde väggen.",
-    "image_url": "/images/deadpool.png",
-    "movies": ["Deadpool & Wolverine"]
   },
   {
     "id": 1008,
     "name": "Captain Carter",
     "real_name": "Peggy Carter",
-    "description": "Captain Carter, en alternativ version av Peggy Carter, introducerades i 'What If...? (TV Series)'. I denna verklighet får Peggy Carter den supersoldatrusten istället för Steve Rogers, vilket gör henne till en av de mest ikoniska kvinnliga hjältarna i Marvel-universumet.",
+    "description": "Peggy Carter är en skicklig agent och en av grundarna till S.H.I.E.L.D. Hon är modig, intelligent och en av de första att se potentialen i Steve Rogers. Genom sin insats under och efter kriget blir hon en nyckelfigur i uppbyggnaden av den moderna superhjältevärlden.",
     "image_url": "/images/peggy-carter.png",
     "movies": ["Captain America: The First Avenger", "Doctor Strange in the Multiverse of Madness"]
   },
@@ -333,7 +309,7 @@
     "id": 1010,
     "name": "Valkyrie",
     "real_name": "Brunnhilde",
-    "description": "Valkyrie, skapad av Roy Thomas och John Buscema, debuterade i 'Avengers #87' (April, 1971). Brunnhilde är en krigare från Asgård och en av Thor's närmaste allierade. Hon leder en av Asgårds Valkyrior och är en mäktig och modig hjälte.",
+    "description": "Valkyrie, också känd som Brunnhilde, är en Asgårdisk krigare med stark vilja och imponerande stridsförmåga. Hon är både frihetsälskande och ansvarstagande, och har en viktig roll i sitt folks framtid.",
     "image_url": "/images/valkyrie.jpg",
     "movies": ["Thor: Ragnarok", "Avengers: Endgame", "Thor: Love and Thunder"]
   },
@@ -341,7 +317,7 @@
     "id": 1011,
     "name": "Heimdall",
     "real_name": "Heimdall",
-    "description": "Heimdall, skapad av Stan Lee och Jack Kirby, debuterade i 'Journey into Mystery #85' (Oktober, 1962). Heimdall är den trogna och allseende vaktmästaren av Bifrost, Asgårds port till andra världar. Hans styrka och förmåga att se alla världar gör honom till en ovärderlig allierad.",
+    "description": "Heimdall är väktare av Bifröst och en lojal beskyddare av Asgård. Med sina övermänskliga sinnen och starka känsla för ära är han en tyst men avgörande närvaro i kampen för att skydda sitt folk.",
     "image_url": "/images/heimdall.png",
     "movies": ["Thor", "Thor: The Dark World", "Avengers: Age of Ultron", "Thor: Ragnarok", "Avengers: Infinity War", "Thor: Love and Thunder"]
   },
@@ -349,7 +325,7 @@
     "id": 1012,
     "name": "Ikaris",
     "real_name": "Ikaris",
-    "description": "Ikaris, skapad av Jack Kirby, debuterade i 'Eternals #1' (Juli, 1976). Ikaris är en av de mäktigaste Eternals och besitter förmågan att flyga, använda energiattacker och övermänsklig styrka. Han spelar en central roll i Eternals berättelse.",
+    "description": "Ikaris är en medlem av Eternals, en odödlig ras utsänd för att skydda jorden från urgamla hot. Han har förmågan att flyga och avfyra energi från ögonen, och är känd för sin styrka, lojalitet och inre konflikt.",
     "image_url": "/images/ikaris.png",
     "movies": ["Eternals"]
   }
