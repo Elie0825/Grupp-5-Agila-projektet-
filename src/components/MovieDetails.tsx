@@ -263,15 +263,28 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
           ×
         </button>
         
-        {/* Tillbaka-knapp som bara visas om vi kom från en karaktär */}
         {backToCharacterId && (
-          <button 
-            className="go-back-button" 
-            onClick={handleBackToCharacter}
+        <button 
+          className="go-back-button" 
+          onClick={handleBackToCharacter}
+          aria-label="Tillbaka till karaktär"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            strokeWidth="1.5" 
+            stroke="currentColor" 
+            className="size-6"
           >
-            Tillbaka till karaktär
-          </button>
-        )}
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" 
+            />
+          </svg>
+        </button>
+      )}
         
         {/* Bakgrundsbild med blur */}
         {movie.cover_url && (
