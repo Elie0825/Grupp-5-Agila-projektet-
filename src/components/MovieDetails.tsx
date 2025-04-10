@@ -40,6 +40,89 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
     getCharacters();
   }, []);
 
+  const MovieDetail: React.FC<{ imdbId: string }> = ({ imdbId }) => {
+    // Definierar state variabler för att hålla data om streaminginformation och eventuella felmeddelanden
+    const [streamingInfo, setStreamingInfo] = useState<any | null>(null); // Innehåller streaminginformation som hämtas från json filen
+    const [error, setError] = useState<string | null>(null); // felmeddelanden om något går fel under fetch-anropet
+  
+    useEffect(() => {
+      // useEffect körs när komponenten laddas eller när imdbId ändras
+      const getStreamingInfo = async () => { // Asynkron funktion för att hämta data från json filen
+        try {
+          // gör en fetch för att hämta json filen
+          const response = await fetch(`${process.env.PUBLIC_URL}/movie-streaming.json`);
+  
+          // Om servern svarar med en ok-status (200), fortsätter vi, annars kastar vi ett fel
+          if (!response.ok) {
+            throw new Error(`Något gick fel: ${response.status}`);
+          }
+  
+          // försöker omvandla svaret från fetch-anropet till json
+          const data = await response.json(); 
+  
+      
+          console.log("Laddad data från JSON:", data); 
+  
+          // Om vi hittar filmens streaminginformation i den hämtade datan (baserat på imdbId), sätt den i vårt state
+          if (data[imdbId]) {
+            setStreamingInfo(data[imdbId]);
+          } else {
+            setError('Ingen streaminginformation hittades.');
+          }
+        } catch (err) {
+          setError('Fel vid hämtning av streaminginformation.');
+          console.error(err);
+        }
+      };
+  
+      // Kör funktionen för att hämta streamingdata
+      getStreamingInfo();
+    }, [imdbId]);
+  
+    
+    if (error) {
+      return <div>{error}</div>;
+    }
+  
+    if (!streamingInfo) {
+      return <div>Laddar...</div>;
+    }
+  
+    // Definiera vilka streamingplattformar vi vill visa
+    const platforms = ['Disney+', 'HBO Max', 'Prime Video', 'Apple TV'];
+  
+    return (
+      <div>
+        <h4 className='rubrik'>Streama på:</h4>
+        <div className='streaming-services'>
+          {/* Gå igenom alla plattformar och skapa en länk om det finns en länk för plattformen */}
+          {platforms.map((platform) => {
+            // Hämta länken för den aktuella plattformen från streamingInfo-objektet
+            const link = streamingInfo[platform];
+            
+            // Om det finns en länk för plattformen, rendera en länk med plattformens logotyp
+            if (link) {
+              return (
+                <a key={platform} href={link} target="_blank" rel="noopener noreferrer">
+                  {/* Visa logotypen för plattformen */}
+                  <img className='streaming-icon'
+                    src={`/streamlogo/${platform}.png`}
+                    alt={`${platform} logo`}
+                  />
+                </a>
+              );
+            }
+            return null;
+          })}
+        </div>
+      </div>
+    );
+  };
+  
+
+
+
+
   // Kontrollera om det finns en karaktär att gå tillbaka till
   useEffect(() => {
     const savedCharacterId = localStorage.getItem("backToCharacterId");

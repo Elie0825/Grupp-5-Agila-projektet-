@@ -3,6 +3,12 @@
 // import axios from 'axios';
 // import { Movie } from '../types/movie';
 
+// ///////////////////////////////
+// Detta var apiet som höll vart filmersna går att streama, men det blev problem med nyckeln, och han inte lösa det,
+// så testade med att göra funktionen manuell. Stötte på ett problem och hann inte fixa det heller.
+// Har gjort flera versioner.
+// /////////////////////////////
+
 // const RAPID_API_KEY = 'd714cca026mshb1ddcecef9e704ap11cfebjsn01a59249d00a';
 
 // interface StreamingApiResponse {
@@ -22,6 +28,7 @@
 //     country: 'se'
 //   }*/
 
+    // Gör ett HTTP-anrop via axios för att hämta streaminginformation baserat på IMDb-ID
 //   const fetchStreamingAvailability = async (imdbId: string): Promise<StreamingInfo | null> => {
 //     try {
 //       const response = await axios.get<StreamingApiResponse>('https://streaming-availability.p.rapidapi.com/shows/movie/' + imdbId, {
@@ -31,10 +38,12 @@
 //         }
       
 //       });
-  
+         
+         // Skapar ett objekt för att lagra plattformar med länkar
 //       const platforms: StreamingInfo = {};
-//       const platformsToCheck = ['netflix', 'disney', 'hbo', 'prime', 'apple'];
+//       const platformsToCheck = ['Disney+', 'HBO Max', 'Prime Video', 'Apple TV'];
   
+        // Går igenom varje plattform och kontrollerar om det finns en länk
 //       platformsToCheck.forEach(platform => {
 //         const platformData = response.data.result[platform];
 //         if (platformData && platformData.link) {
@@ -42,6 +51,7 @@
 //         }
 //       });
   
+        // Om vi hittar några plattformar, returnera objektet med länkar
 //       return Object.keys(platforms).length > 0 ? platforms : null;
 //     } catch (error) {
 //       console.error(`Streaming info fetch error for IMDB ID ${imdbId}:`, error);
