@@ -23,6 +23,11 @@ html, body {
   box-sizing: border-box; /* Viktigt för att padding inte ska läggas utanför width */
 }
 
+input, textarea, select {
+  font-size: 16px;
+}
+ 
+
 /* Se till att alla element hanterar padding innanför width */
 *, *:before, *:after {
   box-sizing: inherit;
