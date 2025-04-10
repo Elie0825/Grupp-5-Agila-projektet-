@@ -94,7 +94,12 @@ const CharactersPage: React.FC = () => {
   return (
     <main className="characters-page">
       <header className="characters-hero">
-        {/* Hero content */}
+        <p className="text">
+            <span className="big-span">Karaktärer <br /></span>
+                  <span className="small-span">
+                  Utforska bland de stora ikoniska karaktärerna.
+          </span>
+        </p>
       </header>
 
       <section className="search-section">

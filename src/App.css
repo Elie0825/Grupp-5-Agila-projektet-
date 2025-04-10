@@ -92,7 +92,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.characters-hero {
+.app-container .characters-hero {
   margin: 0; /* Centrera innehållet horisontellt */
   margin-bottom: 5rem;
   width: 100%;
@@ -181,7 +181,6 @@ body {
   font-weight: 600;
   line-height: 24px; 
   font-size: calc(1.5rem + 2vw); /* Responsiv textstorlek */
-  
 }
 
 /* ========== STATUS-INDIKATORER ========== */

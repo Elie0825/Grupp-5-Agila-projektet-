@@ -14,6 +14,11 @@
   overflow-x: hidden; /* Dölj horisontell scrolling */
 }
 
+input, textarea, select {
+  font-size: 16px;
+}
+
+
 /* Förhindrar att något kan orsaka horisontell scroll */
 html, body {
   margin: 0;
