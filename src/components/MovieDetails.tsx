@@ -325,11 +325,11 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
             <span className="movie-duration">{formatDuration(movie.duration)}</span>
           </div>
 
-          <div className="genre-tags">
+          {/* <div className="genre-tags">
             {genres.map(genre => (
               <span key={genre} className="genre-tag">{genre}</span>
             ))}
-          </div>
+          </div> */}
 
           <div className="genre-tags">
             {movie.saga && (
@@ -378,7 +378,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
         {/* Övrig information från databasen */}
         <section className="about-movie-section">
           <div className="section-divider"></div>
-          <h3 className="section-title">About the movie</h3>
+          <h3 className="section-title">Om filmen</h3>
           <p>{movie.overview || "Ingen beskrivning tillgänglig."}</p>
         </section>
 
