@@ -6,6 +6,27 @@ import '../CSS/MovieCard.css';
 const OMDB_API_KEY = "8f57b2c1"; // Hårdkodad API-nyckel
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
+  // Favoritstate som hämtas från localStorage
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  const isFavorite = favorites.includes(movie.id.toString());
+
+  const toggleFavorite = () => {
+    let updatedFavorites;
+    if (isFavorite) {
+      // Ta bort från favoriter
+      updatedFavorites = favorites.filter(id => id !== movie.id.toString());
+    } else {
+      // Lägg till i favoriter
+      updatedFavorites = [...favorites, movie.id];
+    }
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
   // Uppdaterad state-typ med union type number | null för att lösa TypeScript-felet
   const [ratings, setRatings] = useState<{
     imdb: number | null;
@@ -93,6 +114,15 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
 
   return (
     <article className="movie-card" onClick={() => onClick(movie)}>
+       {/* Favoritknapp */}
+       <button 
+        className="favorite-button" 
+        onClick={(e) => { e.stopPropagation(); toggleFavorite(); }}
+        aria-label={isFavorite ? 'Ta bort från favoriter' : 'Lägg till i favoriter'}
+      >
+        {isFavorite ? '⭐' : '☆'}
+      </button>
+
       <figure className="movie-poster">
         {movie.cover_url ? (
           <img src={movie.cover_url} alt={`Filmposter för ${movie.title}`} />
