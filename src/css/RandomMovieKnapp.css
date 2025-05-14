@@ -1,0 +1,16 @@
+.random-button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #e62429;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .random-button:hover {
+    background-color: #b71c1c;
+  }
+  

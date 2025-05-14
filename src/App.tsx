@@ -14,6 +14,7 @@ import CharactersPage from "./components/CharactersPage";
 import "./App.css";
 import "./css/Navbar.css";
 import { inspectMoviesFile } from './services/debugTools';
+import RandomMovie from './components/RandomMovie';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -175,6 +176,8 @@ function App() {
                   </span>
                 </p>
               </header>
+              <RandomMovie onMovieClick={handleMovieClick} />
+
 
               <SearchFilter
                 searchTerm={searchTerm}

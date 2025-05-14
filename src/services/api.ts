@@ -96,4 +96,26 @@ export const fetchMovieById = async (movieId: number): Promise<Movie | null> => 
     console.error(`Fel vid hämtning av film med ID ${movieId}:`, error);
     return null;
   }
+  
+};
+
+
+/**
+ * Hämtar en slumpmässig Marvel-film
+ * @returns Promise som resolvar till en slumpmässig filmdata
+ */
+export const fetchRandomMarvelMovie = async (): Promise<Movie | null> => {
+  try {
+    const movies = await fetchMarvelMovies();
+    if (movies.length === 0) {
+      console.warn("[API] Inga filmer tillgängliga för slumpval.");
+      return null;
+    }
+
+    const randomIndex = Math.floor(Math.random() * movies.length);
+    return movies[randomIndex];
+  } catch (error) {
+    console.error('[API] Fel vid hämtning av slumpmässig film:', error);
+    return null;
+  }
 };
